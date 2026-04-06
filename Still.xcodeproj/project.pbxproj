@@ -1,0 +1,810 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		018521D89C42908D4C59A9D4 /* FocusHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697B58435BACBBB0AF2659C /* FocusHomeView.swift */; };
+		01B0F6C204D89E0FF6F21AA4 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFCF1CF2B3C88006C3A098D /* PrimaryButton.swift */; };
+		07BAA65D68C8D578E85033C6 /* FocusStatusHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B7ABB69D38B2C1D4D91C8D /* FocusStatusHeader.swift */; };
+		10E16FD1CA4C6D79DF496840 /* AlarmQRTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0D345926875876AB596F78 /* AlarmQRTokenStore.swift */; };
+		117EE9C0649D61F58FC5025D /* AlarmWalkDismissContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55860788AE0CD925B30508D7 /* AlarmWalkDismissContent.swift */; };
+		123C2D4FD639A9D9F8ECE556 /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5229B631BB752283F1A6FC /* DurationPicker.swift */; };
+		174BFF982F2E0E00B2E6543C /* AlarmRingingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C2AC50E8240BD17F9E94 /* AlarmRingingView.swift */; };
+		1CB664E4866803F36D3D29E5 /* MotionStepAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA0D3AB23059E7A3E7BAE1A /* MotionStepAuthorization.swift */; };
+		23B9CDB97AE67BCDBF6AA332 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76775C0345634029781ED9 /* AppConstants.swift */; };
+		258090671E937287A521632E /* SheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3C7541FDE5BCB9EA90C78F /* SheetHeader.swift */; };
+		259DED55B70EDD3460E13826 /* StillShield.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 36885A9C0D936DB2A097BA37 /* StillShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		262ACD049E4CF6981A6E05D1 /* AlarmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FDEE0115183141EA76A1A9 /* AlarmStore.swift */; };
+		27E9358AB3F34B393A9393D9 /* AlarmRingingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087E384F22E7C2EEFB9BE1D7 /* AlarmRingingCoordinator.swift */; };
+		2A13941CF873442F87B8C18E /* AlarmBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CB6FD68C20C08C524FA96E /* AlarmBootstrap.swift */; };
+		2D56782CF556E2675BF68197 /* AlarmTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB4EB389F6B68BCD1A9DF8 /* AlarmTabView.swift */; };
+		3CD4A7C29B6D56C13CBAE5BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5B2539898EB583763A28A42 /* Assets.xcassets */; };
+		41CD5C404C204E944143F9F5 /* AlarmSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40CDD61B798C6BC5024365 /* AlarmSoundPlayer.swift */; };
+		432CA4802E33631D43146D17 /* still_tink.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28066CFB7A812944554BF5EA /* still_tink.caf */; };
+		4356A9F800F9AE8CA145448A /* StoredFocusGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */; };
+		4B8F21265E8A0AD124A5D152 /* SelectionMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */; };
+		4BA739805624FDE1CB95248E /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAFD2DA23B4D14856BB7C2 /* ListRow.swift */; };
+		5CECA3C68F102AD32A96D3E4 /* QRCodeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F1E77823DF4707D57128 /* QRCodeImageView.swift */; };
+		6E06F4E489E331B15A9245FF /* AuthorizationCenter+Still.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD34D498076A9DA4B856A4 /* AuthorizationCenter+Still.swift */; };
+		6FED56D5D2729384B14CC409 /* UNNotificationCenter+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7F0593472763B7188657B /* UNNotificationCenter+Async.swift */; };
+		70716351F3FD425CFF616A15 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB726EBF9987D741ECFEBF5E /* SecondaryButton.swift */; };
+		71F5106E1140B159D1C727FC /* still_glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA79901063758266E7324E5 /* still_glass.caf */; };
+		72BCCA9F9C50B84277FD8D74 /* OpenStillAlarmChallengeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6946D7308B4175B9922BED1 /* OpenStillAlarmChallengeIntent.swift */; };
+		75B28D9FF14EEB57CB3F3119 /* StillAlarmMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3633391E8CEFB299B2E249 /* StillAlarmMetadata.swift */; };
+		761342F53F7B90FF685A3614 /* SelectionCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EB87E68219033713090608 /* SelectionCodec.swift */; };
+		7F5BC5C1C0C845B381B9FDB0 /* SettingsViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787294E131C92DD766EF1D /* SettingsViewScreen.swift */; };
+		820B451E2DB6DA2373347006 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D7670EFBBC45339515C578 /* EmptyState.swift */; };
+		8659D6D5D475ED6506C54D25 /* AlarmKitScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BE14155FB2EE2D2FC6DB40 /* AlarmKitScheduler.swift */; };
+		87ED55BBF2A5B3B7367674F3 /* StillAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBAED7AB8AF9AFF2260404C /* StillAppDelegate.swift */; };
+		8D1F6D517958677CDC2D06FC /* FocusSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */; };
+		90D55F6B5E607DB4637D858A /* AlarmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7ECB13CEA75DE052FFE85F4 /* AlarmModels.swift */; };
+		923A17D0AE6A21540BDEA7C5 /* AlarmScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E883AA014F89547770325A6 /* AlarmScheduler.swift */; };
+		92A5E42F2A31B0C5B606F672 /* StatBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E77A236C7B170E3A6F44C /* StatBlock.swift */; };
+		976B9C206EA5C84519B9CED2 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */; };
+		9D34D0BDA04A88154A551EE4 /* still_ping.caf in Resources */ = {isa = PBXBuildFile; fileRef = 224D3CE7101EC9EED2BC0093 /* still_ping.caf */; };
+		A53A60BC21723061D05B3ADA /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */; };
+		A602CC5E43A94157F5455FD7 /* ShieldApplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */; };
+		A67A8776FDD45857CD655ED1 /* StoredFocusGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */; };
+		ABC4AEBE879348E4E08245F0 /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518A2D1CBE7D67C11D82077 /* ShieldConfigurationExtension.swift */; };
+		AC1BC0C4E83723D7FEE77062 /* BreakFocusFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC55CC629E00BB5C2EFC0D /* BreakFocusFlowView.swift */; };
+		ADC60342778EA19EB546C959 /* StillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5DF07AF9BACBF2DFAEE064 /* StillApp.swift */; };
+		B2375AEE5C0CB139E1BEFE97 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */; };
+		B97B4B6D81C2358FCE2DA344 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7238F98B19D7CBC1CF03661 /* RootView.swift */; };
+		BEEFB3664BA2FDC6881BC50C /* AlarmEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77AA1002C87FEFF4971843F /* AlarmEditorSheet.swift */; };
+		CEA3A9A5278F48DA230EFD16 /* ShieldApplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */; };
+		D00E01F938CF2C11AFCF48FF /* SelectionCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EB87E68219033713090608 /* SelectionCodec.swift */; };
+		D1839F62FD81351FB6E3BD0B /* StillMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4CDF99A3410427FF3EFC733D /* StillMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D384CA4DDFFD44A29712B8F9 /* QRScannerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE03E3F9F41AD76E301E9F0 /* QRScannerRepresentable.swift */; };
+		D7725F91C3103E95CF5D14D2 /* CalmCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213192B956B35C653EAEE0A3 /* CalmCard.swift */; };
+		E5D5112EFCBD2926D9A9813F /* GroupEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F80521F5D5DBBCE90FD4CEA /* GroupEditorSheet.swift */; };
+		E8BC5EE422B4B37B2C5D3AF1 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB251AD9C28AB68D6D416A /* MainTabView.swift */; };
+		EA50619FCF443ED810530DE8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76775C0345634029781ED9 /* AppConstants.swift */; };
+		EC9DA4968A6309E77D310DFB /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */; };
+		F0E37C68A6EC8D97ED6A58B9 /* StillHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F415B9A4D4368D6233C506 /* StillHaptics.swift */; };
+		F4293B40F6FBC4D2E13D2132 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B6DACD684D8698EBBA07C3 /* ActivityShareSheet.swift */; };
+		FCE42EB2C6EE4012CA33BF2D /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C89C8A57003D06A645A64 /* Tokens.swift */; };
+		FDCA70DC58D43F75A7354C0C /* SelectionMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		231E501248AFC455C206EC4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4966E9BE9D7D1ABED65BFF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB0D64181692E50AF1E0A261;
+			remoteInfo = StillShield;
+		};
+		A91FAC27129BA0E491F4BD9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4966E9BE9D7D1ABED65BFF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C39B236B1AA30066E1DC7F9A;
+			remoteInfo = StillMonitor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7047390280BD6FDDD786C428 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D1839F62FD81351FB6E3BD0B /* StillMonitor.appex in Embed Foundation Extensions */,
+				259DED55B70EDD3460E13826 /* StillShield.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0697B58435BACBBB0AF2659C /* FocusHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusHomeView.swift; sourceTree = "<group>"; };
+		087E384F22E7C2EEFB9BE1D7 /* AlarmRingingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRingingCoordinator.swift; sourceTree = "<group>"; };
+		0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
+		0E883AA014F89547770325A6 /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmScheduler.swift; sourceTree = "<group>"; };
+		1718F1E77823DF4707D57128 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
+		193593C1E058E2D289F796C2 /* Still.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Still.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E4E77A236C7B170E3A6F44C /* StatBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatBlock.swift; sourceTree = "<group>"; };
+		20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFocusGroup.swift; sourceTree = "<group>"; };
+		213192B956B35C653EAEE0A3 /* CalmCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalmCard.swift; sourceTree = "<group>"; };
+		224D3CE7101EC9EED2BC0093 /* still_ping.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_ping.caf; sourceTree = "<group>"; };
+		259C89C8A57003D06A645A64 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		28066CFB7A812944554BF5EA /* still_tink.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_tink.caf; sourceTree = "<group>"; };
+		2CCC55CC629E00BB5C2EFC0D /* BreakFocusFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakFocusFlowView.swift; sourceTree = "<group>"; };
+		2F3C7541FDE5BCB9EA90C78F /* SheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeader.swift; sourceTree = "<group>"; };
+		2F5229B631BB752283F1A6FC /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
+		2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		32E3C2AC50E8240BD17F9E94 /* AlarmRingingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRingingView.swift; sourceTree = "<group>"; };
+		36885A9C0D936DB2A097BA37 /* StillShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B5DF07AF9BACBF2DFAEE064 /* StillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillApp.swift; sourceTree = "<group>"; };
+		3CA79901063758266E7324E5 /* still_glass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_glass.caf; sourceTree = "<group>"; };
+		3DEB251AD9C28AB68D6D416A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		41FDEE0115183141EA76A1A9 /* AlarmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStore.swift; sourceTree = "<group>"; };
+		4518A2D1CBE7D67C11D82077 /* ShieldConfigurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationExtension.swift; sourceTree = "<group>"; };
+		49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupStore.swift; sourceTree = "<group>"; };
+		4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSessionController.swift; sourceTree = "<group>"; };
+		4CDF99A3410427FF3EFC733D /* StillMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DA5AB17BDD84BB65D1642F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4F80521F5D5DBBCE90FD4CEA /* GroupEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEditorSheet.swift; sourceTree = "<group>"; };
+		54EB87E68219033713090608 /* SelectionCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCodec.swift; sourceTree = "<group>"; };
+		55860788AE0CD925B30508D7 /* AlarmWalkDismissContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmWalkDismissContent.swift; sourceTree = "<group>"; };
+		55B7ABB69D38B2C1D4D91C8D /* FocusStatusHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusStatusHeader.swift; sourceTree = "<group>"; };
+		56B7F0593472763B7188657B /* UNNotificationCenter+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNNotificationCenter+Async.swift"; sourceTree = "<group>"; };
+		5C40CDD61B798C6BC5024365 /* AlarmSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSoundPlayer.swift; sourceTree = "<group>"; };
+		5D0D345926875876AB596F78 /* AlarmQRTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQRTokenStore.swift; sourceTree = "<group>"; };
+		75B51ADB08EDF74609504079 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7DBAED7AB8AF9AFF2260404C /* StillAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillAppDelegate.swift; sourceTree = "<group>"; };
+		81D7670EFBBC45339515C578 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
+		891F2D81B320DE09B0DC5A5B /* StillShield.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StillShield.entitlements; sourceTree = "<group>"; };
+		8F3633391E8CEFB299B2E249 /* StillAlarmMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillAlarmMetadata.swift; sourceTree = "<group>"; };
+		9157B439397BBB9E7056783B /* StillMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StillMonitor.entitlements; sourceTree = "<group>"; };
+		95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMerge.swift; sourceTree = "<group>"; };
+		9BA0D3AB23059E7A3E7BAE1A /* MotionStepAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionStepAuthorization.swift; sourceTree = "<group>"; };
+		A4BE14155FB2EE2D2FC6DB40 /* AlarmKitScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmKitScheduler.swift; sourceTree = "<group>"; };
+		A6946D7308B4175B9922BED1 /* OpenStillAlarmChallengeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStillAlarmChallengeIntent.swift; sourceTree = "<group>"; };
+		ACFCF1CF2B3C88006C3A098D /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		B4F415B9A4D4368D6233C506 /* StillHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillHaptics.swift; sourceTree = "<group>"; };
+		B8FED92DE8DE37927EACC621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B9FB4EB389F6B68BCD1A9DF8 /* AlarmTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTabView.swift; sourceTree = "<group>"; };
+		BF76775C0345634029781ED9 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		C0CD34D498076A9DA4B856A4 /* AuthorizationCenter+Still.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthorizationCenter+Still.swift"; sourceTree = "<group>"; };
+		D5B2539898EB583763A28A42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D6B6DACD684D8698EBBA07C3 /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
+		D77AA1002C87FEFF4971843F /* AlarmEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditorSheet.swift; sourceTree = "<group>"; };
+		DB726EBF9987D741ECFEBF5E /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldApplicator.swift; sourceTree = "<group>"; };
+		EBE03E3F9F41AD76E301E9F0 /* QRScannerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerRepresentable.swift; sourceTree = "<group>"; };
+		F6787294E131C92DD766EF1D /* SettingsViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewScreen.swift; sourceTree = "<group>"; };
+		F6CB6FD68C20C08C524FA96E /* AlarmBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmBootstrap.swift; sourceTree = "<group>"; };
+		F7238F98B19D7CBC1CF03661 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		F7CAFD2DA23B4D14856BB7C2 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
+		F7ECB13CEA75DE052FFE85F4 /* AlarmModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModels.swift; sourceTree = "<group>"; };
+		FB03B665E58BD3106E23CE0D /* Still.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Still.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		01FD8AD78A9B70EB2FD086BF = {
+			isa = PBXGroup;
+			children = (
+				87F4BDF1EA2832255E2815AB /* Core */,
+				DAEA6376511282569C88BBB5 /* DeviceActivityMonitor */,
+				597943E22B0E56646059DAED /* ShieldConfiguration */,
+				1AD6987513E67B5BBC1578E8 /* Still */,
+				840A35E61B17558FC8F6BA24 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0BD2B0A485DF88AE678DCE1C /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				D6B6DACD684D8698EBBA07C3 /* ActivityShareSheet.swift */,
+				D77AA1002C87FEFF4971843F /* AlarmEditorSheet.swift */,
+				F7ECB13CEA75DE052FFE85F4 /* AlarmModels.swift */,
+				32E3C2AC50E8240BD17F9E94 /* AlarmRingingView.swift */,
+				B9FB4EB389F6B68BCD1A9DF8 /* AlarmTabView.swift */,
+				55860788AE0CD925B30508D7 /* AlarmWalkDismissContent.swift */,
+				A6946D7308B4175B9922BED1 /* OpenStillAlarmChallengeIntent.swift */,
+				1718F1E77823DF4707D57128 /* QRCodeImageView.swift */,
+				EBE03E3F9F41AD76E301E9F0 /* QRScannerRepresentable.swift */,
+				8F3633391E8CEFB299B2E249 /* StillAlarmMetadata.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		1AD6987513E67B5BBC1578E8 /* Still */ = {
+			isa = PBXGroup;
+			children = (
+				0BD2B0A485DF88AE678DCE1C /* Alarm */,
+				A9E415F7A5459BD5917E8871 /* App */,
+				3AAE2F0B1299B2509F72A8D2 /* DesignSystem */,
+				434F6F0EEDC6FE35C326BB41 /* Resources */,
+				1DEDDAEE3EF621C0D7E71F80 /* Services */,
+				D5B2539898EB583763A28A42 /* Assets.xcassets */,
+				2CCC55CC629E00BB5C2EFC0D /* BreakFocusFlowView.swift */,
+				0697B58435BACBBB0AF2659C /* FocusHomeView.swift */,
+				4F80521F5D5DBBCE90FD4CEA /* GroupEditorSheet.swift */,
+				B8FED92DE8DE37927EACC621 /* Info.plist */,
+				3DEB251AD9C28AB68D6D416A /* MainTabView.swift */,
+				2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */,
+				F7238F98B19D7CBC1CF03661 /* RootView.swift */,
+				F6787294E131C92DD766EF1D /* SettingsViewScreen.swift */,
+				FB03B665E58BD3106E23CE0D /* Still.entitlements */,
+				3B5DF07AF9BACBF2DFAEE064 /* StillApp.swift */,
+			);
+			path = Still;
+			sourceTree = "<group>";
+		};
+		1DEDDAEE3EF621C0D7E71F80 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F6CB6FD68C20C08C524FA96E /* AlarmBootstrap.swift */,
+				A4BE14155FB2EE2D2FC6DB40 /* AlarmKitScheduler.swift */,
+				5D0D345926875876AB596F78 /* AlarmQRTokenStore.swift */,
+				087E384F22E7C2EEFB9BE1D7 /* AlarmRingingCoordinator.swift */,
+				0E883AA014F89547770325A6 /* AlarmScheduler.swift */,
+				5C40CDD61B798C6BC5024365 /* AlarmSoundPlayer.swift */,
+				41FDEE0115183141EA76A1A9 /* AlarmStore.swift */,
+				C0CD34D498076A9DA4B856A4 /* AuthorizationCenter+Still.swift */,
+				4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */,
+				9BA0D3AB23059E7A3E7BAE1A /* MotionStepAuthorization.swift */,
+				56B7F0593472763B7188657B /* UNNotificationCenter+Async.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3AAE2F0B1299B2509F72A8D2 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				213192B956B35C653EAEE0A3 /* CalmCard.swift */,
+				2F5229B631BB752283F1A6FC /* DurationPicker.swift */,
+				81D7670EFBBC45339515C578 /* EmptyState.swift */,
+				55B7ABB69D38B2C1D4D91C8D /* FocusStatusHeader.swift */,
+				F7CAFD2DA23B4D14856BB7C2 /* ListRow.swift */,
+				ACFCF1CF2B3C88006C3A098D /* PrimaryButton.swift */,
+				DB726EBF9987D741ECFEBF5E /* SecondaryButton.swift */,
+				2F3C7541FDE5BCB9EA90C78F /* SheetHeader.swift */,
+				1E4E77A236C7B170E3A6F44C /* StatBlock.swift */,
+				B4F415B9A4D4368D6233C506 /* StillHaptics.swift */,
+				259C89C8A57003D06A645A64 /* Tokens.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		434F6F0EEDC6FE35C326BB41 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3CA79901063758266E7324E5 /* still_glass.caf */,
+				224D3CE7101EC9EED2BC0093 /* still_ping.caf */,
+				28066CFB7A812944554BF5EA /* still_tink.caf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		597943E22B0E56646059DAED /* ShieldConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				4DA5AB17BDD84BB65D1642F8 /* Info.plist */,
+				4518A2D1CBE7D67C11D82077 /* ShieldConfigurationExtension.swift */,
+				891F2D81B320DE09B0DC5A5B /* StillShield.entitlements */,
+			);
+			path = ShieldConfiguration;
+			sourceTree = "<group>";
+		};
+		840A35E61B17558FC8F6BA24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				193593C1E058E2D289F796C2 /* Still.app */,
+				4CDF99A3410427FF3EFC733D /* StillMonitor.appex */,
+				36885A9C0D936DB2A097BA37 /* StillShield.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87F4BDF1EA2832255E2815AB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BF76775C0345634029781ED9 /* AppConstants.swift */,
+				49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */,
+				54EB87E68219033713090608 /* SelectionCodec.swift */,
+				95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */,
+				EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */,
+				20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A9E415F7A5459BD5917E8871 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7DBAED7AB8AF9AFF2260404C /* StillAppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DAEA6376511282569C88BBB5 /* DeviceActivityMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */,
+				75B51ADB08EDF74609504079 /* Info.plist */,
+				9157B439397BBB9E7056783B /* StillMonitor.entitlements */,
+			);
+			path = DeviceActivityMonitor;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		30EB340DFB53288959370D0F /* Still */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 842991EF2FF19D3CFD473BC7 /* Build configuration list for PBXNativeTarget "Still" */;
+			buildPhases = (
+				3D1C61EA36E4EC1CC23E6DCF /* Sources */,
+				0F60371C912BD1BBA21918FA /* Resources */,
+				7047390280BD6FDDD786C428 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB5C9A6A0E646988A508C567 /* PBXTargetDependency */,
+				4C58A9FB66461A66B446B1E5 /* PBXTargetDependency */,
+			);
+			name = Still;
+			packageProductDependencies = (
+			);
+			productName = Still;
+			productReference = 193593C1E058E2D289F796C2 /* Still.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C39B236B1AA30066E1DC7F9A /* StillMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72DBE189669F9E4B2E608188 /* Build configuration list for PBXNativeTarget "StillMonitor" */;
+			buildPhases = (
+				A4EC26EAACFD06E9460F725D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StillMonitor;
+			packageProductDependencies = (
+			);
+			productName = StillMonitor;
+			productReference = 4CDF99A3410427FF3EFC733D /* StillMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		EB0D64181692E50AF1E0A261 /* StillShield */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D4746AFE3CD05037FF441D4 /* Build configuration list for PBXNativeTarget "StillShield" */;
+			buildPhases = (
+				AE0FDD0F935FD9DF899548B5 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StillShield;
+			packageProductDependencies = (
+			);
+			productName = StillShield;
+			productReference = 36885A9C0D936DB2A097BA37 /* StillShield.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F4966E9BE9D7D1ABED65BFF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					30EB340DFB53288959370D0F = {
+						ProvisioningStyle = Automatic;
+					};
+					C39B236B1AA30066E1DC7F9A = {
+						ProvisioningStyle = Automatic;
+					};
+					EB0D64181692E50AF1E0A261 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D4C3CA34F2162AE68E04DF3F /* Build configuration list for PBXProject "Still" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 01FD8AD78A9B70EB2FD086BF;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 840A35E61B17558FC8F6BA24 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30EB340DFB53288959370D0F /* Still */,
+				C39B236B1AA30066E1DC7F9A /* StillMonitor */,
+				EB0D64181692E50AF1E0A261 /* StillShield */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0F60371C912BD1BBA21918FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD4A7C29B6D56C13CBAE5BC /* Assets.xcassets in Resources */,
+				71F5106E1140B159D1C727FC /* still_glass.caf in Resources */,
+				9D34D0BDA04A88154A551EE4 /* still_ping.caf in Resources */,
+				432CA4802E33631D43146D17 /* still_tink.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D1C61EA36E4EC1CC23E6DCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4293B40F6FBC4D2E13D2132 /* ActivityShareSheet.swift in Sources */,
+				2A13941CF873442F87B8C18E /* AlarmBootstrap.swift in Sources */,
+				BEEFB3664BA2FDC6881BC50C /* AlarmEditorSheet.swift in Sources */,
+				8659D6D5D475ED6506C54D25 /* AlarmKitScheduler.swift in Sources */,
+				90D55F6B5E607DB4637D858A /* AlarmModels.swift in Sources */,
+				10E16FD1CA4C6D79DF496840 /* AlarmQRTokenStore.swift in Sources */,
+				27E9358AB3F34B393A9393D9 /* AlarmRingingCoordinator.swift in Sources */,
+				174BFF982F2E0E00B2E6543C /* AlarmRingingView.swift in Sources */,
+				923A17D0AE6A21540BDEA7C5 /* AlarmScheduler.swift in Sources */,
+				41CD5C404C204E944143F9F5 /* AlarmSoundPlayer.swift in Sources */,
+				262ACD049E4CF6981A6E05D1 /* AlarmStore.swift in Sources */,
+				2D56782CF556E2675BF68197 /* AlarmTabView.swift in Sources */,
+				117EE9C0649D61F58FC5025D /* AlarmWalkDismissContent.swift in Sources */,
+				EA50619FCF443ED810530DE8 /* AppConstants.swift in Sources */,
+				A53A60BC21723061D05B3ADA /* AppGroupStore.swift in Sources */,
+				6E06F4E489E331B15A9245FF /* AuthorizationCenter+Still.swift in Sources */,
+				AC1BC0C4E83723D7FEE77062 /* BreakFocusFlowView.swift in Sources */,
+				D7725F91C3103E95CF5D14D2 /* CalmCard.swift in Sources */,
+				123C2D4FD639A9D9F8ECE556 /* DurationPicker.swift in Sources */,
+				820B451E2DB6DA2373347006 /* EmptyState.swift in Sources */,
+				018521D89C42908D4C59A9D4 /* FocusHomeView.swift in Sources */,
+				8D1F6D517958677CDC2D06FC /* FocusSessionController.swift in Sources */,
+				07BAA65D68C8D578E85033C6 /* FocusStatusHeader.swift in Sources */,
+				E5D5112EFCBD2926D9A9813F /* GroupEditorSheet.swift in Sources */,
+				4BA739805624FDE1CB95248E /* ListRow.swift in Sources */,
+				E8BC5EE422B4B37B2C5D3AF1 /* MainTabView.swift in Sources */,
+				1CB664E4866803F36D3D29E5 /* MotionStepAuthorization.swift in Sources */,
+				B2375AEE5C0CB139E1BEFE97 /* OnboardingView.swift in Sources */,
+				72BCCA9F9C50B84277FD8D74 /* OpenStillAlarmChallengeIntent.swift in Sources */,
+				01B0F6C204D89E0FF6F21AA4 /* PrimaryButton.swift in Sources */,
+				5CECA3C68F102AD32A96D3E4 /* QRCodeImageView.swift in Sources */,
+				D384CA4DDFFD44A29712B8F9 /* QRScannerRepresentable.swift in Sources */,
+				B97B4B6D81C2358FCE2DA344 /* RootView.swift in Sources */,
+				70716351F3FD425CFF616A15 /* SecondaryButton.swift in Sources */,
+				D00E01F938CF2C11AFCF48FF /* SelectionCodec.swift in Sources */,
+				4B8F21265E8A0AD124A5D152 /* SelectionMerge.swift in Sources */,
+				7F5BC5C1C0C845B381B9FDB0 /* SettingsViewScreen.swift in Sources */,
+				258090671E937287A521632E /* SheetHeader.swift in Sources */,
+				CEA3A9A5278F48DA230EFD16 /* ShieldApplicator.swift in Sources */,
+				92A5E42F2A31B0C5B606F672 /* StatBlock.swift in Sources */,
+				75B28D9FF14EEB57CB3F3119 /* StillAlarmMetadata.swift in Sources */,
+				ADC60342778EA19EB546C959 /* StillApp.swift in Sources */,
+				87ED55BBF2A5B3B7367674F3 /* StillAppDelegate.swift in Sources */,
+				F0E37C68A6EC8D97ED6A58B9 /* StillHaptics.swift in Sources */,
+				A67A8776FDD45857CD655ED1 /* StoredFocusGroup.swift in Sources */,
+				FCE42EB2C6EE4012CA33BF2D /* Tokens.swift in Sources */,
+				6FED56D5D2729384B14CC409 /* UNNotificationCenter+Async.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4EC26EAACFD06E9460F725D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23B9CDB97AE67BCDBF6AA332 /* AppConstants.swift in Sources */,
+				EC9DA4968A6309E77D310DFB /* AppGroupStore.swift in Sources */,
+				976B9C206EA5C84519B9CED2 /* DeviceActivityMonitorExtension.swift in Sources */,
+				761342F53F7B90FF685A3614 /* SelectionCodec.swift in Sources */,
+				FDCA70DC58D43F75A7354C0C /* SelectionMerge.swift in Sources */,
+				A602CC5E43A94157F5455FD7 /* ShieldApplicator.swift in Sources */,
+				4356A9F800F9AE8CA145448A /* StoredFocusGroup.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE0FDD0F935FD9DF899548B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC4AEBE879348E4E08245F0 /* ShieldConfigurationExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C58A9FB66461A66B446B1E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB0D64181692E50AF1E0A261 /* StillShield */;
+			targetProxy = 231E501248AFC455C206EC4D /* PBXContainerItemProxy */;
+		};
+		DB5C9A6A0E646988A508C567 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C39B236B1AA30066E1DC7F9A /* StillMonitor */;
+			targetProxy = A91FAC27129BA0E491F4BD9F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		414F180F83868B9A6E91139D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6A6DAF68DDDD7EECD9C8C669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Still/Still.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = Still/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					AlarmKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A3C60B1D8915B729F295B779 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/StillMonitor.entitlements;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.monitor;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A8DF1B5CA48FFCA1AF257052 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfiguration/StillShield.entitlements;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = ShieldConfiguration/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.shield;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D57B55B9DC3A7CD2F1B9FF18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldConfiguration/StillShield.entitlements;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = ShieldConfiguration/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.shield;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D5EA568FE5AC90FA0B844850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D701A62D4ECDA75D492D05A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/StillMonitor.entitlements;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.monitor;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F06BE20B33730EA6E2A86542 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Still/Still.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = Still/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					AlarmKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		72DBE189669F9E4B2E608188 /* Build configuration list for PBXNativeTarget "StillMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D701A62D4ECDA75D492D05A4 /* Debug */,
+				A3C60B1D8915B729F295B779 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		842991EF2FF19D3CFD473BC7 /* Build configuration list for PBXNativeTarget "Still" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A6DAF68DDDD7EECD9C8C669 /* Debug */,
+				F06BE20B33730EA6E2A86542 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8D4746AFE3CD05037FF441D4 /* Build configuration list for PBXNativeTarget "StillShield" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D57B55B9DC3A7CD2F1B9FF18 /* Debug */,
+				A8DF1B5CA48FFCA1AF257052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D4C3CA34F2162AE68E04DF3F /* Build configuration list for PBXProject "Still" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				414F180F83868B9A6E91139D /* Debug */,
+				D5EA568FE5AC90FA0B844850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F4966E9BE9D7D1ABED65BFF6 /* Project object */;
+}
