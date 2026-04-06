@@ -1,4 +1,9 @@
 xcuserdata/
 DerivedData/
 *.xcuserstate
+*.xcscmblueprint
 .DS_Store
+build/
+.swiftpm/
+*.ipa
+*.dSYM.zip
