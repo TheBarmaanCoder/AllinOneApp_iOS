@@ -31,6 +31,8 @@ targets:
         INFOPLIST_FILE: Still/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         OTHER_LDFLAGS: "$(inherited) -weak_framework AlarmKit"
+        # Let Automatic signing pick Development vs Distribution (hard-coding "iPhone Developer" breaks App Store export in Xcode Cloud).
+        CODE_SIGN_IDENTITY: ""
     entitlements:
       path: Still/Still.entitlements
     dependencies:
@@ -51,6 +53,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.allinoneapp.still.monitor
         INFOPLIST_FILE: DeviceActivityMonitor/Info.plist
+        CODE_SIGN_IDENTITY: ""
     entitlements:
       path: DeviceActivityMonitor/StillMonitor.entitlements
 
@@ -63,6 +66,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.allinoneapp.still.shield
         INFOPLIST_FILE: ShieldConfiguration/Info.plist
+        CODE_SIGN_IDENTITY: ""
     entitlements:
       path: ShieldConfiguration/StillShield.entitlements
 

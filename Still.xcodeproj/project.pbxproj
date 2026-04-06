@@ -108,27 +108,27 @@
 		0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
 		0E883AA014F89547770325A6 /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmScheduler.swift; sourceTree = "<group>"; };
 		1718F1E77823DF4707D57128 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
-		193593C1E058E2D289F796C2 /* Still.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Still.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		193593C1E058E2D289F796C2 /* Still.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Still.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4E77A236C7B170E3A6F44C /* StatBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatBlock.swift; sourceTree = "<group>"; };
 		20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFocusGroup.swift; sourceTree = "<group>"; };
 		213192B956B35C653EAEE0A3 /* CalmCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalmCard.swift; sourceTree = "<group>"; };
-		224D3CE7101EC9EED2BC0093 /* still_ping.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_ping.caf; sourceTree = "<group>"; };
+		224D3CE7101EC9EED2BC0093 /* still_ping.caf */ = {isa = PBXFileReference; path = still_ping.caf; sourceTree = "<group>"; };
 		259C89C8A57003D06A645A64 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
-		28066CFB7A812944554BF5EA /* still_tink.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_tink.caf; sourceTree = "<group>"; };
+		28066CFB7A812944554BF5EA /* still_tink.caf */ = {isa = PBXFileReference; path = still_tink.caf; sourceTree = "<group>"; };
 		2CCC55CC629E00BB5C2EFC0D /* BreakFocusFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakFocusFlowView.swift; sourceTree = "<group>"; };
 		2F3C7541FDE5BCB9EA90C78F /* SheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeader.swift; sourceTree = "<group>"; };
 		2F5229B631BB752283F1A6FC /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
 		2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		32E3C2AC50E8240BD17F9E94 /* AlarmRingingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRingingView.swift; sourceTree = "<group>"; };
-		36885A9C0D936DB2A097BA37 /* StillShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		36885A9C0D936DB2A097BA37 /* StillShield.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = StillShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B5DF07AF9BACBF2DFAEE064 /* StillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillApp.swift; sourceTree = "<group>"; };
-		3CA79901063758266E7324E5 /* still_glass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_glass.caf; sourceTree = "<group>"; };
+		3CA79901063758266E7324E5 /* still_glass.caf */ = {isa = PBXFileReference; path = still_glass.caf; sourceTree = "<group>"; };
 		3DEB251AD9C28AB68D6D416A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		41FDEE0115183141EA76A1A9 /* AlarmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStore.swift; sourceTree = "<group>"; };
 		4518A2D1CBE7D67C11D82077 /* ShieldConfigurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationExtension.swift; sourceTree = "<group>"; };
 		49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupStore.swift; sourceTree = "<group>"; };
 		4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSessionController.swift; sourceTree = "<group>"; };
-		4CDF99A3410427FF3EFC733D /* StillMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CDF99A3410427FF3EFC733D /* StillMonitor.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = StillMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DA5AB17BDD84BB65D1642F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4F80521F5D5DBBCE90FD4CEA /* GroupEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEditorSheet.swift; sourceTree = "<group>"; };
 		54EB87E68219033713090608 /* SelectionCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCodec.swift; sourceTree = "<group>"; };
@@ -595,18 +595,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Still/Still.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = Still/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-weak_framework",
-					AlarmKit,
-				);
+				OTHER_LDFLAGS = "$(inherited) -weak_framework AlarmKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -617,7 +612,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/StillMonitor.entitlements;
-				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -634,7 +629,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ShieldConfiguration/StillShield.entitlements;
-				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = ShieldConfiguration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -651,7 +646,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ShieldConfiguration/StillShield.entitlements;
-				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = ShieldConfiguration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -729,7 +724,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/StillMonitor.entitlements;
-				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -747,18 +742,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Still/Still.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = Still/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-weak_framework",
-					AlarmKit,
-				);
+				OTHER_LDFLAGS = "$(inherited) -weak_framework AlarmKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

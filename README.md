@@ -21,6 +21,12 @@ Minimal focus + alarm app: choose apps, categories, and sites to shield during a
 
 `Still.xcodeproj` is committed, so Cloud does not need to run XcodeGen unless you remove the project from git.
 
+### If the archive succeeds but “Export archive” fails in Xcode Cloud
+
+- The app and extensions use **Automatic** signing with **no fixed** `CODE_SIGN_IDENTITY` (so Release can use **Apple Distribution** for App Store export). After editing `project.yml`, run `xcodegen generate` and commit the updated `Still.xcodeproj`.
+- Complete the **encryption / export compliance** steps in **App Store Connect** if prompted (`ITSAppUsesNonExemptEncryption` is set to `false` in the app for standard exempt-only encryption).
+- Ensure all bundle IDs exist on the developer portal with the right capabilities: `com.allinoneapp.still`, `com.allinoneapp.still.monitor`, `com.allinoneapp.still.shield`.
+
 ## Signing and capabilities
 
 - Select your **Team** on the **Still**, **StillMonitor**, and **StillShield** targets.
