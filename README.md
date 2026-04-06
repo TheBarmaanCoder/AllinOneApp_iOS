@@ -23,9 +23,10 @@ Minimal focus + alarm app: choose apps, categories, and sites to shield during a
 
 ### If the archive succeeds but “Export archive” fails in Xcode Cloud
 
-- The app and extensions use **Automatic** signing with **no fixed** `CODE_SIGN_IDENTITY` (so Release can use **Apple Distribution** for App Store export). After editing `project.yml`, run `xcodegen generate` and commit the updated `Still.xcodeproj`.
+- The app and extensions use **Automatic** signing with **empty** `CODE_SIGN_IDENTITY` in the project (XcodeGen otherwise injects `iPhone Developer`, which breaks **Apple Distribution** export). After editing `project.yml`, run `xcodegen generate` and commit the updated `Still.xcodeproj`.
+- **Entitlements** in the repo include **Family Controls** and the **App Group** `group.com.allinoneapp.still` on **Still**, **StillMonitor**, and **StillShield**. In [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/identifiers/list), each App ID must enable the same capabilities so Xcode Cloud can create provisioning profiles.
 - Complete the **encryption / export compliance** steps in **App Store Connect** if prompted (`ITSAppUsesNonExemptEncryption` is set to `false` in the app for standard exempt-only encryption).
-- Ensure all bundle IDs exist on the developer portal with the right capabilities: `com.allinoneapp.still`, `com.allinoneapp.still.monitor`, `com.allinoneapp.still.shield`.
+- If export still exits with **code 70** after the above, revoke **Xcode Cloud–managed** certificates in the developer portal (**Certificates** → filter *Managed*) and re-run the build so Apple issues fresh certs ([forum discussion](https://developer.apple.com/forums/thread/816085)).
 
 ## Signing and capabilities
 

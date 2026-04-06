@@ -27,11 +27,12 @@ targets:
       - path: Still/Resources
     settings:
       base:
+        DEVELOPMENT_TEAM: WYCSFCBC9V
         PRODUCT_BUNDLE_IDENTIFIER: com.allinoneapp.still
         INFOPLIST_FILE: Still/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         OTHER_LDFLAGS: "$(inherited) -weak_framework AlarmKit"
-        # Let Automatic signing pick Development vs Distribution (hard-coding "iPhone Developer" breaks App Store export in Xcode Cloud).
+        # XcodeGen defaults to "iPhone Developer" for apps; empty uses Automatic identity (needed for Cloud export).
         CODE_SIGN_IDENTITY: ""
     entitlements:
       path: Still/Still.entitlements
@@ -51,6 +52,7 @@ targets:
       - path: Core
     settings:
       base:
+        DEVELOPMENT_TEAM: WYCSFCBC9V
         PRODUCT_BUNDLE_IDENTIFIER: com.allinoneapp.still.monitor
         INFOPLIST_FILE: DeviceActivityMonitor/Info.plist
         CODE_SIGN_IDENTITY: ""
@@ -64,6 +66,7 @@ targets:
       - path: ShieldConfiguration
     settings:
       base:
+        DEVELOPMENT_TEAM: WYCSFCBC9V
         PRODUCT_BUNDLE_IDENTIFIER: com.allinoneapp.still.shield
         INFOPLIST_FILE: ShieldConfiguration/Info.plist
         CODE_SIGN_IDENTITY: ""
