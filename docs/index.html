@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Still — Focus &amp; alarms for iPhone</title>
+  <meta name="description" content="Still helps you stay focused with Screen Time shields and optional walk-or-QR alarms." />
+  <style>
+    :root {
+      --bg: #f6f4f1;
+      --text: #1c1c1e;
+      --muted: #636366;
+      --accent: #3d5a73;
+      --card: #fff;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    .wrap {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+    header { margin-bottom: 2rem; }
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      margin-bottom: 1.25rem;
+    }
+    h2 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 0 0 0.75rem;
+      font-weight: 600;
+    }
+    ul { margin: 0; padding-left: 1.2rem; }
+    li { margin: 0.4rem 0; }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0,0,0,.08);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover { text-decoration: underline; }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Still</h1>
+      <p class="tagline">Focus sessions with Screen Time shields, plus optional alarms you dismiss by walking or scanning your own QR code.</p>
+    </header>
+
+    <section class="card" aria-labelledby="purpose-heading">
+      <h2 id="purpose-heading">Purpose</h2>
+      <p style="margin:0">Still is built for people who want to reduce distractions on their own terms: you choose which apps, categories, and websites are limited during a timed focus session. Alarms are optional and designed so you finish waking up with a short walk or a sticker you place away from your bed.</p>
+    </section>
+
+    <section class="card" aria-labelledby="highlights-heading">
+      <h2 id="highlights-heading">Highlights</h2>
+      <ul>
+        <li>Timed focus using Apple’s Screen Time APIs (Family Controls, Managed Settings, Device Activity)</li>
+        <li>Optional alarms: system alarms on supported iOS versions, with walk-to-dismiss or QR dismiss</li>
+        <li>Data stays on your device for core focus features; see our <a href="privacy.html">privacy summary</a></li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Project &amp; contact</h2>
+      <p style="margin:0 0 1rem">Source and issues:</p>
+      <nav class="links" aria-label="Project links">
+        <a href="https://github.com/TheBarmaanCoder/AllinOneApp_iOS">GitHub repository</a>
+        <a href="https://github.com/TheBarmaanCoder">Developer profile</a>
+      </nav>
+    </section>
+
+    <footer>
+      <p style="margin:0">© Still. This page documents the app for developer program requests and transparency.</p>
+    </footer>
+  </div>
+</body>
+</html>

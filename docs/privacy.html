@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy summary — Still</title>
+  <style>
+    :root {
+      --bg: #f6f4f1;
+      --text: #1c1c1e;
+      --muted: #636366;
+      --accent: #3d5a73;
+      --card: #fff;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    .wrap { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+    h1 { font-size: 1.5rem; margin: 0 0 1rem; }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      margin-bottom: 1rem;
+    }
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--accent); font-weight: 500; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back { margin-bottom: 1.25rem; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="back"><a href="index.html">← Back to Still</a></p>
+    <h1>Privacy summary</h1>
+    <div class="card">
+      <p><strong>On-device focus.</strong> Your focus selections, session timing, and related data used to apply shields are handled on your device using Apple’s Screen Time APIs and shared containers between the app and its extensions. We do not operate our own servers for that core functionality.</p>
+      <p><strong>Permissions.</strong> The app may request access the system requires (for example Screen Time authorization, Motion &amp; Fitness for step-based alarm dismiss, Camera for QR scan, notifications or system alarms as described in the app). Those flows are disclosed in the app and in the App Store privacy details when you ship.</p>
+      <p><strong>Changes.</strong> If we add analytics or cloud services later, we will update this summary and the App Store privacy information before collecting new data.</p>
+    </div>
+    <p style="font-size:0.9rem;color:var(--muted)">Questions: use <a href="https://github.com/TheBarmaanCoder/AllinOneApp_iOS/issues">GitHub Issues</a> on the project repository.</p>
+  </div>
+</body>
+</html>

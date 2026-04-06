@@ -2,6 +2,9 @@
 
 iOS app repo for **Still**, synced with [Xcode Cloud](https://developer.apple.com/xcode-cloud/) for CI and TestFlight.
 
+**Public site (GitHub Pages):** after you enable Pages (Settings → Pages → Branch `main`, folder `/docs`), the site will be at  
+`https://thebarmaancoder.github.io/AllinOneApp_iOS/`
+
 Minimal focus + alarm app: choose apps, categories, and sites to shield during a timed session using Apple’s Screen Time APIs, plus alarms.
 
 ## Open in Xcode
