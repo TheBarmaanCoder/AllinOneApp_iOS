@@ -3,9 +3,12 @@ import SwiftUI
 
 struct FocusHomeView: View {
     @EnvironmentObject private var session: FocusSessionController
+    @EnvironmentObject private var stillMode: StillModeController
 
     @State private var extraSelection = FamilyActivitySelection()
     @State private var showPicker = false
+    @State private var showStillModePicker = false
+    @State private var stillModeSelection = FamilyActivitySelection()
     @State private var durationPreset: DurationBarPreset = .thirty
     @State private var otherHours = 0
     @State private var otherMinutes = 30
@@ -18,6 +21,7 @@ struct FocusHomeView: View {
     @State private var isCreatingGroup = false
     @State private var totalSeconds: TimeInterval = AppGroupStore.shared.totalFocusSeconds
     @State private var completedSessions: Int = AppGroupStore.shared.completedSessions
+    @State private var now = Date()
 
     private var durationMinutes: Int {
         switch durationPreset {
@@ -39,17 +43,7 @@ struct FocusHomeView: View {
                     FocusStatusHeader(isActive: session.isSessionActive, endsAt: session.sessionEndsAt)
 
                     if session.isSessionActive {
-                        CalmCard {
-                            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
-                                Text("Your session is active. Shields apply to what you selected; you can always change Screen Time in Settings.")
-                                    .font(.subheadline)
-                                    .foregroundStyle(Tokens.ColorName.textSecondary)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                SecondaryButton(title: "Break focus…") {
-                                    showBreakFlow = true
-                                }
-                            }
-                        }
+                        focusTimerCard
                     } else {
                         DurationBar(
                             preset: $durationPreset,
@@ -72,6 +66,8 @@ struct FocusHomeView: View {
                     }
 
                     groupsSection
+
+                    stillModeSection
                 }
                 .padding(.horizontal, Tokens.Spacing.screenHorizontal)
                 .padding(.vertical, Tokens.Spacing.screenVertical)
@@ -81,6 +77,7 @@ struct FocusHomeView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .familyActivityPicker(isPresented: $showPicker, selection: $extraSelection)
+        .familyActivityPicker(isPresented: $showStillModePicker, selection: $stillModeSelection)
         .onChange(of: showPicker) { isShowing in
             if isShowing {
                 StillHaptics.lightImpact()
@@ -117,11 +114,18 @@ struct FocusHomeView: View {
                 editing = nil
             }
         }
+        .onChange(of: showStillModePicker) { showing in
+            if !showing {
+                stillMode.saveSelection(stillModeSelection)
+            }
+        }
         .onAppear {
             refreshTally()
             reloadGroups()
+            stillModeSelection = stillMode.loadSelection()
         }
-        .onReceive(Timer.publish(every: 2, on: .main, in: .common).autoconnect()) { _ in
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { tick in
+            now = tick
             refreshTally()
         }
     }
@@ -275,6 +279,118 @@ struct FocusHomeView: View {
         }
     }
 
+    // MARK: - Focus Timer Card
+
+    private var focusTimerCard: some View {
+        CalmCard {
+            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                HStack(spacing: Tokens.Spacing.xl) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("In focus")
+                            .font(.caption.weight(.medium))
+                            .foregroundStyle(Tokens.ColorName.textTertiary)
+                        Text(focusElapsedText)
+                            .font(.title2.weight(.semibold))
+                            .monospacedDigit()
+                            .foregroundStyle(Tokens.ColorName.textPrimary)
+                            .contentTransition(.numericText())
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Remaining")
+                            .font(.caption.weight(.medium))
+                            .foregroundStyle(Tokens.ColorName.textTertiary)
+                        Text(focusRemainingText)
+                            .font(.title2.weight(.semibold))
+                            .monospacedDigit()
+                            .foregroundStyle(Tokens.ColorName.textSecondary)
+                            .contentTransition(.numericText())
+                    }
+                }
+
+                if let end = session.sessionEndsAt {
+                    ProgressView(value: focusProgress(endDate: end))
+                        .tint(Tokens.ColorName.textPrimary)
+                }
+
+                SecondaryButton(title: "Break focus…") {
+                    showBreakFlow = true
+                }
+            }
+        }
+    }
+
+    private var focusElapsedText: String {
+        guard let start = AppGroupStore.shared.sessionStart else { return "0m" }
+        let elapsed = max(0, now.timeIntervalSince(start))
+        return formattedDuration(elapsed)
+    }
+
+    private var focusRemainingText: String {
+        guard let end = session.sessionEndsAt else { return "0m" }
+        let remaining = max(0, end.timeIntervalSince(now))
+        return formattedDuration(remaining)
+    }
+
+    private func focusProgress(endDate: Date) -> Double {
+        guard session.plannedDuration > 0 else { return 0 }
+        let elapsed = max(0, now.timeIntervalSince(
+            AppGroupStore.shared.sessionStart ?? now
+        ))
+        return min(1, elapsed / session.plannedDuration)
+    }
+
+    // MARK: - Still Mode
+
+    private var stillModeSection: some View {
+        VStack(alignment: .leading, spacing: Tokens.Spacing.lg) {
+            Text("Still Mode")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(Tokens.ColorName.textPrimary)
+            Text("Scan your QR code with the iPhone camera to instantly block apps. Scan again and type a sentence to exit.")
+                .font(.subheadline)
+                .foregroundStyle(Tokens.ColorName.textSecondary)
+
+            CalmCard {
+                VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                    Button {
+                        StillHaptics.lightImpact()
+                        showStillModePicker = true
+                    } label: {
+                        HStack(alignment: .center, spacing: Tokens.Spacing.md) {
+                            VStack(alignment: .leading, spacing: Tokens.Spacing.xxs) {
+                                Text("Apps to block in Still Mode")
+                                    .font(.body.weight(.medium))
+                                    .foregroundStyle(Tokens.ColorName.textPrimary)
+                                Text(stillModeSelectionSubtitle)
+                                    .font(.caption)
+                                    .foregroundStyle(Tokens.ColorName.textSecondary)
+                            }
+                            Spacer(minLength: 0)
+                            Image(systemName: "chevron.right")
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(Tokens.ColorName.textTertiary)
+                        }
+                        .padding(.vertical, Tokens.Spacing.sm)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+
+                    Label("Print your QR from Settings, then scan it with your camera to activate.", systemImage: "info.circle")
+                        .font(.footnote)
+                        .foregroundStyle(Tokens.ColorName.textTertiary)
+                }
+            }
+        }
+    }
+
+    private var stillModeSelectionSubtitle: String {
+        let n = stillModeSelection.applicationTokens.count
+            + stillModeSelection.categoryTokens.count
+            + stillModeSelection.webDomainTokens.count
+        if n == 0 { return "No apps selected" }
+        return n == 1 ? "1 item selected" : "\(n) items selected"
+    }
+
     private func manualSelectionCount(_ selection: FamilyActivitySelection) -> Int {
         selection.applicationTokens.count + selection.categoryTokens.count + selection.webDomainTokens.count
     }
@@ -299,6 +415,11 @@ struct FocusHomeView: View {
 
     private func startSession() {
         startError = nil
+        guard !stillMode.isActive else {
+            startError = "Exit Still Mode before starting a focus session."
+            StillHaptics.warning()
+            return
+        }
         let chosenGroups = groups.filter { selectedGroupIDs.contains($0.id) }
         do {
             let merged = try SelectionMerge.mergedSelection(groups: chosenGroups, extra: extraSelection)

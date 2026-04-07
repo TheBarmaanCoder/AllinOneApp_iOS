@@ -28,7 +28,7 @@ struct PrimaryButton: View {
                 RoundedRectangle(cornerRadius: Tokens.Radius.medium, style: .continuous)
                     .fill(Tokens.ColorName.accent)
             )
-            .foregroundStyle(Color.white)
+            .foregroundStyle(Tokens.ColorName.backgroundPrimary)
         }
         .buttonStyle(.plain)
         .disabled(isDisabled || isLoading)

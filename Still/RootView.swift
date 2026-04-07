@@ -6,6 +6,7 @@ struct RootView: View {
     @EnvironmentObject private var session: FocusSessionController
     @EnvironmentObject private var alarmStore: AlarmStore
     @EnvironmentObject private var alarmCoordinator: AlarmRingingCoordinator
+    @EnvironmentObject private var stillMode: StillModeController
 
     var body: some View {
         Group {
@@ -19,9 +20,16 @@ struct RootView: View {
         }
         .fullScreenCover(item: Binding(
             get: { alarmCoordinator.activeRinging },
-            set: { alarmCoordinator.activeRinging = $0 }
+            set: { _ in }
         )) { context in
             AlarmRingingView(context: context, coordinator: alarmCoordinator)
+                .interactiveDismissDisabled(true)
+        }
+        .fullScreenCover(isPresented: Binding(
+            get: { stillMode.isActive || stillMode.pendingExit },
+            set: { _ in }
+        )) {
+            StillModeActiveOverlay(controller: stillMode)
                 .interactiveDismissDisabled(true)
         }
         .animation(.easeOut(duration: Tokens.Motion.standard), value: hasCompletedOnboarding)

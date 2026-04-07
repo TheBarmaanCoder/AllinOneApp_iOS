@@ -24,9 +24,9 @@ enum AlarmScheduler {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 
-    static func rescheduleAll(alarms: [StoredAlarm]) {
+    static func rescheduleAll(alarms: [StoredAlarm]) async {
         let center = UNUserNotificationCenter.current()
-        center.removeAllPendingNotificationRequests()
+        removeAllPendingRequests()
 
         for alarm in alarms {
             guard alarm.isEnabled, !alarm.weekdays.isEmpty else { continue }
@@ -48,17 +48,17 @@ enum AlarmScheduler {
                 dc.minute = alarm.minute
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dc, repeats: true)
                 let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
-                center.add(request)
+                try? await center.add(request)
             }
         }
     }
 
     private static func notificationTitle(for alarm: StoredAlarm) -> String {
-        switch alarm.dismissMode {
-        case .walk:
-            return "Get up and walk"
+        switch alarm.dismissMode.normalized {
         case .qr:
             return alarm.label.isEmpty ? "Alarm" : alarm.label
+        default:
+            return alarm.label.isEmpty ? "Alarm — Still" : alarm.label
         }
     }
 }

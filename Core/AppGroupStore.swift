@@ -19,6 +19,9 @@ final class AppGroupStore {
         static let totalFocusSeconds = "totalFocusSeconds"
         static let completedSessions = "completedSessions"
         static let groupsData = "groupsData"
+        static let stillModeActive = "stillModeActive"
+        static let stillModeStart = "stillModeStart"
+        static let stillModeSelectionData = "stillModeSelectionData"
     }
 
     private init() {
@@ -120,4 +123,40 @@ final class AppGroupStore {
         clearSessionSelectionBlob()
     }
 
+    // MARK: - Still Mode
+
+    var stillModeActive: Bool {
+        get { defaults?.bool(forKey: Key.stillModeActive) ?? false }
+        set {
+            defaults?.set(newValue, forKey: Key.stillModeActive)
+            defaults?.synchronize()
+        }
+    }
+
+    var stillModeStart: Date? {
+        get { defaults?.object(forKey: Key.stillModeStart) as? Date }
+        set {
+            if let newValue {
+                defaults?.set(newValue, forKey: Key.stillModeStart)
+            } else {
+                defaults?.removeObject(forKey: Key.stillModeStart)
+            }
+        }
+    }
+
+    var stillModeSelectionData: Data? {
+        get { defaults?.data(forKey: Key.stillModeSelectionData) }
+        set {
+            if let newValue {
+                defaults?.set(newValue, forKey: Key.stillModeSelectionData)
+            } else {
+                defaults?.removeObject(forKey: Key.stillModeSelectionData)
+            }
+        }
+    }
+
+    func clearStillModeMetadata() {
+        stillModeActive = false
+        stillModeStart = nil
+    }
 }

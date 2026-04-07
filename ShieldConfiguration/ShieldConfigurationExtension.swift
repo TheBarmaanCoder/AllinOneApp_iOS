@@ -20,7 +20,7 @@ final class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         Self.makeShield(copyKey: webDomain)
     }
 
-    private static let messages: [String] = [
+    private static let focusMessages: [String] = [
         "Your attention is the rarest thing you have. Give it to what matters.",
         "This urge will pass. What you build when you wait is yours.",
         "One clear hour beats a scattered day.",
@@ -33,14 +33,25 @@ final class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         "Small boundaries today become freedom tomorrow.",
     ]
 
+    private static let stillModeMessages: [String] = [
+        "You chose Still Mode. This app is locked until you scan your QR code.",
+        "Your phone is in Still Mode. The world outside is waiting for you.",
+        "Still Mode is active. Put the phone down and come back when you're ready.",
+        "This app is paused while you're in Still Mode. Enjoy the quiet.",
+        "Still Mode — the best things happen when you're not on your phone.",
+    ]
+
     private static func makeShield<T: Hashable>(copyKey: T) -> ShieldConfiguration {
+        let isStillMode = UserDefaults(suiteName: "group.com.allinoneapp.still")?.bool(forKey: "stillModeActive") ?? false
+        let messages = isStillMode ? stillModeMessages : focusMessages
+        let title = isStillMode ? "Still Mode" : "Focus Mode"
         let idx = abs(copyKey.hashValue) % messages.count
         let body = messages[idx]
         return ShieldConfiguration(
             backgroundBlurStyle: nil,
             backgroundColor: .black,
             icon: nil,
-            title: ShieldConfiguration.Label(text: "Wait.", color: .white),
+            title: ShieldConfiguration.Label(text: title, color: .white),
             subtitle: ShieldConfiguration.Label(text: body, color: UIColor(white: 0.75, alpha: 1)),
             primaryButtonLabel: ShieldConfiguration.Label(text: "OK", color: .black),
             primaryButtonBackgroundColor: .white

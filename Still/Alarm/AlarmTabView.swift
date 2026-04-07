@@ -16,8 +16,6 @@ struct AlarmTabView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
-                    qrCard
-
                     Text("Alarms")
                         .font(.largeTitle.weight(.semibold))
                         .foregroundStyle(Tokens.ColorName.textPrimary)
@@ -31,21 +29,7 @@ struct AlarmTabView: View {
                             editorMode = .create
                         }
                     } else {
-                        VStack(spacing: 0) {
-                            ForEach(alarmStore.alarms) { alarm in
-                                alarmRow(alarm)
-                                if alarm.id != alarmStore.alarms.last?.id {
-                                    Divider().background(Tokens.ColorName.separator)
-                                }
-                            }
-                        }
-                        .padding(.horizontal, Tokens.Spacing.lg)
-                        .padding(.vertical, Tokens.Spacing.sm)
-                        .background(
-                            RoundedRectangle(cornerRadius: Tokens.Radius.large, style: .continuous)
-                                .fill(Tokens.ColorName.backgroundSecondary)
-                                .shadow(color: Color.black.opacity(0.06), radius: 10, x: 0, y: 3)
-                        )
+                        alarmList
 
                         PrimaryButton(title: "Add alarm") {
                             editorMode = .create
@@ -82,9 +66,34 @@ struct AlarmTabView: View {
         }
     }
 
+    // MARK: - Alarm list with swipe-to-delete
+
+    private var alarmList: some View {
+        VStack(spacing: 0) {
+            ForEach(alarmStore.alarms) { alarm in
+                alarmRow(alarm)
+                    .background(Tokens.ColorName.backgroundSecondary)
+                    .swipeToDelete {
+                        alarmStore.delete(id: alarm.id)
+                    }
+                if alarm.id != alarmStore.alarms.last?.id {
+                    Divider().background(Tokens.ColorName.separator)
+                        .padding(.horizontal, Tokens.Spacing.lg)
+                }
+            }
+        }
+        .padding(.vertical, Tokens.Spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: Tokens.Radius.large, style: .continuous)
+                .fill(Tokens.ColorName.backgroundSecondary)
+                .shadow(color: Color.black.opacity(0.06), radius: 10, x: 0, y: 3)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: Tokens.Radius.large, style: .continuous))
+    }
+
     private var emptyAlarmsMessage: String {
         if AlarmBootstrap.usesAlarmKitThisDevice {
-            return "Create an alarm. With system alarms, your phone rings like a real clock—even when it is locked or in Do Not Disturb—until you finish your walk or QR challenge."
+            return "Create an alarm. It rings like a real clock—even when locked or in Do Not Disturb—and nags you every 30 seconds until you dismiss it."
         }
         return "Create an alarm and allow notifications when asked so Still can alert you."
     }
@@ -93,7 +102,9 @@ struct AlarmTabView: View {
         "Notifications are off. Enable them in Settings → Still → Notifications to hear alarms on this iOS version."
     }
 
-    private var qrCard: some View {
+    // MARK: - QR card (kept for Settings)
+
+    var qrCard: some View {
         CalmCard {
             VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
                 Text("Your dismiss QR")
@@ -156,13 +167,7 @@ struct AlarmTabView: View {
             .buttonStyle(.plain)
         }
         .padding(.vertical, Tokens.Spacing.sm)
-        .contextMenu {
-            Button(role: .destructive) {
-                alarmStore.delete(id: alarm.id)
-            } label: {
-                Label("Delete alarm", systemImage: "trash")
-            }
-        }
+        .padding(.horizontal, Tokens.Spacing.lg)
     }
 
     private func timeString(_ alarm: StoredAlarm) -> String {

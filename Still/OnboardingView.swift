@@ -1,39 +1,54 @@
 import AlarmKit
-import CoreMotion
+import AVFoundation
 import FamilyControls
 import SwiftUI
 import UIKit
+import UserNotifications
 
 struct OnboardingView: View {
     var onFinished: () -> Void
 
     @State private var familyStatus: AuthorizationStatus = FocusAuthorization.authorizationStatus()
-    @State private var motionStatus: CMAuthorizationStatus = MotionStepAuthorization.status()
     @State private var requestingFamily = false
-    @State private var requestingMotion = false
+    @State private var requestingCamera = false
+    @State private var requestingNotifications = false
     @State private var requestingAlarmKit = false
     @State private var alarmKitAuthorized = false
     @State private var alarmKitDenied = false
+    @State private var cameraStatus: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+    @State private var notificationAuthStatus: UNAuthorizationStatus = .notDetermined
 
     private var screenTimeOK: Bool {
         familyStatus == .approved
     }
 
-    private var motionOK: Bool {
-        MotionStepAuthorization.isSatisfiedForApp
+    private var notificationOK: Bool {
+        switch notificationAuthStatus {
+        case .authorized, .provisional, .ephemeral:
+            return true
+        default:
+            return false
+        }
+    }
+
+    private var notificationDenied: Bool {
+        notificationAuthStatus == .denied
     }
 
     private var canContinue: Bool {
-        screenTimeOK && motionOK
+        screenTimeOK && notificationOK
     }
 
     private var familyDenied: Bool {
         familyStatus == .denied
     }
 
-    private var motionDenied: Bool {
-        MotionStepAuthorization.isStepCountingAvailable
-            && (motionStatus == .denied || motionStatus == .restricted)
+    private var cameraOK: Bool {
+        cameraStatus == .authorized
+    }
+
+    private var cameraDenied: Bool {
+        cameraStatus == .denied || cameraStatus == .restricted
     }
 
     var body: some View {
@@ -58,20 +73,31 @@ struct OnboardingView: View {
                 )
 
                 permissionCard(
-                    title: "Motion (walk alarms)",
-                    explanation: "Walk-to-dismiss alarms count about fifteen steps using Motion & Fitness. QR alarms only need the camera when an alarm rings.",
-                    isGranted: motionOK,
-                    denied: motionDenied,
-                    isRequesting: requestingMotion,
-                    allowTitle: "Allow Motion & Fitness",
-                    onAllow: { Task { await requestMotion() } },
-                    settingsHint: "Motion & Fitness for Still is off. Turn it on in Settings → Still to use walk dismiss."
+                    title: "Camera (QR alarms & Still Mode)",
+                    explanation: "Still uses the camera to scan your printed QR code — both for alarm dismiss and to enter Still Mode. Images are not saved or uploaded.",
+                    isGranted: cameraOK,
+                    denied: cameraDenied,
+                    isRequesting: requestingCamera,
+                    allowTitle: "Allow Camera",
+                    onAllow: { Task { await requestCamera() } },
+                    settingsHint: "Camera access for Still is off. Turn it on in Settings → Still to use QR features."
+                )
+
+                permissionCard(
+                    title: "Notifications",
+                    explanation: "Still sends follow-up alarm alerts if you dismiss without completing the challenge. No marketing — only alarm follow-ups.",
+                    isGranted: notificationOK,
+                    denied: notificationDenied,
+                    isRequesting: requestingNotifications,
+                    allowTitle: "Allow Notifications",
+                    onAllow: { Task { await requestNotifications() } },
+                    settingsHint: "Notifications for Still are off. Turn them on in Settings → Still so follow-up alarms can play."
                 )
 
                 if #available(iOS 26.0, *) {
                     permissionCard(
                         title: "System alarms",
-                        explanation: "On iOS 26 or later, Still can schedule real alarms that ring through Sleep Focus and Do Not Disturb—not just a notification. They keep ringing if you leave the app; you still stop them only by walking fifteen steps or scanning your QR code after you tap Stop on the system alarm.",
+                        explanation: "Still can schedule real alarms that ring through Sleep Focus and Do Not Disturb — not just a notification. They keep ringing until you open the app and dismiss them.",
                         isGranted: alarmKitAuthorized,
                         denied: alarmKitDenied,
                         isRequesting: requestingAlarmKit,
@@ -79,12 +105,6 @@ struct OnboardingView: View {
                         onAllow: { Task { await triggerAlarmKitRequest() } },
                         settingsHint: "Alarm access for Still is off. Turn it on in Settings → Still to use full-screen alarms."
                     )
-                }
-
-                if !MotionStepAuthorization.isStepCountingAvailable {
-                    Text("Step counting is not available on this device; walk dismiss will be limited. You can still use Focus and QR alarms.")
-                        .font(.footnote)
-                        .foregroundStyle(Tokens.ColorName.textTertiary)
                 }
 
                 PrimaryButton(title: "Continue", isDisabled: !canContinue) {
@@ -96,16 +116,19 @@ struct OnboardingView: View {
             .padding(.vertical, Tokens.Spacing.xxl)
         }
         .background(Tokens.ColorName.backgroundPrimary.ignoresSafeArea())
-        .onAppear { refreshStatuses() }
+        .onAppear {
+            refreshStatuses()
+            Task { await refreshNotificationStatus() }
+        }
     }
 
     private var introCopy: some View {
-        let head = Text("Still has two tabs: ") + Text("Focus").fontWeight(.semibold)
-        let mid = Text(" shields apps and sites you choose using Screen Time, and ")
+        let head = Text("Still has three tabs: ") + Text("Focus").fontWeight(.semibold)
+        let mid = Text(" shields apps you choose, ")
             + Text("Alarm").fontWeight(.semibold)
         let tail = Text(
-            " wakes you with a QR scan or a short walk. Both need the right access to work on your device."
-        )
+            " wakes you and won't stop until you're up, and "
+        ) + Text("Settings").fontWeight(.semibold) + Text(" has your QR code.")
         return (head + mid + tail)
             .font(.body)
             .foregroundStyle(Tokens.ColorName.textSecondary)
@@ -114,7 +137,7 @@ struct OnboardingView: View {
 
     private func refreshStatuses() {
         familyStatus = FocusAuthorization.authorizationStatus()
-        motionStatus = MotionStepAuthorization.status()
+        cameraStatus = AVCaptureDevice.authorizationStatus(for: .video)
         if #available(iOS 26.0, *) {
             switch AlarmManager.shared.authorizationState {
             case .authorized:
@@ -127,6 +150,13 @@ struct OnboardingView: View {
                 alarmKitAuthorized = false
                 alarmKitDenied = false
             }
+        }
+    }
+
+    private func refreshNotificationStatus() async {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        await MainActor.run {
+            notificationAuthStatus = settings.authorizationStatus
         }
     }
 
@@ -144,14 +174,41 @@ struct OnboardingView: View {
         }
     }
 
-    private func requestMotion() async {
-        requestingMotion = true
+    private func requestCamera() async {
+        requestingCamera = true
         defer {
-            requestingMotion = false
+            requestingCamera = false
             refreshStatuses()
         }
-        await MotionStepAuthorization.requestAccess()
-        StillHaptics.selectionChanged()
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            StillHaptics.selectionChanged()
+        case .notDetermined:
+            let granted = await withCheckedContinuation { (cont: CheckedContinuation<Bool, Never>) in
+                AVCaptureDevice.requestAccess(for: .video) { cont.resume(returning: $0) }
+            }
+            if granted {
+                StillHaptics.selectionChanged()
+            } else {
+                StillHaptics.warning()
+            }
+        case .denied, .restricted:
+            StillHaptics.warning()
+        @unknown default:
+            StillHaptics.warning()
+        }
+    }
+
+    private func requestNotifications() async {
+        requestingNotifications = true
+        let granted = await AlarmScheduler.requestAuthorizationIfNeeded()
+        await refreshNotificationStatus()
+        requestingNotifications = false
+        if granted {
+            StillHaptics.selectionChanged()
+        } else {
+            StillHaptics.warning()
+        }
     }
 
     private func triggerAlarmKitRequest() async {

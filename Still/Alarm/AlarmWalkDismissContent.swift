@@ -1,4 +1,4 @@
-import CoreMotion
+@preconcurrency import CoreMotion
 import SwiftUI
 
 struct AlarmWalkDismissContent: View {
@@ -8,6 +8,7 @@ struct AlarmWalkDismissContent: View {
     @State private var steps: Int = 0
     @State private var errorText: String?
     @State private var timer: Timer?
+    @State private var pedometer: CMPedometer?
 
     private let required = AlarmConstants.requiredSteps
 
@@ -32,36 +33,68 @@ struct AlarmWalkDismissContent: View {
             }
         }
         .padding()
-        .onAppear { startPolling() }
-        .onDisappear { timer?.invalidate() }
+        .task { await startCounting() }
+        .onDisappear {
+            timer?.invalidate()
+            timer = nil
+        }
     }
 
-    private func startPolling() {
+    private func startCounting() async {
         guard CMPedometer.isStepCountingAvailable() else {
             errorText = "Step counting needs a physical iPhone with Motion & Fitness enabled."
             return
         }
 
-        let pedometer = CMPedometer()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true) { _ in
-            pedometer.queryPedometerData(from: fireDate, to: Date()) { data, error in
+        let ped = CMPedometer()
+        pedometer = ped
+
+        // Immediate check — user may have already walked before opening the app
+        let alreadyDone = await withCheckedContinuation { (cont: CheckedContinuation<Bool, Never>) in
+            ped.queryPedometerData(from: fireDate, to: Date()) { data, _ in
+                let n = data?.numberOfSteps.intValue ?? 0
+                DispatchQueue.main.async { steps = n }
+                cont.resume(returning: n >= required)
+            }
+        }
+        if alreadyDone {
+            onComplete()
+            return
+        }
+
+        // Live updates via startUpdates for faster response
+        ped.startUpdates(from: fireDate) { data, error in
+            DispatchQueue.main.async {
+                if let error {
+                    errorText = error.localizedDescription
+                    return
+                }
+                let n = data?.numberOfSteps.intValue ?? 0
+                steps = n
+                if n >= required {
+                    ped.stopUpdates()
+                    timer?.invalidate()
+                    timer = nil
+                    onComplete()
+                }
+            }
+        }
+
+        // Polling fallback in case live updates stall
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+            ped.queryPedometerData(from: fireDate, to: Date()) { data, _ in
                 DispatchQueue.main.async {
-                    if let error {
-                        errorText = error.localizedDescription
-                        return
-                    }
                     let n = data?.numberOfSteps.intValue ?? 0
-                    steps = n
+                    steps = max(steps, n)
                     if n >= required {
+                        ped.stopUpdates()
                         timer?.invalidate()
                         timer = nil
-                        StillHaptics.success()
                         onComplete()
                     }
                 }
             }
         }
         RunLoop.main.add(timer!, forMode: .common)
-        timer?.fire()
     }
 }

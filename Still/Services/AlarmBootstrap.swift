@@ -19,7 +19,7 @@ enum AlarmBootstrap {
             }
         }
 
-        AlarmScheduler.rescheduleAll(alarms: alarms)
+        await AlarmScheduler.rescheduleAll(alarms: alarms)
     }
 
     static var usesAlarmKitThisDevice: Bool {

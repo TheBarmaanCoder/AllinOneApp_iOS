@@ -54,7 +54,7 @@ struct DurationBar: View {
                                 RoundedRectangle(cornerRadius: Tokens.Radius.small, style: .continuous)
                                     .fill(isSelected(kind) ? Tokens.ColorName.textPrimary : Tokens.ColorName.surfaceMuted)
                             )
-                            .foregroundStyle(isSelected(kind) ? Color.white : Tokens.ColorName.textPrimary)
+                            .foregroundStyle(isSelected(kind) ? Tokens.ColorName.backgroundPrimary : Tokens.ColorName.textPrimary)
                     }
                     .buttonStyle(.plain)
                 }

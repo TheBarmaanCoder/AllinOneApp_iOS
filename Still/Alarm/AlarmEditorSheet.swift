@@ -15,7 +15,7 @@ struct AlarmEditorSheet: View {
     @State private var label: String = ""
     @State private var time: Date = Calendar.current.date(from: DateComponents(hour: 7, minute: 0)) ?? Date()
     @State private var weekdays: Set<Int> = Set(1 ... 7)
-    @State private var dismissMode: AlarmDismissMode = .walk
+    @State private var dismissMode: AlarmDismissMode = .simple
     @State private var ringtone: StillAlarmRingtoneOption = .default
 
     var body: some View {

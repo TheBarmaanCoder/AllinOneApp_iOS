@@ -22,21 +22,31 @@ enum StillAlarmRingtoneOption: String, CaseIterable, Identifiable {
 
 enum AlarmDismissMode: String, Codable, CaseIterable, Identifiable {
     case qr
+    case simple
+    /// Legacy value — decoded as `.simple`.
     case walk
+
+    static var allCases: [AlarmDismissMode] { [.qr, .simple] }
 
     var id: String { rawValue }
 
+    var normalized: AlarmDismissMode {
+        self == .walk ? .simple : self
+    }
+
     var title: String {
-        switch self {
+        switch normalized {
         case .qr: return "Scan QR sticker"
-        case .walk: return "Walk 15 steps"
+        case .simple: return "Simple alarm"
+        default: return "Simple alarm"
         }
     }
 
     var detail: String {
-        switch self {
+        switch normalized {
         case .qr: return "Print your code and scan it to stop."
-        case .walk: return "Fifteen steps since the alarm, counted by your iPhone."
+        case .simple: return "Alarm nags every 30 seconds until you open the app and confirm you're up."
+        default: return ""
         }
     }
 }
@@ -118,4 +128,52 @@ enum AlarmConstants {
     static let pendingSessionAppGroupKey = "pendingAlarmSessionAppGroup"
     static let alarmsStorageKey = "storedAlarms.v1"
     static let alarmsMirrorKey = "storedAlarmsMirror.v1"
+    static let nagAlarmIdsKey = "stillAlarmNagIds"
+    /// Epoch timestamp (TimeInterval) written when a challenge is completed.
+    /// Intents check this to avoid recreating sessions for stale nag alarms.
+    static let challengeCompletedAtKey = "stillChallengeCompletedAt"
+}
+
+enum ChallengeCompletionMarker {
+    private static let cooldown: TimeInterval = 600
+    private static let keyTimestamp = AlarmConstants.challengeCompletedAtKey
+    private static let keyAlarmId = "stillChallengeCompletedAlarmId"
+
+    static func markCompleted(alarmId: UUID) {
+        let now = Date().timeIntervalSince1970
+        let id = alarmId.uuidString
+        for store in stores {
+            store.set(now, forKey: keyTimestamp)
+            store.set(id, forKey: keyAlarmId)
+        }
+    }
+
+    /// Returns true only if the **same** alarm was recently completed.
+    /// Different alarms are never blocked.
+    static func wasRecentlyCompleted(for alarmId: UUID) -> Bool {
+        let (ts, storedId) = load()
+        guard ts > 0, storedId == alarmId.uuidString else { return false }
+        return Date().timeIntervalSince1970 - ts < cooldown
+    }
+
+    static func clear() {
+        for store in stores {
+            store.removeObject(forKey: keyTimestamp)
+            store.removeObject(forKey: keyAlarmId)
+        }
+    }
+
+    private static var stores: [UserDefaults] {
+        [UserDefaults.standard, UserDefaults(suiteName: AppConstants.appGroupId)].compactMap { $0 }
+    }
+
+    private static func load() -> (TimeInterval, String?) {
+        for store in [UserDefaults(suiteName: AppConstants.appGroupId), UserDefaults.standard].compactMap({ $0 }) {
+            let ts = store.double(forKey: keyTimestamp)
+            if ts > 0 {
+                return (ts, store.string(forKey: keyAlarmId))
+            }
+        }
+        return (0, nil)
+    }
 }

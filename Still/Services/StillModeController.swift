@@ -1,0 +1,103 @@
+import FamilyControls
+import Foundation
+import ManagedSettings
+
+@MainActor
+final class StillModeController: ObservableObject {
+    @Published private(set) var isActive = false
+    @Published private(set) var startedAt: Date?
+    /// Set when the user scans the QR to exit — triggers the sentence confirmation UI.
+    @Published var pendingExit = false
+
+    private let groupStore = AppGroupStore.shared
+
+    init() {
+        syncFromStore()
+    }
+
+    func syncFromStore() {
+        isActive = groupStore.stillModeActive
+        startedAt = groupStore.stillModeStart
+    }
+
+    var elapsedSeconds: TimeInterval {
+        guard let start = startedAt else { return 0 }
+        return max(0, Date().timeIntervalSince(start))
+    }
+
+    // MARK: - Activation
+
+    func activate() {
+        guard !isActive else { return }
+        guard !groupStore.sessionActive else { return }
+        guard let data = groupStore.stillModeSelectionData,
+              let selection = try? SelectionCodec.decode(data),
+              tokenCount(selection) > 0
+        else { return }
+
+        let now = Date()
+        groupStore.stillModeActive = true
+        groupStore.stillModeStart = now
+
+        ShieldApplicator.applyShields(for: selection)
+
+        isActive = true
+        startedAt = now
+    }
+
+    /// Returns `true` if there are apps selected for Still Mode.
+    var hasSelection: Bool {
+        guard let data = groupStore.stillModeSelectionData,
+              let sel = try? SelectionCodec.decode(data)
+        else { return false }
+        return tokenCount(sel) > 0
+    }
+
+    // MARK: - Deactivation
+
+    func requestExit() {
+        pendingExit = true
+    }
+
+    /// Validates the typed sentence and deactivates Still Mode.
+    func confirmExit(sentence: String) -> Bool {
+        let expected = "I am getting out of Still Mode"
+        let clean = sentence.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard clean.caseInsensitiveCompare(expected) == .orderedSame else { return false }
+
+        if let start = groupStore.stillModeStart {
+            groupStore.totalFocusSeconds += Date().timeIntervalSince(start)
+            groupStore.completedSessions += 1
+        }
+
+        ShieldApplicator.clearShields()
+        groupStore.clearStillModeMetadata()
+
+        isActive = false
+        startedAt = nil
+        pendingExit = false
+        return true
+    }
+
+    func cancelExit() {
+        pendingExit = false
+    }
+
+    // MARK: - Selection persistence
+
+    func saveSelection(_ selection: FamilyActivitySelection) {
+        guard let data = try? SelectionCodec.encode(selection) else { return }
+        groupStore.stillModeSelectionData = data
+    }
+
+    func loadSelection() -> FamilyActivitySelection {
+        guard let data = groupStore.stillModeSelectionData,
+              let sel = try? SelectionCodec.decode(data)
+        else { return FamilyActivitySelection() }
+        return sel
+    }
+
+    private func tokenCount(_ sel: FamilyActivitySelection) -> Int {
+        sel.applicationTokens.count + sel.categoryTokens.count + sel.webDomainTokens.count
+    }
+}

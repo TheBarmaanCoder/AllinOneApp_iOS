@@ -15,8 +15,13 @@ final class StillAppDelegate: NSObject, UIApplicationDelegate, UNUserNotificatio
             if #available(iOS 26.0, *) {
                 await alarmCoordinator?.syncFromAlarmKitState()
             }
-            alarmCoordinator?.restorePendingIfNeeded()
-            alarmCoordinator?.ensureForegroundAlarmSoundIfNeeded()
+            alarmCoordinator?.restorePendingAndForegroundAudioIfNeeded()
+        }
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        Task { @MainActor in
+            await alarmCoordinator?.rescheduleNagsIfChallengePending()
         }
     }
 
@@ -36,10 +41,8 @@ final class StillAppDelegate: NSObject, UIApplicationDelegate, UNUserNotificatio
     ) {
         if notification.request.content.categoryIdentifier == "STILL_ALARM" {
             deliverAlarm(notification)
-            completionHandler([.banner, .sound, .list])
-        } else {
-            completionHandler([.banner, .sound, .list])
         }
+        completionHandler([.banner, .sound, .list])
     }
 
     func userNotificationCenter(
