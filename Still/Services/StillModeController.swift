@@ -8,6 +8,8 @@ final class StillModeController: ObservableObject {
     @Published private(set) var startedAt: Date?
     /// Set when the user scans the QR to exit — triggers the sentence confirmation UI.
     @Published var pendingExit = false
+    /// Set when a non-Pro user scans the QR — triggers the paywall sheet.
+    @Published var showProPaywall = false
 
     private let groupStore = AppGroupStore.shared
 

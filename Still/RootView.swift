@@ -7,6 +7,7 @@ struct RootView: View {
     @EnvironmentObject private var alarmStore: AlarmStore
     @EnvironmentObject private var alarmCoordinator: AlarmRingingCoordinator
     @EnvironmentObject private var stillMode: StillModeController
+    @EnvironmentObject private var store: StoreManager
 
     var body: some View {
         Group {
@@ -31,6 +32,9 @@ struct RootView: View {
         )) {
             StillModeActiveOverlay(controller: stillMode)
                 .interactiveDismissDisabled(true)
+        }
+        .sheet(isPresented: $stillMode.showProPaywall) {
+            ProPaywallSheet()
         }
         .animation(.easeOut(duration: Tokens.Motion.standard), value: hasCompletedOnboarding)
         .onChange(of: hasCompletedOnboarding) { done in

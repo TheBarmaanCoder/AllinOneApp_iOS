@@ -4,10 +4,12 @@ import SwiftUI
 struct FocusHomeView: View {
     @EnvironmentObject private var session: FocusSessionController
     @EnvironmentObject private var stillMode: StillModeController
+    @EnvironmentObject private var store: StoreManager
 
     @State private var extraSelection = FamilyActivitySelection()
     @State private var showPicker = false
     @State private var showStillModePicker = false
+    @State private var showPaywall = false
     @State private var stillModeSelection = FamilyActivitySelection()
     @State private var durationPreset: DurationBarPreset = .thirty
     @State private var otherHours = 0
@@ -343,9 +345,14 @@ struct FocusHomeView: View {
 
     private var stillModeSection: some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.lg) {
-            Text("Still Mode")
-                .font(.title2.weight(.semibold))
-                .foregroundStyle(Tokens.ColorName.textPrimary)
+            HStack {
+                Text("Still Mode")
+                    .font(.title2.weight(.semibold))
+                    .foregroundStyle(Tokens.ColorName.textPrimary)
+                if !store.isProUnlocked {
+                    proBadge
+                }
+            }
             Text("Scan your QR code with the iPhone camera to instantly block apps. Scan again and type a sentence to exit.")
                 .font(.subheadline)
                 .foregroundStyle(Tokens.ColorName.textSecondary)
@@ -354,21 +361,31 @@ struct FocusHomeView: View {
                 VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
                     Button {
                         StillHaptics.lightImpact()
-                        showStillModePicker = true
+                        if store.isProUnlocked {
+                            showStillModePicker = true
+                        } else {
+                            showPaywall = true
+                        }
                     } label: {
                         HStack(alignment: .center, spacing: Tokens.Spacing.md) {
                             VStack(alignment: .leading, spacing: Tokens.Spacing.xxs) {
                                 Text("Apps to block in Still Mode")
                                     .font(.body.weight(.medium))
                                     .foregroundStyle(Tokens.ColorName.textPrimary)
-                                Text(stillModeSelectionSubtitle)
+                                Text(store.isProUnlocked ? stillModeSelectionSubtitle : "Requires Still Pro")
                                     .font(.caption)
                                     .foregroundStyle(Tokens.ColorName.textSecondary)
                             }
                             Spacer(minLength: 0)
-                            Image(systemName: "chevron.right")
-                                .font(.footnote.weight(.semibold))
-                                .foregroundStyle(Tokens.ColorName.textTertiary)
+                            if store.isProUnlocked {
+                                Image(systemName: "chevron.right")
+                                    .font(.footnote.weight(.semibold))
+                                    .foregroundStyle(Tokens.ColorName.textTertiary)
+                            } else {
+                                Image(systemName: "lock.fill")
+                                    .font(.footnote.weight(.semibold))
+                                    .foregroundStyle(Tokens.ColorName.textTertiary)
+                            }
                         }
                         .padding(.vertical, Tokens.Spacing.sm)
                         .contentShape(Rectangle())
@@ -381,6 +398,18 @@ struct FocusHomeView: View {
                 }
             }
         }
+        .sheet(isPresented: $showPaywall) {
+            ProPaywallSheet()
+        }
+    }
+
+    private var proBadge: some View {
+        Text("PRO")
+            .font(.caption2.weight(.bold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(Capsule().fill(Color.orange))
     }
 
     private var stillModeSelectionSubtitle: String {

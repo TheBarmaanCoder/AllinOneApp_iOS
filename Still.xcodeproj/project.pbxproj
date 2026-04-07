@@ -10,6 +10,8 @@
 		018521D89C42908D4C59A9D4 /* FocusHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0697B58435BACBBB0AF2659C /* FocusHomeView.swift */; };
 		01B0F6C204D89E0FF6F21AA4 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFCF1CF2B3C88006C3A098D /* PrimaryButton.swift */; };
 		07BAA65D68C8D578E85033C6 /* FocusStatusHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B7ABB69D38B2C1D4D91C8D /* FocusStatusHeader.swift */; };
+		08C6BF8759BE0820ECAF7DE2 /* ProPaywallSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFBB4EB37CB829A01BE4A8B /* ProPaywallSheet.swift */; };
+		0E2D8F90F58EFC2C5F630F82 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDF72BA1CF23D0322C8B818 /* StoreManager.swift */; };
 		10E16FD1CA4C6D79DF496840 /* AlarmQRTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0D345926875876AB596F78 /* AlarmQRTokenStore.swift */; };
 		117EE9C0649D61F58FC5025D /* AlarmWalkDismissContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55860788AE0CD925B30508D7 /* AlarmWalkDismissContent.swift */; };
 		123C2D4FD639A9D9F8ECE556 /* DurationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5229B631BB752283F1A6FC /* DurationPicker.swift */; };
@@ -115,6 +117,7 @@
 		0E883AA014F89547770325A6 /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmScheduler.swift; sourceTree = "<group>"; };
 		1718F1E77823DF4707D57128 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
 		193593C1E058E2D289F796C2 /* Still.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Still.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CDF72BA1CF23D0322C8B818 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		1E4E77A236C7B170E3A6F44C /* StatBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatBlock.swift; sourceTree = "<group>"; };
 		20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFocusGroup.swift; sourceTree = "<group>"; };
 		21166197651118205EBA3B78 /* StillShield 2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StillShield 2.entitlements"; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 		6AF4E58BA0B8B4F0BFBB6844 /* Still 3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 3.entitlements"; sourceTree = "<group>"; };
 		6FE483101A3FEFB1E63B191E /* StillModeExitFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillModeExitFlow.swift; sourceTree = "<group>"; };
 		75B51ADB08EDF74609504079 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7BFBB4EB37CB829A01BE4A8B /* ProPaywallSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProPaywallSheet.swift; sourceTree = "<group>"; };
 		7DBAED7AB8AF9AFF2260404C /* StillAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillAppDelegate.swift; sourceTree = "<group>"; };
 		81D7670EFBBC45339515C578 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
 		856A2B54907A62F778242BA9 /* StillMonitor 2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StillMonitor 2.entitlements"; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 				B8FED92DE8DE37927EACC621 /* Info.plist */,
 				3DEB251AD9C28AB68D6D416A /* MainTabView.swift */,
 				2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */,
+				7BFBB4EB37CB829A01BE4A8B /* ProPaywallSheet.swift */,
 				F7238F98B19D7CBC1CF03661 /* RootView.swift */,
 				F6787294E131C92DD766EF1D /* SettingsViewScreen.swift */,
 				F93FE8E9066DED626F7DA8A2 /* Still 2.entitlements */,
@@ -268,6 +273,7 @@
 				4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */,
 				9BA0D3AB23059E7A3E7BAE1A /* MotionStepAuthorization.swift */,
 				34E525A1B13328F86EE36F31 /* StillModeController.swift */,
+				1CDF72BA1CF23D0322C8B818 /* StoreManager.swift */,
 				56B7F0593472763B7188657B /* UNNotificationCenter+Async.swift */,
 			);
 			path = Services;
@@ -511,6 +517,7 @@
 				B2375AEE5C0CB139E1BEFE97 /* OnboardingView.swift in Sources */,
 				72BCCA9F9C50B84277FD8D74 /* OpenStillAlarmChallengeIntent.swift in Sources */,
 				01B0F6C204D89E0FF6F21AA4 /* PrimaryButton.swift in Sources */,
+				08C6BF8759BE0820ECAF7DE2 /* ProPaywallSheet.swift in Sources */,
 				5CECA3C68F102AD32A96D3E4 /* QRCodeImageView.swift in Sources */,
 				D384CA4DDFFD44A29712B8F9 /* QRScannerRepresentable.swift in Sources */,
 				B97B4B6D81C2358FCE2DA344 /* RootView.swift in Sources */,
@@ -528,6 +535,7 @@
 				BCC422697C79954F26AB0EAC /* StillModeActiveOverlay.swift in Sources */,
 				8D2B2C416789BDB6BD337B2A /* StillModeController.swift in Sources */,
 				1CCB7D7F3EE3BCFA7B4E6EF1 /* StillModeExitFlow.swift in Sources */,
+				0E2D8F90F58EFC2C5F630F82 /* StoreManager.swift in Sources */,
 				A67A8776FDD45857CD655ED1 /* StoredFocusGroup.swift in Sources */,
 				C2AFD0E6B20D48541FE5CA97 /* SwipeToDelete.swift in Sources */,
 				FCE42EB2C6EE4012CA33BF2D /* Tokens.swift in Sources */,

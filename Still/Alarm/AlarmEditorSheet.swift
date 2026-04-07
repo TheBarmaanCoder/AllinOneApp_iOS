@@ -10,6 +10,7 @@ struct AlarmEditorSheet: View {
     var onClose: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var store: StoreManager
     @ObservedObject var alarmStore: AlarmStore
 
     @State private var label: String = ""
@@ -17,6 +18,7 @@ struct AlarmEditorSheet: View {
     @State private var weekdays: Set<Int> = Set(1 ... 7)
     @State private var dismissMode: AlarmDismissMode = .simple
     @State private var ringtone: StillAlarmRingtoneOption = .default
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
@@ -42,15 +44,39 @@ struct AlarmEditorSheet: View {
                 }
 
                 Section("Dismiss") {
-                    Picker("How to stop", selection: $dismissMode) {
+                    Picker("How to stop", selection: Binding(
+                        get: { dismissMode },
+                        set: { newMode in
+                            if newMode == .qr, !store.isProUnlocked {
+                                showPaywall = true
+                            } else {
+                                dismissMode = newMode
+                            }
+                        }
+                    )) {
                         ForEach(AlarmDismissMode.allCases) { m in
-                            Text(m.title).tag(m)
+                            HStack {
+                                Text(m.title)
+                                if m == .qr, !store.isProUnlocked {
+                                    Spacer()
+                                    Text("PRO")
+                                        .font(.caption2.weight(.bold))
+                                        .foregroundStyle(.white)
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(Capsule().fill(Color.orange))
+                                }
+                            }
+                            .tag(m)
                         }
                     }
                     .pickerStyle(.inline)
                     Text(dismissMode.detail)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                }
+                .sheet(isPresented: $showPaywall) {
+                    ProPaywallSheet()
                 }
 
                 Section {

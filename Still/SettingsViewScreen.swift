@@ -9,7 +9,12 @@ private struct QRSharePayload: Identifiable {
 
 struct SettingsViewScreen: View {
     private var status: AuthorizationStatus { FocusAuthorization.authorizationStatus() }
+    @EnvironmentObject private var store: StoreManager
     @State private var qrSharePayload: QRSharePayload?
+    @State private var showPaywall = false
+    @State private var showRedeemAlert = false
+    @State private var redeemCode = ""
+    @State private var redeemError = false
     @AppStorage("stillTheme") private var themeRaw: String = StillTheme.light.rawValue
 
     private var selectedTheme: StillTheme {
@@ -23,6 +28,8 @@ struct SettingsViewScreen: View {
                     Text("Settings")
                         .font(.largeTitle.weight(.semibold))
                         .foregroundStyle(Tokens.ColorName.textPrimary)
+
+                    proCard
 
                     themeCard
 
@@ -43,6 +50,10 @@ struct SettingsViewScreen: View {
                                 .foregroundStyle(Tokens.ColorName.textTertiary)
                         }
                     }
+
+                    restoreRow
+
+                    redeemRow
                 }
                 .padding(.horizontal, Tokens.Spacing.screenHorizontal)
                 .padding(.vertical, Tokens.Spacing.screenVertical)
@@ -51,6 +62,33 @@ struct SettingsViewScreen: View {
         }
         .sheet(item: $qrSharePayload) { payload in
             ActivityShareSheet(activityItems: [payload.image])
+        }
+        .sheet(isPresented: $showPaywall) {
+            ProPaywallSheet()
+        }
+        .alert("Redeem code", isPresented: $showRedeemAlert) {
+            TextField("Secret password", text: $redeemCode)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
+            Button("Redeem") {
+                if redeemCode == "Soleil2016" {
+                    store.redeemProAccess()
+                    redeemCode = ""
+                } else {
+                    redeemError = true
+                    redeemCode = ""
+                }
+            }
+            Button("Cancel", role: .cancel) {
+                redeemCode = ""
+            }
+        } message: {
+            Text("Enter your secret password to unlock Still Pro.")
+        }
+        .alert("Invalid code", isPresented: $redeemError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("That code is not valid. Try again.")
         }
     }
 
@@ -119,34 +157,107 @@ struct SettingsViewScreen: View {
         }
     }
 
+    // MARK: - Pro Card
+
+    private var proCard: some View {
+        CalmCard {
+            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                HStack {
+                    Image(systemName: store.isProUnlocked ? "star.fill" : "star")
+                        .font(.title3)
+                        .foregroundStyle(store.isProUnlocked ? Color.orange : Tokens.ColorName.textTertiary)
+                    Text("Still Pro")
+                        .font(.headline)
+                        .foregroundStyle(Tokens.ColorName.textPrimary)
+                    Spacer()
+                    if store.isProUnlocked {
+                        Text("Unlocked")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.green)
+                    }
+                }
+
+                if store.isProUnlocked {
+                    Text("You have full access to QR alarms, Still Mode, and QR printing.")
+                        .font(.subheadline)
+                        .foregroundStyle(Tokens.ColorName.textSecondary)
+                } else {
+                    Text("Unlock QR alarm dismiss, Still Mode, and QR code printing with a one-time purchase.")
+                        .font(.subheadline)
+                        .foregroundStyle(Tokens.ColorName.textSecondary)
+
+                    PrimaryButton(title: "Unlock Still Pro") {
+                        showPaywall = true
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: - QR Card
 
     private var qrCard: some View {
         CalmCard {
             VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
-                Label("Your QR Code", systemImage: "qrcode")
-                    .font(.headline)
-                    .foregroundStyle(Tokens.ColorName.textPrimary)
+                HStack {
+                    Label("Your QR Code", systemImage: "qrcode")
+                        .font(.headline)
+                        .foregroundStyle(Tokens.ColorName.textPrimary)
+                    if !store.isProUnlocked {
+                        Spacer()
+                        proBadge
+                    }
+                }
 
                 Text("Print this code or save it. Place it away from your bed.")
                     .font(.subheadline)
                     .foregroundStyle(Tokens.ColorName.textSecondary)
 
-                HStack {
-                    Spacer()
-                    QRCodeImageView(content: AlarmQRTokenStore.dismissURLString, dimension: 180)
-                    Spacer()
-                }
+                if store.isProUnlocked {
+                    HStack {
+                        Spacer()
+                        QRCodeImageView(content: AlarmQRTokenStore.dismissURLString, dimension: 180)
+                        Spacer()
+                    }
 
-                SecondaryButton(title: "Share / Print QR") {
-                    let url = AlarmQRTokenStore.dismissURLString
-                    if let image = QRCodeImageView.qrUIImage(content: url, dimension: 768) {
-                        StillHaptics.lightImpact()
-                        qrSharePayload = QRSharePayload(image: image)
+                    SecondaryButton(title: "Share / Print QR") {
+                        let url = AlarmQRTokenStore.dismissURLString
+                        if let image = QRCodeImageView.qrUIImage(content: url, dimension: 768) {
+                            StillHaptics.lightImpact()
+                            qrSharePayload = QRSharePayload(image: image)
+                        }
+                    }
+                } else {
+                    HStack {
+                        Spacer()
+                        VStack(spacing: Tokens.Spacing.sm) {
+                            Image(systemName: "lock.fill")
+                                .font(.system(size: 32))
+                                .foregroundStyle(Tokens.ColorName.textTertiary)
+                            Text("Unlock Still Pro to view and share your QR code")
+                                .font(.footnote)
+                                .foregroundStyle(Tokens.ColorName.textTertiary)
+                                .multilineTextAlignment(.center)
+                        }
+                        .padding(.vertical, Tokens.Spacing.xl)
+                        Spacer()
+                    }
+
+                    SecondaryButton(title: "Unlock Still Pro") {
+                        showPaywall = true
                     }
                 }
             }
         }
+    }
+
+    private var proBadge: some View {
+        Text("PRO")
+            .font(.caption2.weight(.bold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(Capsule().fill(Color.orange))
     }
 
     // MARK: - How to use
@@ -197,6 +308,33 @@ struct SettingsViewScreen: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
+    }
+
+    // MARK: - Redeem code
+
+    private var redeemRow: some View {
+        Button {
+            showRedeemAlert = true
+        } label: {
+            Text("Redeem code")
+                .font(.subheadline)
+                .foregroundStyle(Tokens.ColorName.textTertiary)
+                .frame(maxWidth: .infinity)
+        }
+    }
+
+    // MARK: - Restore purchases
+
+    private var restoreRow: some View {
+        Button {
+            Task { await store.restorePurchases() }
+        } label: {
+            Text("Restore purchases")
+                .font(.subheadline)
+                .foregroundStyle(Tokens.ColorName.textTertiary)
+                .frame(maxWidth: .infinity)
+        }
+        .disabled(store.purchaseInProgress)
     }
 
     private var statusText: String {

@@ -8,6 +8,7 @@ struct StillApp: App {
     @StateObject private var alarmStore = AlarmStore()
     @StateObject private var alarmCoordinator = AlarmRingingCoordinator()
     @StateObject private var stillMode = StillModeController()
+    @StateObject private var store = StoreManager()
     @AppStorage("stillTheme") private var themeRaw: String = StillTheme.light.rawValue
 
     private var theme: StillTheme {
@@ -21,12 +22,14 @@ struct StillApp: App {
                 .environmentObject(alarmStore)
                 .environmentObject(alarmCoordinator)
                 .environmentObject(stillMode)
+                .environmentObject(store)
                 .tint(Tokens.ColorName.accent)
                 .preferredColorScheme(theme.colorScheme)
                 .task {
                     appDelegate.alarmCoordinator = alarmCoordinator
                     alarmCoordinator.configure(store: alarmStore)
                     await AlarmBootstrap.rescheduleAll(alarms: alarmStore.alarms)
+                    await store.refreshStatus()
                     if #available(iOS 26.0, *) {
                         await alarmCoordinator.observeAlarmKitUpdates()
                     }
@@ -60,6 +63,11 @@ struct StillApp: App {
             if handled { return }
 
             await MainActor.run {
+                if !store.isProUnlocked {
+                    stillMode.showProPaywall = true
+                    return
+                }
+
                 if stillMode.isActive {
                     stillMode.requestExit()
                 } else {
