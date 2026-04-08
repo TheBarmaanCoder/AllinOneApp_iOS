@@ -31,6 +31,8 @@ struct SettingsViewScreen: View {
 
                     proCard
 
+                    heatmapCard
+
                     themeCard
 
                     qrCard
@@ -54,6 +56,11 @@ struct SettingsViewScreen: View {
                     restoreRow
 
                     redeemRow
+
+                    Text("Alarms, focus groups, theme, stats, Still Mode picks, and your QR token sync privately via iCloud when you’re signed in.")
+                        .font(.footnote)
+                        .foregroundStyle(Tokens.ColorName.textTertiary)
+                        .frame(maxWidth: .infinity)
                 }
                 .padding(.horizontal, Tokens.Spacing.screenHorizontal)
                 .padding(.vertical, Tokens.Spacing.screenVertical)
@@ -92,6 +99,45 @@ struct SettingsViewScreen: View {
         }
     }
 
+    // MARK: - Heatmap
+
+    private var heatmapCard: some View {
+        Group {
+            if store.isProUnlocked {
+                CalmCard {
+                    FocusHeatmapView()
+                }
+            } else {
+                CalmCard {
+                    VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
+                        HStack {
+                            Text("Focus Heatmap")
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(Tokens.ColorName.textPrimary)
+                            Spacer()
+                            proBadge
+                        }
+                        HStack {
+                            Spacer()
+                            VStack(spacing: Tokens.Spacing.xs) {
+                                Image(systemName: "square.grid.3x3.fill")
+                                    .font(.title2)
+                                    .foregroundStyle(Tokens.ColorName.textTertiary)
+                                Text("Unlock Still Pro to see your monthly focus heatmap")
+                                    .font(.caption)
+                                    .foregroundStyle(Tokens.ColorName.textTertiary)
+                                    .multilineTextAlignment(.center)
+                            }
+                            .padding(.vertical, Tokens.Spacing.lg)
+                            Spacer()
+                        }
+                    }
+                }
+                .onTapGesture { showPaywall = true }
+            }
+        }
+    }
+
     // MARK: - Theme
 
     private var themeCard: some View {
@@ -117,6 +163,7 @@ struct SettingsViewScreen: View {
             withAnimation(.easeInOut(duration: 0.25)) {
                 themeRaw = theme.rawValue
             }
+            CloudPreferencesSync.schedulePushDebounced()
         } label: {
             VStack(spacing: 8) {
                 ZStack {

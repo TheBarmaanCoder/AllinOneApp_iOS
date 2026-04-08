@@ -28,6 +28,11 @@ final class AppGroupStore {
         defaults = UserDefaults(suiteName: AppConstants.appGroupId)
     }
 
+    /// Call before reading shared keys after another process (shield / monitor extension) may have written, so this process sees up‑to‑date values.
+    func synchronizeForCrossProcessRead() {
+        defaults?.synchronize()
+    }
+
     /// Legacy UserDefaults access; prefer `loadSessionSelectionData` / `persistSessionSelection` for the active session blob.
     var selectionData: Data? {
         get { loadSessionSelectionData() }

@@ -9,10 +9,12 @@ struct StillApp: App {
     @StateObject private var alarmCoordinator = AlarmRingingCoordinator()
     @StateObject private var stillMode = StillModeController()
     @StateObject private var store = StoreManager()
-    @AppStorage("stillTheme") private var themeRaw: String = StillTheme.light.rawValue
+    @State private var cloudPaintEpoch = 0
 
     private var theme: StillTheme {
-        StillTheme(rawValue: themeRaw) ?? .light
+        _ = cloudPaintEpoch
+        let raw = UserDefaults.standard.string(forKey: "stillTheme") ?? StillTheme.light.rawValue
+        return StillTheme(rawValue: raw) ?? .light
     }
 
     var body: some Scene {
@@ -26,24 +28,52 @@ struct StillApp: App {
                 .tint(Tokens.ColorName.accent)
                 .preferredColorScheme(theme.colorScheme)
                 .task {
+                    await CloudPreferencesSync.pullAndMergeIfNeeded()
+                    await MainActor.run {
+                        alarmStore.load()
+                    }
+                    await store.refreshStatus()
                     appDelegate.alarmCoordinator = alarmCoordinator
                     alarmCoordinator.configure(store: alarmStore)
                     await AlarmBootstrap.rescheduleAll(alarms: alarmStore.alarms)
-                    await store.refreshStatus()
                     if #available(iOS 26.0, *) {
                         await alarmCoordinator.observeAlarmKitUpdates()
                     }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: .stillCloudPreferencesMerged)) { _ in
+                    cloudPaintEpoch += 1
+                }
                 .onOpenURL { url in
                     handleIncomingURL(url)
                 }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                    session.syncFromStore()
+                    stillMode.syncFromStore()
+                    // App group writes from the shield extension can lag one runloop; resync shortly after.
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 150_000_000)
+                        session.syncFromStore()
+                        stillMode.syncFromStore()
+                    }
+                }
                 .onChange(of: scenePhase) { phase in
                     if phase == .active {
+                        Task {
+                            await CloudPreferencesSync.pullAndMergeIfNeeded()
+                            await MainActor.run {
+                                alarmStore.load()
+                            }
+                            await store.refreshStatus()
+                            await AlarmBootstrap.rescheduleAll(alarms: alarmStore.alarms)
+                        }
                         alarmCoordinator.restorePendingAndForegroundAudioIfNeeded()
+                        session.syncFromStore()
                         stillMode.syncFromStore()
+                        CloudPreferencesSync.schedulePushDebounced()
                     } else if phase == .background {
                         Task {
                             await alarmCoordinator.rescheduleNagsIfChallengePending()
+                            await CloudPreferencesSync.pushSnapshot()
                         }
                     }
                 }

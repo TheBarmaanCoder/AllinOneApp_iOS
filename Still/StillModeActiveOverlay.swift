@@ -2,6 +2,7 @@ import SwiftUI
 
 struct StillModeActiveOverlay: View {
     @ObservedObject var controller: StillModeController
+    @EnvironmentObject private var session: FocusSessionController
     @State private var elapsed: TimeInterval = 0
     @State private var showEntryAnimation = true
     @State private var showScanner = false
@@ -31,6 +32,7 @@ struct StillModeActiveOverlay: View {
         .animation(.easeInOut(duration: 0.3), value: controller.pendingExit)
         .onReceive(timer) { _ in
             elapsed = controller.elapsedSeconds
+            session.syncCheatState()
         }
         .onAppear {
             elapsed = controller.elapsedSeconds
@@ -55,12 +57,33 @@ struct StillModeActiveOverlay: View {
                     .foregroundStyle(.white.opacity(0.7))
             }
 
-            Text(formattedTime(elapsed))
-                .font(.system(size: 64, weight: .light, design: .monospaced))
-                .foregroundStyle(.white)
-                .contentTransition(.numericText())
+            if session.isCheatActive {
+                Text(formattedCheat(session.cheatRemainingSeconds))
+                    .font(.system(size: 64, weight: .light, design: .monospaced))
+                    .foregroundStyle(.orange)
+                    .contentTransition(.numericText())
 
-            scanButton
+                Button {
+                    session.endCheatAndReblock()
+                    StillHaptics.success()
+                } label: {
+                    Label("Restore Still Mode", systemImage: "lock.fill")
+                        .font(.headline)
+                        .foregroundStyle(.black)
+                        .frame(maxWidth: 260)
+                        .padding(.vertical, 14)
+                        .background(.white, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 8)
+            } else {
+                Text(formattedTime(elapsed))
+                    .font(.system(size: 64, weight: .light, design: .monospaced))
+                    .foregroundStyle(.white)
+                    .contentTransition(.numericText())
+
+                scanButton
+            }
 
             Spacer()
 
@@ -106,6 +129,13 @@ struct StillModeActiveOverlay: View {
         if hours > 0 {
             return String(format: "%d:%02d:%02d", hours, minutes, seconds)
         }
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+
+    private func formattedCheat(_ t: TimeInterval) -> String {
+        let total = max(0, Int(t))
+        let minutes = total / 60
+        let seconds = total % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
 }

@@ -18,6 +18,7 @@ final class StillModeController: ObservableObject {
     }
 
     func syncFromStore() {
+        groupStore.synchronizeForCrossProcessRead()
         isActive = groupStore.stillModeActive
         startedAt = groupStore.stillModeStart
     }
@@ -42,6 +43,7 @@ final class StillModeController: ObservableObject {
         groupStore.stillModeStart = now
 
         ShieldApplicator.applyShields(for: selection)
+        LiveActivityManager.startStillModeTimer()
 
         isActive = true
         startedAt = now
@@ -68,16 +70,21 @@ final class StillModeController: ObservableObject {
         guard clean.caseInsensitiveCompare(expected) == .orderedSame else { return false }
 
         if let start = groupStore.stillModeStart {
-            groupStore.totalFocusSeconds += Date().timeIntervalSince(start)
+            let end = Date()
+            groupStore.totalFocusSeconds += end.timeIntervalSince(start)
             groupStore.completedSessions += 1
+            DailyFocusLog.logSession(start: start, end: end)
+            AchievementTracker.evaluateAndUnlock()
         }
 
         ShieldApplicator.clearShields()
+        LiveActivityManager.stop()
         groupStore.clearStillModeMetadata()
 
         isActive = false
         startedAt = nil
         pendingExit = false
+        CloudPreferencesSync.schedulePushDebounced()
         return true
     }
 
@@ -90,6 +97,7 @@ final class StillModeController: ObservableObject {
     func saveSelection(_ selection: FamilyActivitySelection) {
         guard let data = try? SelectionCodec.encode(selection) else { return }
         groupStore.stillModeSelectionData = data
+        CloudPreferencesSync.schedulePushDebounced()
     }
 
     func loadSelection() -> FamilyActivitySelection {

@@ -45,6 +45,7 @@ final class StoreManager: ObservableObject {
                 isProUnlocked = true
                 UserDefaults.standard.set(true, forKey: "stillProUnlocked")
                 StillHaptics.success()
+                CloudPreferencesSync.schedulePushDebounced()
             case .userCancelled:
                 break
             case .pending:
@@ -63,6 +64,7 @@ final class StoreManager: ObservableObject {
         isProUnlocked = true
         UserDefaults.standard.set(true, forKey: "stillProUnlocked")
         StillHaptics.success()
+        CloudPreferencesSync.schedulePushDebounced()
     }
 
     func restorePurchases() async {
@@ -73,6 +75,8 @@ final class StoreManager: ObservableObject {
         purchaseInProgress = false
         if !isProUnlocked {
             purchaseError = "No previous purchase found."
+        } else {
+            CloudPreferencesSync.schedulePushDebounced()
         }
     }
 
@@ -113,6 +117,7 @@ final class StoreManager: ObservableObject {
                         if transaction.productID == StoreManager.proProductID {
                             self.isProUnlocked = true
                             UserDefaults.standard.set(true, forKey: "stillProUnlocked")
+                            CloudPreferencesSync.schedulePushDebounced()
                         }
                     }
                 }

@@ -22,24 +22,36 @@
 		258090671E937287A521632E /* SheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3C7541FDE5BCB9EA90C78F /* SheetHeader.swift */; };
 		259DED55B70EDD3460E13826 /* StillShield.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 36885A9C0D936DB2A097BA37 /* StillShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		262ACD049E4CF6981A6E05D1 /* AlarmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FDEE0115183141EA76A1A9 /* AlarmStore.swift */; };
+		276CC065634719F1B148DC6D /* ScheduledBlockScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C944B7F7A298A8F6C86D8C73 /* ScheduledBlockScheduler.swift */; };
 		27E9358AB3F34B393A9393D9 /* AlarmRingingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087E384F22E7C2EEFB9BE1D7 /* AlarmRingingCoordinator.swift */; };
 		2A13941CF873442F87B8C18E /* AlarmBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CB6FD68C20C08C524FA96E /* AlarmBootstrap.swift */; };
 		2D56782CF556E2675BF68197 /* AlarmTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB4EB389F6B68BCD1A9DF8 /* AlarmTabView.swift */; };
+		329E9A05E1455153736C71DE /* StreakTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E40B364F11D7791A657AA7 /* StreakTracker.swift */; };
+		37A48DC11CCCD9F4F252EE4C /* AchievementShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8562C867122050B3C6A2344E /* AchievementShelfView.swift */; };
+		3850C280A2431076E8567E23 /* StillLiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1D1991B371BC5C2945F1F /* StillLiveActivityBundle.swift */; };
 		3CD4A7C29B6D56C13CBAE5BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5B2539898EB583763A28A42 /* Assets.xcassets */; };
 		41CD5C404C204E944143F9F5 /* AlarmSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40CDD61B798C6BC5024365 /* AlarmSoundPlayer.swift */; };
 		432CA4802E33631D43146D17 /* still_tink.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28066CFB7A812944554BF5EA /* still_tink.caf */; };
 		4356A9F800F9AE8CA145448A /* StoredFocusGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */; };
+		477AB39B0DB5E8637D23AB82 /* AchievementTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F999EF7254FD4F5B21E1755 /* AchievementTracker.swift */; };
 		4B8F21265E8A0AD124A5D152 /* SelectionMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */; };
 		4BA739805624FDE1CB95248E /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAFD2DA23B4D14856BB7C2 /* ListRow.swift */; };
+		4D24312A96C8FA489E0547E6 /* AchievementTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F999EF7254FD4F5B21E1755 /* AchievementTracker.swift */; };
+		50EF6E1B407651F6664FEE48 /* CloudPreferencesSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775C28E2A3DDB1619A481A78 /* CloudPreferencesSync.swift */; };
 		5CECA3C68F102AD32A96D3E4 /* QRCodeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F1E77823DF4707D57128 /* QRCodeImageView.swift */; };
 		6E06F4E489E331B15A9245FF /* AuthorizationCenter+Still.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD34D498076A9DA4B856A4 /* AuthorizationCenter+Still.swift */; };
 		6FED56D5D2729384B14CC409 /* UNNotificationCenter+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7F0593472763B7188657B /* UNNotificationCenter+Async.swift */; };
+		702461E5CC8BA92654FEBD63 /* StillShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0691495473CADDD905E2CFB9 /* StillShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		70716351F3FD425CFF616A15 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB726EBF9987D741ECFEBF5E /* SecondaryButton.swift */; };
 		71F5106E1140B159D1C727FC /* still_glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3CA79901063758266E7324E5 /* still_glass.caf */; };
 		72BCCA9F9C50B84277FD8D74 /* OpenStillAlarmChallengeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6946D7308B4175B9922BED1 /* OpenStillAlarmChallengeIntent.swift */; };
 		75B28D9FF14EEB57CB3F3119 /* StillAlarmMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3633391E8CEFB299B2E249 /* StillAlarmMetadata.swift */; };
 		761342F53F7B90FF685A3614 /* SelectionCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EB87E68219033713090608 /* SelectionCodec.swift */; };
 		79ACDD377B4D078B7894E149 /* AlarmNagScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A64D710464195D80159BD2 /* AlarmNagScheduler.swift */; };
+		7D4D713E55CF10C3E3529475 /* ShieldActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E55705F19A5EA91FDF8834 /* ShieldActionExtension.swift */; };
+		B2C3D4E5F60718293A4B5C6D8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76775C0345634029781ED9 /* AppConstants.swift */; };
+		C1D2E3F405162738495A6B7C9 /* StillTimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */; };
+		7E8FC2669E31834D561D8F0D /* ScheduledBlockEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EACCAE0836F32554747A37F /* ScheduledBlockEditorSheet.swift */; };
 		7F5BC5C1C0C845B381B9FDB0 /* SettingsViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787294E131C92DD766EF1D /* SettingsViewScreen.swift */; };
 		820B451E2DB6DA2373347006 /* EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D7670EFBBC45339515C578 /* EmptyState.swift */; };
 		8659D6D5D475ED6506C54D25 /* AlarmKitScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BE14155FB2EE2D2FC6DB40 /* AlarmKitScheduler.swift */; };
@@ -47,33 +59,46 @@
 		883C663D6CC36FA8558BF23D /* AlarmSuccessOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D200E67A0DB1EDD0CE881D3 /* AlarmSuccessOverlay.swift */; };
 		8D1F6D517958677CDC2D06FC /* FocusSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */; };
 		8D2B2C416789BDB6BD337B2A /* StillModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E525A1B13328F86EE36F31 /* StillModeController.swift */; };
+		8FC8DEAC17923858A16B0642 /* DailyFocusLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8ECBE13AF87356878A4C29 /* DailyFocusLog.swift */; };
 		90D55F6B5E607DB4637D858A /* AlarmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7ECB13CEA75DE052FFE85F4 /* AlarmModels.swift */; };
 		923A17D0AE6A21540BDEA7C5 /* AlarmScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E883AA014F89547770325A6 /* AlarmScheduler.swift */; };
 		92A5E42F2A31B0C5B606F672 /* StatBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E77A236C7B170E3A6F44C /* StatBlock.swift */; };
+		95090932768F46DA01FD101D /* StillTimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */; };
 		976B9C206EA5C84519B9CED2 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */; };
 		9D34D0BDA04A88154A551EE4 /* still_ping.caf in Resources */ = {isa = PBXBuildFile; fileRef = 224D3CE7101EC9EED2BC0093 /* still_ping.caf */; };
+		A0C6BEBAB33A8838E21E1D2B /* StillTimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */; };
 		A53A60BC21723061D05B3ADA /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */; };
 		A602CC5E43A94157F5455FD7 /* ShieldApplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */; };
+		A625D8215C0AD7252167BB0A /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A45BF67522A2A6CEE002E58 /* LiveActivityManager.swift */; };
 		A67A8776FDD45857CD655ED1 /* StoredFocusGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */; };
 		ABC4AEBE879348E4E08245F0 /* ShieldConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518A2D1CBE7D67C11D82077 /* ShieldConfigurationExtension.swift */; };
 		AC1BC0C4E83723D7FEE77062 /* BreakFocusFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC55CC629E00BB5C2EFC0D /* BreakFocusFlowView.swift */; };
+		ACCF8AC4714A2DA723FCA815 /* ScheduledBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3B9FA190C997ED9FFF79C /* ScheduledBlock.swift */; };
 		ADC60342778EA19EB546C959 /* StillApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5DF07AF9BACBF2DFAEE064 /* StillApp.swift */; };
 		B2375AEE5C0CB139E1BEFE97 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */; };
 		B97B4B6D81C2358FCE2DA344 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7238F98B19D7CBC1CF03661 /* RootView.swift */; };
 		BCC422697C79954F26AB0EAC /* StillModeActiveOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE02B030357DD62BF30F6B98 /* StillModeActiveOverlay.swift */; };
 		BEEFB3664BA2FDC6881BC50C /* AlarmEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77AA1002C87FEFF4971843F /* AlarmEditorSheet.swift */; };
 		C2AFD0E6B20D48541FE5CA97 /* SwipeToDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E196B6E974A3C15EEC997 /* SwipeToDelete.swift */; };
+		C7C0761F352696272C153F12 /* ScheduledBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3B9FA190C997ED9FFF79C /* ScheduledBlock.swift */; };
+		CBE4D77A7B521885241208D1 /* StreakTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E40B364F11D7791A657AA7 /* StreakTracker.swift */; };
+		CD529762E94AAE2AB82AC829 /* CheatBudgetTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF34BF7CBE5FDC1E32116DD /* CheatBudgetTracker.swift */; };
 		CEA3A9A5278F48DA230EFD16 /* ShieldApplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */; };
 		D00E01F938CF2C11AFCF48FF /* SelectionCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EB87E68219033713090608 /* SelectionCodec.swift */; };
 		D1839F62FD81351FB6E3BD0B /* StillMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4CDF99A3410427FF3EFC733D /* StillMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D384CA4DDFFD44A29712B8F9 /* QRScannerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE03E3F9F41AD76E301E9F0 /* QRScannerRepresentable.swift */; };
+		D43028EC8879C6AF32B57BD0 /* FocusHeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D919C33C85EB922B48C8C3E4 /* FocusHeatmapView.swift */; };
 		D7725F91C3103E95CF5D14D2 /* CalmCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213192B956B35C653EAEE0A3 /* CalmCard.swift */; };
+		E1B89A2CAD9FC2DE7D77DBC4 /* StillTimerWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0977B244FF0011CC6D2506C8 /* StillTimerWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E5D5112EFCBD2926D9A9813F /* GroupEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F80521F5D5DBBCE90FD4CEA /* GroupEditorSheet.swift */; };
+		E79417AB09A569A29A4FAEF2 /* CheatBudgetTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF34BF7CBE5FDC1E32116DD /* CheatBudgetTracker.swift */; };
 		E8BC5EE422B4B37B2C5D3AF1 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB251AD9C28AB68D6D416A /* MainTabView.swift */; };
 		EA50619FCF443ED810530DE8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76775C0345634029781ED9 /* AppConstants.swift */; };
 		EC9DA4968A6309E77D310DFB /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */; };
 		F0E37C68A6EC8D97ED6A58B9 /* StillHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F415B9A4D4368D6233C506 /* StillHaptics.swift */; };
 		F4293B40F6FBC4D2E13D2132 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B6DACD684D8698EBBA07C3 /* ActivityShareSheet.swift */; };
+		F68A73CCCD6CCC5ABDFCBE99 /* StillTimerLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25159A9F53F970BC8D532644 /* StillTimerLiveActivity.swift */; };
+		FB2828438187CC22D10F5D1F /* DailyFocusLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8ECBE13AF87356878A4C29 /* DailyFocusLog.swift */; };
 		FCE42EB2C6EE4012CA33BF2D /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C89C8A57003D06A645A64 /* Tokens.swift */; };
 		FDCA70DC58D43F75A7354C0C /* SelectionMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */; };
 /* End PBXBuildFile section */
@@ -86,12 +111,26 @@
 			remoteGlobalIDString = EB0D64181692E50AF1E0A261;
 			remoteInfo = StillShield;
 		};
+		35281114E3A6A817CC9FDE2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4966E9BE9D7D1ABED65BFF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F0DA8E4A8FCDEA2D93B973FF;
+			remoteInfo = StillTimerWidget;
+		};
 		A91FAC27129BA0E491F4BD9F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F4966E9BE9D7D1ABED65BFF6 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C39B236B1AA30066E1DC7F9A;
 			remoteInfo = StillMonitor;
+		};
+		CAC1D36CB19A2F34DBE8DD47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4966E9BE9D7D1ABED65BFF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B81DF819ECE8174421A2774;
+			remoteInfo = StillShieldAction;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -104,6 +143,8 @@
 			files = (
 				D1839F62FD81351FB6E3BD0B /* StillMonitor.appex in Embed Foundation Extensions */,
 				259DED55B70EDD3460E13826 /* StillShield.appex in Embed Foundation Extensions */,
+				702461E5CC8BA92654FEBD63 /* StillShieldAction.appex in Embed Foundation Extensions */,
+				E1B89A2CAD9FC2DE7D77DBC4 /* StillTimerWidget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,40 +152,48 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0691495473CADDD905E2CFB9 /* StillShieldAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0697B58435BACBBB0AF2659C /* FocusHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusHomeView.swift; sourceTree = "<group>"; };
 		087E384F22E7C2EEFB9BE1D7 /* AlarmRingingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRingingCoordinator.swift; sourceTree = "<group>"; };
+		0977B244FF0011CC6D2506C8 /* StillTimerWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillTimerWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
 		0E883AA014F89547770325A6 /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmScheduler.swift; sourceTree = "<group>"; };
+		15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillTimerAttributes.swift; sourceTree = "<group>"; };
 		1718F1E77823DF4707D57128 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
-		193593C1E058E2D289F796C2 /* Still.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Still.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		193593C1E058E2D289F796C2 /* Still.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Still.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19F1D9EDE69012A0F4E8057E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1CDF72BA1CF23D0322C8B818 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		1DA3B9FA190C997ED9FFF79C /* ScheduledBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledBlock.swift; sourceTree = "<group>"; };
 		1E4E77A236C7B170E3A6F44C /* StatBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatBlock.swift; sourceTree = "<group>"; };
 		20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFocusGroup.swift; sourceTree = "<group>"; };
-		21166197651118205EBA3B78 /* StillShield 2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StillShield 2.entitlements"; sourceTree = "<group>"; };
 		213192B956B35C653EAEE0A3 /* CalmCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalmCard.swift; sourceTree = "<group>"; };
-		224D3CE7101EC9EED2BC0093 /* still_ping.caf */ = {isa = PBXFileReference; path = still_ping.caf; sourceTree = "<group>"; };
+		224D3CE7101EC9EED2BC0093 /* still_ping.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_ping.caf; sourceTree = "<group>"; };
+		25159A9F53F970BC8D532644 /* StillTimerLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillTimerLiveActivity.swift; sourceTree = "<group>"; };
 		259C89C8A57003D06A645A64 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
-		28066CFB7A812944554BF5EA /* still_tink.caf */ = {isa = PBXFileReference; path = still_tink.caf; sourceTree = "<group>"; };
+		25F629E33F451FF37637F32B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		28066CFB7A812944554BF5EA /* still_tink.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_tink.caf; sourceTree = "<group>"; };
 		2CCC55CC629E00BB5C2EFC0D /* BreakFocusFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakFocusFlowView.swift; sourceTree = "<group>"; };
+		2F15D8D5FD1B75454AFF5705 /* StillShieldAction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StillShieldAction.entitlements; sourceTree = "<group>"; };
 		2F3C7541FDE5BCB9EA90C78F /* SheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetHeader.swift; sourceTree = "<group>"; };
 		2F5229B631BB752283F1A6FC /* DurationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPicker.swift; sourceTree = "<group>"; };
 		2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		30A64D710464195D80159BD2 /* AlarmNagScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmNagScheduler.swift; sourceTree = "<group>"; };
 		32E3C2AC50E8240BD17F9E94 /* AlarmRingingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRingingView.swift; sourceTree = "<group>"; };
 		34E525A1B13328F86EE36F31 /* StillModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillModeController.swift; sourceTree = "<group>"; };
-		36885A9C0D936DB2A097BA37 /* StillShield.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = StillShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		36885A9C0D936DB2A097BA37 /* StillShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A8ECBE13AF87356878A4C29 /* DailyFocusLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFocusLog.swift; sourceTree = "<group>"; };
 		3B5DF07AF9BACBF2DFAEE064 /* StillApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillApp.swift; sourceTree = "<group>"; };
-		3CA79901063758266E7324E5 /* still_glass.caf */ = {isa = PBXFileReference; path = still_glass.caf; sourceTree = "<group>"; };
+		3CA79901063758266E7324E5 /* still_glass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = still_glass.caf; sourceTree = "<group>"; };
 		3DEB251AD9C28AB68D6D416A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		41FDEE0115183141EA76A1A9 /* AlarmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStore.swift; sourceTree = "<group>"; };
 		4518A2D1CBE7D67C11D82077 /* ShieldConfigurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldConfigurationExtension.swift; sourceTree = "<group>"; };
 		49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupStore.swift; sourceTree = "<group>"; };
+		4A45BF67522A2A6CEE002E58 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
 		4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSessionController.swift; sourceTree = "<group>"; };
-		4C0954C76C84E700B0060236 /* Still 5.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 5.entitlements"; sourceTree = "<group>"; };
-		4CDF99A3410427FF3EFC733D /* StillMonitor.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = StillMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CDF99A3410427FF3EFC733D /* StillMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DA5AB17BDD84BB65D1642F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4F80521F5D5DBBCE90FD4CEA /* GroupEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEditorSheet.swift; sourceTree = "<group>"; };
-		51F172DCB1D4547D1087D011 /* Still 8.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 8.entitlements"; sourceTree = "<group>"; };
+		4F999EF7254FD4F5B21E1755 /* AchievementTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTracker.swift; sourceTree = "<group>"; };
 		54EB87E68219033713090608 /* SelectionCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCodec.swift; sourceTree = "<group>"; };
 		55860788AE0CD925B30508D7 /* AlarmWalkDismissContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmWalkDismissContent.swift; sourceTree = "<group>"; };
 		55B7ABB69D38B2C1D4D91C8D /* FocusStatusHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusStatusHeader.swift; sourceTree = "<group>"; };
@@ -152,46 +201,46 @@
 		5C40CDD61B798C6BC5024365 /* AlarmSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSoundPlayer.swift; sourceTree = "<group>"; };
 		5D0D345926875876AB596F78 /* AlarmQRTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmQRTokenStore.swift; sourceTree = "<group>"; };
 		5D200E67A0DB1EDD0CE881D3 /* AlarmSuccessOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSuccessOverlay.swift; sourceTree = "<group>"; };
+		5EACCAE0836F32554747A37F /* ScheduledBlockEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledBlockEditorSheet.swift; sourceTree = "<group>"; };
+		5FF34BF7CBE5FDC1E32116DD /* CheatBudgetTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatBudgetTracker.swift; sourceTree = "<group>"; };
 		639E196B6E974A3C15EEC997 /* SwipeToDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDelete.swift; sourceTree = "<group>"; };
-		6AF4E58BA0B8B4F0BFBB6844 /* Still 3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 3.entitlements"; sourceTree = "<group>"; };
 		6FE483101A3FEFB1E63B191E /* StillModeExitFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillModeExitFlow.swift; sourceTree = "<group>"; };
 		75B51ADB08EDF74609504079 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		775C28E2A3DDB1619A481A78 /* CloudPreferencesSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPreferencesSync.swift; sourceTree = "<group>"; };
+		77F1D1991B371BC5C2945F1F /* StillLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillLiveActivityBundle.swift; sourceTree = "<group>"; };
 		7BFBB4EB37CB829A01BE4A8B /* ProPaywallSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProPaywallSheet.swift; sourceTree = "<group>"; };
 		7DBAED7AB8AF9AFF2260404C /* StillAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillAppDelegate.swift; sourceTree = "<group>"; };
 		81D7670EFBBC45339515C578 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
-		856A2B54907A62F778242BA9 /* StillMonitor 2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StillMonitor 2.entitlements"; sourceTree = "<group>"; };
+		8562C867122050B3C6A2344E /* AchievementShelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementShelfView.swift; sourceTree = "<group>"; };
 		891F2D81B320DE09B0DC5A5B /* StillShield.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StillShield.entitlements; sourceTree = "<group>"; };
-		8ECCEAC6109F4E7183F0EE62 /* Still 4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 4.entitlements"; sourceTree = "<group>"; };
 		8F3633391E8CEFB299B2E249 /* StillAlarmMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillAlarmMetadata.swift; sourceTree = "<group>"; };
 		9157B439397BBB9E7056783B /* StillMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StillMonitor.entitlements; sourceTree = "<group>"; };
+		92E40B364F11D7791A657AA7 /* StreakTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakTracker.swift; sourceTree = "<group>"; };
 		95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMerge.swift; sourceTree = "<group>"; };
 		9BA0D3AB23059E7A3E7BAE1A /* MotionStepAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionStepAuthorization.swift; sourceTree = "<group>"; };
-		9D72720B25ECE45279139569 /* StillMonitor 3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StillMonitor 3.entitlements"; sourceTree = "<group>"; };
 		A4BE14155FB2EE2D2FC6DB40 /* AlarmKitScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmKitScheduler.swift; sourceTree = "<group>"; };
 		A6946D7308B4175B9922BED1 /* OpenStillAlarmChallengeIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStillAlarmChallengeIntent.swift; sourceTree = "<group>"; };
 		ACFCF1CF2B3C88006C3A098D /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
-		B46B50040C77E97F5231E082 /* StillShield 4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StillShield 4.entitlements"; sourceTree = "<group>"; };
+		B4E55705F19A5EA91FDF8834 /* ShieldActionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldActionExtension.swift; sourceTree = "<group>"; };
 		B4F415B9A4D4368D6233C506 /* StillHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillHaptics.swift; sourceTree = "<group>"; };
-		B668E9D967D4F3A43D66BAFE /* Still 7.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 7.entitlements"; sourceTree = "<group>"; };
-		B8F0B3867C1A7F18A2777A6B /* StillShield 3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "StillShield 3.entitlements"; sourceTree = "<group>"; };
 		B8FED92DE8DE37927EACC621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B9FB4EB389F6B68BCD1A9DF8 /* AlarmTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTabView.swift; sourceTree = "<group>"; };
 		BF76775C0345634029781ED9 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		C0CD34D498076A9DA4B856A4 /* AuthorizationCenter+Still.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthorizationCenter+Still.swift"; sourceTree = "<group>"; };
+		C944B7F7A298A8F6C86D8C73 /* ScheduledBlockScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledBlockScheduler.swift; sourceTree = "<group>"; };
 		D5B2539898EB583763A28A42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6B6DACD684D8698EBBA07C3 /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
 		D77AA1002C87FEFF4971843F /* AlarmEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditorSheet.swift; sourceTree = "<group>"; };
+		D919C33C85EB922B48C8C3E4 /* FocusHeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusHeatmapView.swift; sourceTree = "<group>"; };
 		DB726EBF9987D741ECFEBF5E /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		DE02B030357DD62BF30F6B98 /* StillModeActiveOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillModeActiveOverlay.swift; sourceTree = "<group>"; };
 		EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldApplicator.swift; sourceTree = "<group>"; };
 		EBE03E3F9F41AD76E301E9F0 /* QRScannerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerRepresentable.swift; sourceTree = "<group>"; };
-		F317A4A52F6289BF150A734F /* Still 6.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 6.entitlements"; sourceTree = "<group>"; };
 		F6787294E131C92DD766EF1D /* SettingsViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewScreen.swift; sourceTree = "<group>"; };
 		F6CB6FD68C20C08C524FA96E /* AlarmBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmBootstrap.swift; sourceTree = "<group>"; };
 		F7238F98B19D7CBC1CF03661 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		F7CAFD2DA23B4D14856BB7C2 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
 		F7ECB13CEA75DE052FFE85F4 /* AlarmModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmModels.swift; sourceTree = "<group>"; };
-		F93FE8E9066DED626F7DA8A2 /* Still 2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Still 2.entitlements"; sourceTree = "<group>"; };
 		FB03B665E58BD3106E23CE0D /* Still.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Still.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,8 +250,10 @@
 			children = (
 				87F4BDF1EA2832255E2815AB /* Core */,
 				DAEA6376511282569C88BBB5 /* DeviceActivityMonitor */,
+				BE019D5E4E77FF3D54C86856 /* ShieldAction */,
 				597943E22B0E56646059DAED /* ShieldConfiguration */,
 				1AD6987513E67B5BBC1578E8 /* Still */,
+				5D43E5EE08BA1B8007C1DC05 /* StillLiveActivity */,
 				840A35E61B17558FC8F6BA24 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -242,14 +293,8 @@
 				2F782DBA7AA570ABE45CA238 /* OnboardingView.swift */,
 				7BFBB4EB37CB829A01BE4A8B /* ProPaywallSheet.swift */,
 				F7238F98B19D7CBC1CF03661 /* RootView.swift */,
+				5EACCAE0836F32554747A37F /* ScheduledBlockEditorSheet.swift */,
 				F6787294E131C92DD766EF1D /* SettingsViewScreen.swift */,
-				F93FE8E9066DED626F7DA8A2 /* Still 2.entitlements */,
-				6AF4E58BA0B8B4F0BFBB6844 /* Still 3.entitlements */,
-				8ECCEAC6109F4E7183F0EE62 /* Still 4.entitlements */,
-				4C0954C76C84E700B0060236 /* Still 5.entitlements */,
-				F317A4A52F6289BF150A734F /* Still 6.entitlements */,
-				B668E9D967D4F3A43D66BAFE /* Still 7.entitlements */,
-				51F172DCB1D4547D1087D011 /* Still 8.entitlements */,
 				FB03B665E58BD3106E23CE0D /* Still.entitlements */,
 				3B5DF07AF9BACBF2DFAEE064 /* StillApp.swift */,
 				DE02B030357DD62BF30F6B98 /* StillModeActiveOverlay.swift */,
@@ -270,8 +315,11 @@
 				5C40CDD61B798C6BC5024365 /* AlarmSoundPlayer.swift */,
 				41FDEE0115183141EA76A1A9 /* AlarmStore.swift */,
 				C0CD34D498076A9DA4B856A4 /* AuthorizationCenter+Still.swift */,
+				775C28E2A3DDB1619A481A78 /* CloudPreferencesSync.swift */,
 				4C03C1107DF05156636CCBD0 /* FocusSessionController.swift */,
+				4A45BF67522A2A6CEE002E58 /* LiveActivityManager.swift */,
 				9BA0D3AB23059E7A3E7BAE1A /* MotionStepAuthorization.swift */,
+				C944B7F7A298A8F6C86D8C73 /* ScheduledBlockScheduler.swift */,
 				34E525A1B13328F86EE36F31 /* StillModeController.swift */,
 				1CDF72BA1CF23D0322C8B818 /* StoreManager.swift */,
 				56B7F0593472763B7188657B /* UNNotificationCenter+Async.swift */,
@@ -282,9 +330,11 @@
 		3AAE2F0B1299B2509F72A8D2 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				8562C867122050B3C6A2344E /* AchievementShelfView.swift */,
 				213192B956B35C653EAEE0A3 /* CalmCard.swift */,
 				2F5229B631BB752283F1A6FC /* DurationPicker.swift */,
 				81D7670EFBBC45339515C578 /* EmptyState.swift */,
+				D919C33C85EB922B48C8C3E4 /* FocusHeatmapView.swift */,
 				55B7ABB69D38B2C1D4D91C8D /* FocusStatusHeader.swift */,
 				F7CAFD2DA23B4D14856BB7C2 /* ListRow.swift */,
 				ACFCF1CF2B3C88006C3A098D /* PrimaryButton.swift */,
@@ -313,12 +363,20 @@
 			children = (
 				4DA5AB17BDD84BB65D1642F8 /* Info.plist */,
 				4518A2D1CBE7D67C11D82077 /* ShieldConfigurationExtension.swift */,
-				21166197651118205EBA3B78 /* StillShield 2.entitlements */,
-				B8F0B3867C1A7F18A2777A6B /* StillShield 3.entitlements */,
-				B46B50040C77E97F5231E082 /* StillShield 4.entitlements */,
 				891F2D81B320DE09B0DC5A5B /* StillShield.entitlements */,
 			);
 			path = ShieldConfiguration;
+			sourceTree = "<group>";
+		};
+		5D43E5EE08BA1B8007C1DC05 /* StillLiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				25F629E33F451FF37637F32B /* Info.plist */,
+				77F1D1991B371BC5C2945F1F /* StillLiveActivityBundle.swift */,
+				15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */,
+				25159A9F53F970BC8D532644 /* StillTimerLiveActivity.swift */,
+			);
+			path = StillLiveActivity;
 			sourceTree = "<group>";
 		};
 		840A35E61B17558FC8F6BA24 /* Products */ = {
@@ -327,6 +385,8 @@
 				193593C1E058E2D289F796C2 /* Still.app */,
 				4CDF99A3410427FF3EFC733D /* StillMonitor.appex */,
 				36885A9C0D936DB2A097BA37 /* StillShield.appex */,
+				0691495473CADDD905E2CFB9 /* StillShieldAction.appex */,
+				0977B244FF0011CC6D2506C8 /* StillTimerWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -334,12 +394,17 @@
 		87F4BDF1EA2832255E2815AB /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4F999EF7254FD4F5B21E1755 /* AchievementTracker.swift */,
 				BF76775C0345634029781ED9 /* AppConstants.swift */,
 				49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */,
+				5FF34BF7CBE5FDC1E32116DD /* CheatBudgetTracker.swift */,
+				3A8ECBE13AF87356878A4C29 /* DailyFocusLog.swift */,
+				1DA3B9FA190C997ED9FFF79C /* ScheduledBlock.swift */,
 				54EB87E68219033713090608 /* SelectionCodec.swift */,
 				95FFC7D3A135204D13DFA465 /* SelectionMerge.swift */,
 				EA64563F82F9E2C7B84A9B4D /* ShieldApplicator.swift */,
 				20701CBD58428A5F5A32C596 /* StoredFocusGroup.swift */,
+				92E40B364F11D7791A657AA7 /* StreakTracker.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -352,13 +417,21 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		BE019D5E4E77FF3D54C86856 /* ShieldAction */ = {
+			isa = PBXGroup;
+			children = (
+				19F1D9EDE69012A0F4E8057E /* Info.plist */,
+				B4E55705F19A5EA91FDF8834 /* ShieldActionExtension.swift */,
+				2F15D8D5FD1B75454AFF5705 /* StillShieldAction.entitlements */,
+			);
+			path = ShieldAction;
+			sourceTree = "<group>";
+		};
 		DAEA6376511282569C88BBB5 /* DeviceActivityMonitor */ = {
 			isa = PBXGroup;
 			children = (
 				0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */,
 				75B51ADB08EDF74609504079 /* Info.plist */,
-				856A2B54907A62F778242BA9 /* StillMonitor 2.entitlements */,
-				9D72720B25ECE45279139569 /* StillMonitor 3.entitlements */,
 				9157B439397BBB9E7056783B /* StillMonitor.entitlements */,
 			);
 			path = DeviceActivityMonitor;
@@ -380,6 +453,8 @@
 			dependencies = (
 				DB5C9A6A0E646988A508C567 /* PBXTargetDependency */,
 				4C58A9FB66461A66B446B1E5 /* PBXTargetDependency */,
+				C93C140304415AB8BC54E2BC /* PBXTargetDependency */,
+				D4F6EFFA655EDC9B912A2648 /* PBXTargetDependency */,
 			);
 			name = Still;
 			packageProductDependencies = (
@@ -387,6 +462,23 @@
 			productName = Still;
 			productReference = 193593C1E058E2D289F796C2 /* Still.app */;
 			productType = "com.apple.product-type.application";
+		};
+		5B81DF819ECE8174421A2774 /* StillShieldAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9014B2C81C7BCAF6DE6F81A8 /* Build configuration list for PBXNativeTarget "StillShieldAction" */;
+			buildPhases = (
+				4C06E5564080063D334C61D4 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StillShieldAction;
+			packageProductDependencies = (
+			);
+			productName = StillShieldAction;
+			productReference = 0691495473CADDD905E2CFB9 /* StillShieldAction.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		C39B236B1AA30066E1DC7F9A /* StillMonitor */ = {
 			isa = PBXNativeTarget;
@@ -422,6 +514,23 @@
 			productReference = 36885A9C0D936DB2A097BA37 /* StillShield.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		F0DA8E4A8FCDEA2D93B973FF /* StillTimerWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4BD26E01CBA0F3315930B614 /* Build configuration list for PBXNativeTarget "StillTimerWidget" */;
+			buildPhases = (
+				FC3EF7CECD1D1A086613357C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StillTimerWidget;
+			packageProductDependencies = (
+			);
+			productName = StillTimerWidget;
+			productReference = 0977B244FF0011CC6D2506C8 /* StillTimerWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -430,20 +539,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-					30EB340DFB53288959370D0F = {
-						DevelopmentTeam = WYCSFCBC9V;
-						ProvisioningStyle = Automatic;
-					};
-					C39B236B1AA30066E1DC7F9A = {
-						DevelopmentTeam = WYCSFCBC9V;
-						ProvisioningStyle = Automatic;
-					};
-					EB0D64181692E50AF1E0A261 = {
-						DevelopmentTeam = WYCSFCBC9V;
-						ProvisioningStyle = Automatic;
-					};
-				};
 			};
 			buildConfigurationList = D4C3CA34F2162AE68E04DF3F /* Build configuration list for PBXProject "Still" */;
 			developmentRegion = en;
@@ -462,6 +557,8 @@
 				30EB340DFB53288959370D0F /* Still */,
 				C39B236B1AA30066E1DC7F9A /* StillMonitor */,
 				EB0D64181692E50AF1E0A261 /* StillShield */,
+				5B81DF819ECE8174421A2774 /* StillShieldAction */,
+				F0DA8E4A8FCDEA2D93B973FF /* StillTimerWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -485,6 +582,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37A48DC11CCCD9F4F252EE4C /* AchievementShelfView.swift in Sources */,
+				477AB39B0DB5E8637D23AB82 /* AchievementTracker.swift in Sources */,
 				F4293B40F6FBC4D2E13D2132 /* ActivityShareSheet.swift in Sources */,
 				2A13941CF873442F87B8C18E /* AlarmBootstrap.swift in Sources */,
 				BEEFB3664BA2FDC6881BC50C /* AlarmEditorSheet.swift in Sources */,
@@ -505,13 +604,18 @@
 				6E06F4E489E331B15A9245FF /* AuthorizationCenter+Still.swift in Sources */,
 				AC1BC0C4E83723D7FEE77062 /* BreakFocusFlowView.swift in Sources */,
 				D7725F91C3103E95CF5D14D2 /* CalmCard.swift in Sources */,
+				E79417AB09A569A29A4FAEF2 /* CheatBudgetTracker.swift in Sources */,
+				50EF6E1B407651F6664FEE48 /* CloudPreferencesSync.swift in Sources */,
+				8FC8DEAC17923858A16B0642 /* DailyFocusLog.swift in Sources */,
 				123C2D4FD639A9D9F8ECE556 /* DurationPicker.swift in Sources */,
 				820B451E2DB6DA2373347006 /* EmptyState.swift in Sources */,
+				D43028EC8879C6AF32B57BD0 /* FocusHeatmapView.swift in Sources */,
 				018521D89C42908D4C59A9D4 /* FocusHomeView.swift in Sources */,
 				8D1F6D517958677CDC2D06FC /* FocusSessionController.swift in Sources */,
 				07BAA65D68C8D578E85033C6 /* FocusStatusHeader.swift in Sources */,
 				E5D5112EFCBD2926D9A9813F /* GroupEditorSheet.swift in Sources */,
 				4BA739805624FDE1CB95248E /* ListRow.swift in Sources */,
+				A625D8215C0AD7252167BB0A /* LiveActivityManager.swift in Sources */,
 				E8BC5EE422B4B37B2C5D3AF1 /* MainTabView.swift in Sources */,
 				1CB664E4866803F36D3D29E5 /* MotionStepAuthorization.swift in Sources */,
 				B2375AEE5C0CB139E1BEFE97 /* OnboardingView.swift in Sources */,
@@ -521,6 +625,9 @@
 				5CECA3C68F102AD32A96D3E4 /* QRCodeImageView.swift in Sources */,
 				D384CA4DDFFD44A29712B8F9 /* QRScannerRepresentable.swift in Sources */,
 				B97B4B6D81C2358FCE2DA344 /* RootView.swift in Sources */,
+				C7C0761F352696272C153F12 /* ScheduledBlock.swift in Sources */,
+				7E8FC2669E31834D561D8F0D /* ScheduledBlockEditorSheet.swift in Sources */,
+				276CC065634719F1B148DC6D /* ScheduledBlockScheduler.swift in Sources */,
 				70716351F3FD425CFF616A15 /* SecondaryButton.swift in Sources */,
 				D00E01F938CF2C11AFCF48FF /* SelectionCodec.swift in Sources */,
 				4B8F21265E8A0AD124A5D152 /* SelectionMerge.swift in Sources */,
@@ -535,11 +642,23 @@
 				BCC422697C79954F26AB0EAC /* StillModeActiveOverlay.swift in Sources */,
 				8D2B2C416789BDB6BD337B2A /* StillModeController.swift in Sources */,
 				1CCB7D7F3EE3BCFA7B4E6EF1 /* StillModeExitFlow.swift in Sources */,
+				A0C6BEBAB33A8838E21E1D2B /* StillTimerAttributes.swift in Sources */,
 				0E2D8F90F58EFC2C5F630F82 /* StoreManager.swift in Sources */,
 				A67A8776FDD45857CD655ED1 /* StoredFocusGroup.swift in Sources */,
+				CBE4D77A7B521885241208D1 /* StreakTracker.swift in Sources */,
 				C2AFD0E6B20D48541FE5CA97 /* SwipeToDelete.swift in Sources */,
 				FCE42EB2C6EE4012CA33BF2D /* Tokens.swift in Sources */,
 				6FED56D5D2729384B14CC409 /* UNNotificationCenter+Async.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C06E5564080063D334C61D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C3D4E5F60718293A4B5C6D8 /* AppConstants.swift in Sources */,
+				C1D2E3F405162738495A6B7C9 /* StillTimerAttributes.swift in Sources */,
+				7D4D713E55CF10C3E3529475 /* ShieldActionExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,13 +666,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D24312A96C8FA489E0547E6 /* AchievementTracker.swift in Sources */,
 				23B9CDB97AE67BCDBF6AA332 /* AppConstants.swift in Sources */,
 				EC9DA4968A6309E77D310DFB /* AppGroupStore.swift in Sources */,
+				CD529762E94AAE2AB82AC829 /* CheatBudgetTracker.swift in Sources */,
+				FB2828438187CC22D10F5D1F /* DailyFocusLog.swift in Sources */,
 				976B9C206EA5C84519B9CED2 /* DeviceActivityMonitorExtension.swift in Sources */,
+				ACCF8AC4714A2DA723FCA815 /* ScheduledBlock.swift in Sources */,
 				761342F53F7B90FF685A3614 /* SelectionCodec.swift in Sources */,
 				FDCA70DC58D43F75A7354C0C /* SelectionMerge.swift in Sources */,
 				A602CC5E43A94157F5455FD7 /* ShieldApplicator.swift in Sources */,
 				4356A9F800F9AE8CA145448A /* StoredFocusGroup.swift in Sources */,
+				329E9A05E1455153736C71DE /* StreakTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,6 +689,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FC3EF7CECD1D1A086613357C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3850C280A2431076E8567E23 /* StillLiveActivityBundle.swift in Sources */,
+				95090932768F46DA01FD101D /* StillTimerAttributes.swift in Sources */,
+				F68A73CCCD6CCC5ABDFCBE99 /* StillTimerLiveActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -572,6 +706,16 @@
 			isa = PBXTargetDependency;
 			target = EB0D64181692E50AF1E0A261 /* StillShield */;
 			targetProxy = 231E501248AFC455C206EC4D /* PBXContainerItemProxy */;
+		};
+		C93C140304415AB8BC54E2BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B81DF819ECE8174421A2774 /* StillShieldAction */;
+			targetProxy = CAC1D36CB19A2F34DBE8DD47 /* PBXContainerItemProxy */;
+		};
+		D4F6EFFA655EDC9B912A2648 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F0DA8E4A8FCDEA2D93B973FF /* StillTimerWidget */;
+			targetProxy = 35281114E3A6A817CC9FDE2A /* PBXContainerItemProxy */;
 		};
 		DB5C9A6A0E646988A508C567 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -581,6 +725,46 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		25D7BDF0972CCA5956FE95DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldAction/StillShieldAction.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = ShieldAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.shieldaction;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		29A1C55EE90CC6B92AE0A80E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = StillLiveActivity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.timer;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		414F180F83868B9A6E91139D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -649,29 +833,77 @@
 			};
 			name = Debug;
 		};
+		58FFA4589EC3C11610F41228 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShieldAction/StillShieldAction.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = ShieldAction/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.shieldaction;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6A6DAF68DDDD7EECD9C8C669 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Still/Still.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
 				INFOPLIST_FILE = Still/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -weak_framework AlarmKit";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					AlarmKit,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
+		9D32E04EF047606E4E314255 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WYCSFCBC9V;
+				INFOPLIST_FILE = StillLiveActivity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.timer;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A3C60B1D8915B729F295B779 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/StillMonitor.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
 				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -680,6 +912,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.monitor;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -689,6 +922,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ShieldConfiguration/StillShield.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
 				INFOPLIST_FILE = ShieldConfiguration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -697,6 +932,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.shield;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -706,6 +942,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ShieldConfiguration/StillShield.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
 				INFOPLIST_FILE = ShieldConfiguration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -714,6 +952,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.shield;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -784,6 +1023,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/StillMonitor.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
 				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -792,6 +1033,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still.monitor;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -802,15 +1044,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Still/Still.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
 				INFOPLIST_FILE = Still/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -weak_framework AlarmKit";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					AlarmKit,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.allinoneapp.still;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -819,6 +1067,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4BD26E01CBA0F3315930B614 /* Build configuration list for PBXNativeTarget "StillTimerWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29A1C55EE90CC6B92AE0A80E /* Debug */,
+				9D32E04EF047606E4E314255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		72DBE189669F9E4B2E608188 /* Build configuration list for PBXNativeTarget "StillMonitor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -842,6 +1099,15 @@
 			buildConfigurations = (
 				D57B55B9DC3A7CD2F1B9FF18 /* Debug */,
 				A8DF1B5CA48FFCA1AF257052 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9014B2C81C7BCAF6DE6F81A8 /* Build configuration list for PBXNativeTarget "StillShieldAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25D7BDF0972CCA5956FE95DD /* Debug */,
+				58FFA4589EC3C11610F41228 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

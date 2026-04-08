@@ -34,6 +34,8 @@
 	<string>Still schedules the alarms you set so they can ring like a real clock—even when the phone is locked or in Do Not Disturb—and only stop after your walk or QR challenge.</string>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
+	<key>NSSupportsLiveActivitiesFrequentUpdates</key>
+	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

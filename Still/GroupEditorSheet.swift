@@ -95,6 +95,7 @@ struct GroupEditorSheet: View {
             }
         }
         FocusGroupStore.save(list)
+        CloudPreferencesSync.schedulePushDebounced()
         StillHaptics.success()
         onClose()
         dismiss()
@@ -105,6 +106,7 @@ struct GroupEditorSheet: View {
         var list = FocusGroupStore.load()
         list.removeAll { $0.id == existing.id }
         FocusGroupStore.save(list)
+        CloudPreferencesSync.schedulePushDebounced()
         StillHaptics.warning()
         onClose()
         dismiss()

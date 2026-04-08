@@ -25,6 +25,7 @@ final class AlarmStore: ObservableObject {
         if let data = try? JSONEncoder().encode(alarms) {
             defaults.set(data, forKey: AlarmConstants.alarmsStorageKey)
         }
+        CloudPreferencesSync.schedulePushDebounced()
     }
 
     func add(_ alarm: StoredAlarm) {

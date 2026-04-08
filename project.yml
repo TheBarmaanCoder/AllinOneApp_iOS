@@ -23,6 +23,7 @@ targets:
     sources:
       - path: Still
       - path: Core
+      - path: StillLiveActivity/StillTimerAttributes.swift
     resources:
       - path: Still/Resources
     settings:
@@ -38,6 +39,10 @@ targets:
       - target: StillMonitor
         embed: true
       - target: StillShield
+        embed: true
+      - target: StillShieldAction
+        embed: true
+      - target: StillTimerWidget
         embed: true
     scheme:
       testTargets: []
@@ -68,6 +73,31 @@ targets:
         INFOPLIST_FILE: ShieldConfiguration/Info.plist
     entitlements:
       path: ShieldConfiguration/StillShield.entitlements
+
+  StillShieldAction:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShieldAction
+    settings:
+      base:
+        DEVELOPMENT_TEAM: WYCSFCBC9V
+        PRODUCT_BUNDLE_IDENTIFIER: com.allinoneapp.still.shieldaction
+        INFOPLIST_FILE: ShieldAction/Info.plist
+    entitlements:
+      path: ShieldAction/StillShieldAction.entitlements
+
+  StillTimerWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: StillLiveActivity
+    settings:
+      base:
+        DEVELOPMENT_TEAM: WYCSFCBC9V
+        PRODUCT_BUNDLE_IDENTIFIER: com.allinoneapp.still.timer
+        INFOPLIST_FILE: StillLiveActivity/Info.plist
+        SWIFT_VERSION: "5.9"
 
 schemes:
   Still:

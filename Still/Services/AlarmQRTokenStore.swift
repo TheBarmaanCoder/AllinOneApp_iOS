@@ -17,6 +17,11 @@ enum AlarmQRTokenStore {
         value == token()
     }
 
+    /// Replaces the keychain token when merging from iCloud so all devices share the same QR URL.
+    static func replaceTokenForCloudSync(_ string: String) {
+        save(string)
+    }
+
     private static func save(_ string: String) {
         let data = Data(string.utf8)
         let query: [String: Any] = [
