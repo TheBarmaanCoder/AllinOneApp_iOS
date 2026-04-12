@@ -18,6 +18,8 @@ struct ScheduledBlockEditorSheet: View {
     @State private var selection: FamilyActivitySelection
     @State private var showPicker = false
     @State private var enabled: Bool
+    @State private var showOverlapAlert = false
+    @State private var overlapMessage = ""
     private let editingID: UUID?
 
     private let weekdays: [(Int, String)] = [
@@ -136,6 +138,11 @@ struct ScheduledBlockEditorSheet: View {
                 }
             }
             .familyActivityPicker(isPresented: $showPicker, selection: $selection)
+            .alert("Schedule overlap", isPresented: $showOverlapAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(overlapMessage)
+            }
         }
     }
 
@@ -168,6 +175,18 @@ struct ScheduledBlockEditorSheet: View {
         } else {
             blocks.append(block)
         }
+
+        let others = blocks.filter { $0.id != block.id }
+        let conflicts = block.enabledTimeOverlaps(in: others)
+        if !conflicts.isEmpty {
+            let names = conflicts.map(\.name).sorted().joined(separator: ", ")
+            overlapMessage =
+                "This block’s days and times overlap with \(names). Each moment can only belong to one block—change days, times, or turn off the other block."
+            showOverlapAlert = true
+            StillHaptics.warning()
+            return
+        }
+
         ScheduledBlockStore.save(blocks)
         ScheduledBlockScheduler.rescheduleAll()
         CloudPreferencesSync.schedulePushDebounced()

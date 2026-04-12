@@ -7,9 +7,10 @@ private struct QRSharePayload: Identifiable {
 }
 
 struct AlarmTabView: View {
+    @Environment(\.openURL) private var openURL
     @ObservedObject var alarmStore: AlarmStore
     @State private var editorMode: AlarmEditorSheet.Mode?
-    @State private var notificationDenied = false
+    @State private var alarmRevocationKind: PermissionRevocationTracker.AlarmRevocationKind?
     @State private var qrSharePayload: QRSharePayload?
 
     var body: some View {
@@ -36,11 +37,6 @@ struct AlarmTabView: View {
                         }
                     }
 
-                    if notificationDenied {
-                        Text(notificationDeniedMessage)
-                            .font(.footnote)
-                            .foregroundStyle(Tokens.ColorName.dangerMuted)
-                    }
                 }
                 .padding(.horizontal, Tokens.Spacing.screenHorizontal)
                 .padding(.vertical, Tokens.Spacing.screenVertical)
@@ -52,14 +48,49 @@ struct AlarmTabView: View {
         .sheet(item: $editorMode) { mode in
             AlarmEditorSheet(mode: mode, onClose: { editorMode = nil }, alarmStore: alarmStore)
         }
+        .alert(alarmRevocationAlertTitle, isPresented: Binding(
+            get: { alarmRevocationKind != nil },
+            set: { if !$0 { alarmRevocationKind = nil } }
+        )) {
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    openURL(url)
+                }
+                StillHaptics.lightImpact()
+            }
+            if alarmRevocationKind == .notifications {
+                Button("Allow in Still") {
+                    Task {
+                        _ = await AlarmScheduler.requestAuthorizationIfNeeded()
+                        await AlarmBootstrap.rescheduleAll(alarms: alarmStore.alarms)
+                        await evaluateAlarmPermissionRevocation()
+                    }
+                }
+            }
+            if #available(iOS 26.0, *) {
+                if alarmRevocationKind == .alarmKit {
+                    Button("Allow alarms") {
+                        Task {
+                            _ = try? await AlarmKitScheduler.requestAuthorization()
+                            await AlarmBootstrap.rescheduleAll(alarms: alarmStore.alarms)
+                            await evaluateAlarmPermissionRevocation()
+                        }
+                    }
+                }
+            }
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(alarmRevocationAlertMessage)
+        }
         .task {
-            if AlarmBootstrap.usesAlarmKitThisDevice {
-                notificationDenied = false
-            } else {
-                let ok = await AlarmScheduler.requestAuthorizationIfNeeded()
-                notificationDenied = !ok
+            if !AlarmBootstrap.usesAlarmKitThisDevice {
+                _ = await AlarmScheduler.requestAuthorizationIfNeeded()
             }
             await AlarmBootstrap.rescheduleAll(alarms: alarmStore.alarms)
+            await evaluateAlarmPermissionRevocation()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            Task { await evaluateAlarmPermissionRevocation() }
         }
         .sheet(item: $qrSharePayload) { payload in
             ActivityShareSheet(activityItems: [payload.image])
@@ -98,8 +129,36 @@ struct AlarmTabView: View {
         return "Create an alarm and allow notifications when asked so Still can alert you."
     }
 
-    private var notificationDeniedMessage: String {
-        "Notifications are off. Enable them in Settings → Still → Notifications to hear alarms on this iOS version."
+    private var alarmRevocationAlertTitle: String {
+        guard let kind = alarmRevocationKind, kind != .none else { return "" }
+        switch kind {
+        case .alarmKit:
+            return "System alarms turned off"
+        case .notifications:
+            return "Notifications turned off"
+        case .none:
+            return ""
+        }
+    }
+
+    private var alarmRevocationAlertMessage: String {
+        guard let kind = alarmRevocationKind, kind != .none else { return "" }
+        switch kind {
+        case .alarmKit:
+            return "Still uses system alarms so your alarm can ring through Do Not Disturb and Sleep Focus until you dismiss it. Turn alarm access back on under Settings → Still."
+        case .notifications:
+            return "On this iOS version Still uses notifications to sound alarms. Turn notifications back on under Settings → Still so alarms can reach you."
+        case .none:
+            return ""
+        }
+    }
+
+    private func evaluateAlarmPermissionRevocation() async {
+        let kind = await PermissionRevocationTracker.refreshAlarmRelatedRevocation()
+        guard kind != .none else { return }
+        await MainActor.run {
+            alarmRevocationKind = kind
+        }
     }
 
     // MARK: - QR card (kept for Settings)

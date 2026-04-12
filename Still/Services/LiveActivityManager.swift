@@ -19,13 +19,18 @@ private actor LiveActivityCoordinator {
         await request(mode: mode, label: label, startDate: startDate, endDate: endDate)
     }
 
-    func syncToAppState(stillModeActive: Bool, isSessionActive: Bool, sessionEndsAt: Date?) async {
+    func syncToAppState(
+        stillModeActive: Bool,
+        isSessionActive: Bool,
+        sessionEndsAt: Date?,
+        suppressFocusLiveActivity: Bool
+    ) async {
         let store = AppGroupStore.shared
         await stopAllActivities()
         if stillModeActive {
             let start = store.stillModeStart ?? Date()
             await request(mode: .stillMode, label: "Still Mode", startDate: start, endDate: nil)
-        } else if isSessionActive, let end = sessionEndsAt {
+        } else if isSessionActive, !suppressFocusLiveActivity, let end = sessionEndsAt {
             let start = store.sessionStart ?? Date()
             await request(mode: .focus, label: "Focus Mode", startDate: start, endDate: end)
         }
@@ -78,13 +83,19 @@ enum LiveActivityManager {
         }
     }
 
-    static func syncToAppState(stillModeActive: Bool, isSessionActive: Bool, sessionEndsAt: Date?) {
+    static func syncToAppState(
+        stillModeActive: Bool,
+        isSessionActive: Bool,
+        sessionEndsAt: Date?,
+        suppressFocusLiveActivity: Bool = false
+    ) {
         guard #available(iOS 16.2, *) else { return }
         Task {
             await LiveActivityCoordinator.shared.syncToAppState(
                 stillModeActive: stillModeActive,
                 isSessionActive: isSessionActive,
-                sessionEndsAt: sessionEndsAt
+                sessionEndsAt: sessionEndsAt,
+                suppressFocusLiveActivity: suppressFocusLiveActivity
             )
         }
     }

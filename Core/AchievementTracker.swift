@@ -24,6 +24,17 @@ struct StillAchievement: Identifiable, Equatable {
 enum AchievementCatalog {
     static let all: [StillAchievement] = streakAchievements + focusAchievements
 
+    /// Shelf-only tile: never unlocks. Shows users what locked collectibles look like before they earn one.
+    static let unknownMystery: StillAchievement = .init(
+        id: "unknown",
+        title: "Unknown",
+        detail: "Locked collectibles look like this until you earn them.",
+        lockedIcon: "questionmark.circle.fill",
+        unlockedIcon: "questionmark.circle.fill",
+        category: .streak,
+        threshold: Int.max
+    )
+
     static let streakAchievements: [StillAchievement] = [
         .init(id: "streak_3",   title: "New Moon",        detail: "3-day streak",    lockedIcon: "moon",            unlockedIcon: "moon.fill",              category: .streak, threshold: 3),
         .init(id: "streak_7",   title: "Waxing Crescent", detail: "7-day streak",    lockedIcon: "moon",            unlockedIcon: "moonphase.waxing.crescent",   category: .streak, threshold: 7),
@@ -98,5 +109,31 @@ enum AchievementTracker {
 
     static func totalCount() -> Int {
         AchievementCatalog.all.count
+    }
+}
+
+extension StillAchievement {
+    /// Short copy for the collectible detail sheet (earned vs. how to unlock).
+    func collectibleExplanation(isUnlocked unlocked: Bool) -> String {
+        if id == AchievementCatalog.unknownMystery.id {
+            return "Every locked collectible looks like this until you earn it."
+        }
+        if unlocked {
+            switch category {
+            case .streak:
+                return "You earned this by reaching a \(threshold)-day streak."
+            case .focusHours:
+                let noun = threshold == 1 ? "hour" : "hours"
+                return "You earned this after logging \(threshold) \(noun) of focus time."
+            }
+        } else {
+            switch category {
+            case .streak:
+                return "Reach a \(threshold)-day streak to unlock this collectible."
+            case .focusHours:
+                let noun = threshold == 1 ? "hour" : "hours"
+                return "Log \(threshold) total \(noun) of focus time to unlock this collectible."
+            }
+        }
     }
 }

@@ -93,6 +93,7 @@ struct StillApp: App {
             if handled { return }
 
             await MainActor.run {
+                session.syncFromStore()
                 if !store.isProUnlocked {
                     stillMode.showProPaywall = true
                     return
@@ -101,6 +102,7 @@ struct StillApp: App {
                 if stillMode.isActive {
                     stillMode.requestExit()
                 } else {
+                    guard !session.isSessionActive else { return }
                     stillMode.activate()
                 }
             }

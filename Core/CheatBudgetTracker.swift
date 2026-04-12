@@ -69,17 +69,33 @@ enum CheatBudgetTracker {
         defaults?.synchronize()
     }
 
-    /// End the current cheat session and deduct used time from budget.
-    static func endCheat() {
+    /// End the current cheat session and deduct used time from budget (through `closingTime`, not wall-clock now).
+    static func endCheat(at closingTime: Date) {
+        resetIfNewDay()
         guard defaults?.bool(forKey: cheatActiveKey) == true else { return }
-        let startEpoch = defaults?.double(forKey: cheatStartKey) ?? Date().timeIntervalSince1970
-        let elapsed = Date().timeIntervalSince1970 - startEpoch
+        let startEpoch = defaults?.double(forKey: cheatStartKey) ?? closingTime.timeIntervalSince1970
+        let start = Date(timeIntervalSince1970: startEpoch)
+        let elapsed = max(0, closingTime.timeIntervalSince(start))
         let used = defaults?.double(forKey: usedSecondsKey) ?? 0
-        defaults?.set(used + elapsed, forKey: usedSecondsKey)
+        defaults?.set(min(used + elapsed, dailyBudgetSeconds), forKey: usedSecondsKey)
         defaults?.set(false, forKey: cheatActiveKey)
         defaults?.removeObject(forKey: cheatStartKey)
         defaults?.removeObject(forKey: cheatSourceModeKey)
         defaults?.synchronize()
+    }
+
+    /// End the current cheat session and deduct used time from budget through now.
+    static func endCheat() {
+        endCheat(at: Date())
+    }
+
+    /// When a scheduled focus block ends while the user is on a focus cheat, stop the cheat at the block end so post-block app use is not billed or shown as cheating.
+    static func endScheduledFocusCheatIfNeeded(sessionEnd: Date) {
+        resetIfNewDay()
+        guard defaults?.bool(forKey: cheatActiveKey) == true else { return }
+        let mode = defaults?.string(forKey: cheatSourceModeKey) ?? ""
+        guard mode == "focus" else { return }
+        endCheat(at: sessionEnd)
     }
 
     /// How many seconds have been consumed including any active cheat session.

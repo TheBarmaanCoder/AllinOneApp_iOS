@@ -32,6 +32,7 @@ final class StillModeController: ObservableObject {
 
     func activate() {
         guard !isActive else { return }
+        guard !groupStore.sessionIsScheduled else { return }
         guard !groupStore.sessionActive else { return }
         guard let data = groupStore.stillModeSelectionData,
               let selection = try? SelectionCodec.decode(data),
@@ -68,6 +69,7 @@ final class StillModeController: ObservableObject {
         let expected = "I am getting out of Still Mode"
         let clean = sentence.trimmingCharacters(in: .whitespacesAndNewlines)
         guard clean.caseInsensitiveCompare(expected) == .orderedSame else { return false }
+        StreakTracker.markManualBreak()
 
         if let start = groupStore.stillModeStart {
             let end = Date()

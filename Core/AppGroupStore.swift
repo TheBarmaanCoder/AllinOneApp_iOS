@@ -22,6 +22,10 @@ final class AppGroupStore {
         static let stillModeActive = "stillModeActive"
         static let stillModeStart = "stillModeStart"
         static let stillModeSelectionData = "stillModeSelectionData"
+        /// When true, `sessionActive` was started by a scheduled block; suppress focus Live Activity (cheat LA still allowed).
+        static let sessionIsScheduled = "sessionIsScheduled"
+        /// UUID string of the `ScheduledBlock` for the active scheduled session (for UI).
+        static let scheduledBlockSessionId = "scheduledBlockSessionId"
     }
 
     private init() {
@@ -125,7 +129,25 @@ final class AppGroupStore {
         sessionActive = false
         sessionEnd = nil
         sessionStart = nil
+        sessionIsScheduled = false
+        scheduledBlockSessionId = nil
         clearSessionSelectionBlob()
+    }
+
+    var sessionIsScheduled: Bool {
+        get { defaults?.bool(forKey: Key.sessionIsScheduled) ?? false }
+        set { defaults?.set(newValue, forKey: Key.sessionIsScheduled) }
+    }
+
+    var scheduledBlockSessionId: String? {
+        get { defaults?.string(forKey: Key.scheduledBlockSessionId) }
+        set {
+            if let newValue {
+                defaults?.set(newValue, forKey: Key.scheduledBlockSessionId)
+            } else {
+                defaults?.removeObject(forKey: Key.scheduledBlockSessionId)
+            }
+        }
     }
 
     // MARK: - Still Mode

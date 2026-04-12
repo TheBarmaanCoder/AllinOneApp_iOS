@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Still — Focus &amp; alarms for iPhone</title>
-  <meta name="description" content="Still helps you stay focused with Screen Time shields and optional walk-or-QR alarms." />
+  <meta name="description" content="Still helps you stay focused with Screen Time shields, manual and scheduled focus, Still Mode, and optional walk-or-QR alarms." />
   <style>
     :root {
       --bg: #f6f4f1;
@@ -81,18 +81,38 @@
   <div class="wrap">
     <header>
       <h1>Still</h1>
-      <p class="tagline">Focus sessions with Screen Time shields, plus optional alarms you dismiss by walking or scanning your own QR code.</p>
+      <p class="tagline">Manual and scheduled focus with Screen Time shields, Still Mode, plus optional alarms you dismiss by walking or scanning your own QR code.</p>
     </header>
 
     <section class="card" aria-labelledby="purpose-heading">
       <h2 id="purpose-heading">Purpose</h2>
-      <p style="margin:0">Still is built for people who want to reduce distractions on their own terms: you choose which apps, categories, and websites are limited during a timed focus session. Alarms are optional and designed so you finish waking up with a short walk or a sticker you place away from your bed.</p>
+      <p style="margin:0">Still is built for people who want to reduce distractions on their own terms: you choose which apps, categories, and websites are limited during focus. You can run a one-off timed session, set up weekly schedules (Still Pro), or use Still Mode with your own QR code. Alarms are optional and designed so you finish waking up with a short walk or a sticker you place away from your bed.</p>
+    </section>
+
+    <section class="card" aria-labelledby="focus-heading">
+      <h2 id="focus-heading">Focus &amp; Still Mode</h2>
+      <ul>
+        <li><strong>Manual focus</strong> — pick duration, apps/sites, and optional groups; shields apply for the session.</li>
+        <li><strong>Still Mode</strong> — block chosen apps until you scan your printed QR and confirm to exit.</li>
+        <li><strong>Cheat breaks</strong> — optional short breaks with a visible countdown (including Live Activity where supported), then shields return.</li>
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="scheduled-heading">
+      <h2 id="scheduled-heading">Scheduled blocks (Still Pro)</h2>
+      <p style="margin:0 0 0.85rem">Recurring weekly windows can <strong>automatically start</strong> a focus-style session: same shield behavior and cheat flow as a manual session, started for you when the window begins.</p>
+      <ul>
+        <li>Progress and controls for the active scheduled session appear under <strong>Scheduled Blocks</strong> on the Focus tab (the main Focus Session card points you there instead of duplicating the timer).</li>
+        <li>To limit battery use on long blocks, Still does <strong>not</strong> run a continuous Dynamic Island / Lock Screen timer for the scheduled session itself. Cheat breaks still use the same Live Activity countdown as manual focus and Still Mode.</li>
+        <li>While a scheduled session is running, you <strong>cannot</strong> start a separate manual focus session or Still Mode.</li>
+        <li>If you <strong>break</strong> out of a scheduled session early, that block’s schedule is turned <strong>off</strong> (same as disabling it when editing the block), so the recurring rule stops until you turn it back on.</li>
+      </ul>
     </section>
 
     <section class="card" aria-labelledby="highlights-heading">
       <h2 id="highlights-heading">Highlights</h2>
       <ul>
-        <li>Timed focus using Apple’s Screen Time APIs (Family Controls, Managed Settings, Device Activity)</li>
+        <li>Screen Time integration: Family Controls, Managed Settings, and Device Activity for sessions and schedules</li>
         <li>Optional alarms: system alarms on supported iOS versions, with walk-to-dismiss or QR dismiss</li>
         <li>Data stays on your device for core focus features; see our <a href="privacy.html">privacy summary</a></li>
       </ul>

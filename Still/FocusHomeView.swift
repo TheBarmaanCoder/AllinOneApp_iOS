@@ -1,7 +1,9 @@
 import FamilyControls
 import SwiftUI
+import UIKit
 
 struct FocusHomeView: View {
+    @Environment(\.openURL) private var openURL
     @EnvironmentObject private var session: FocusSessionController
     @EnvironmentObject private var stillMode: StillModeController
     @EnvironmentObject private var store: StoreManager
@@ -29,9 +31,11 @@ struct FocusHomeView: View {
     @State private var editingScheduledBlock: ScheduledBlock?
     @State private var isCreatingScheduledBlock = false
     @State private var now = Date()
-    @State private var screenTimeStatus: AuthorizationStatus = FocusAuthorization.authorizationStatus()
+    @State private var showScreenTimeRevokedAlert = false
     @State private var showStreakInfo = false
     @State private var showCheatGuideBanner = false
+    /// Height of the stats card row — collectibles card matches this so the two rows align.
+    @State private var statsRowHeight: CGFloat = 0
 
     private var durationMinutes: Int {
         switch durationPreset {
@@ -54,7 +58,7 @@ struct FocusHomeView: View {
                         .font(.largeTitle.weight(.semibold))
                         .foregroundStyle(Tokens.ColorName.textPrimary)
 
-                    if session.isCheatActive {
+                    if session.isCheatActive && !(session.isScheduledSession && session.cheatSourceMode == "focus") {
                         cheatGlobalTimerBanner
                     }
 
@@ -64,12 +68,12 @@ struct FocusHomeView: View {
 
                     // ── Stats + Achievements ──
                     statsRow
+                        .background(
+                            GeometryReader { proxy in
+                                Color.clear.preference(key: StatsRowHeightKey.self, value: proxy.size.height)
+                            }
+                        )
                     achievementSection
-
-                    // ── Screen Time re-request (if needed) ──
-                    if screenTimeStatus != .approved {
-                        screenTimeCard
-                    }
 
                     // ── Focus Session group ──
                     focusSessionGroup
@@ -82,6 +86,7 @@ struct FocusHomeView: View {
                 }
                 .padding(.horizontal, Tokens.Spacing.screenHorizontal)
                 .padding(.vertical, Tokens.Spacing.screenVertical)
+                .onPreferenceChange(StatsRowHeightKey.self) { statsRowHeight = $0 }
             }
             .background(Tokens.ColorName.backgroundPrimary.ignoresSafeArea())
             .navigationTitle("")
@@ -93,8 +98,11 @@ struct FocusHomeView: View {
             if isShowing { StillHaptics.lightImpact() }
         }
         .sheet(isPresented: $showBreakFlow) {
-            BreakFocusFlowView { showBreakFlow = false }
-                .environmentObject(session)
+            BreakFocusFlowView {
+                showBreakFlow = false
+                reloadScheduledBlocks()
+            }
+            .environmentObject(session)
         }
         .sheet(isPresented: $showOtherSheet) {
             OtherDurationSheet(
@@ -128,6 +136,30 @@ struct FocusHomeView: View {
         .sheet(isPresented: $showPaywall) {
             ProPaywallSheet()
         }
+        .alert("Screen Time access turned off", isPresented: $showScreenTimeRevokedAlert) {
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    openURL(url)
+                }
+                StillHaptics.lightImpact()
+            }
+            Button("Allow in Still") {
+                Task {
+                    do {
+                        try await FocusAuthorization.requestAuthorization()
+                        StillHaptics.selectionChanged()
+                    } catch {
+                        StillHaptics.warning()
+                    }
+                    _ = PermissionRevocationTracker.refreshScreenTimeRevocation()
+                }
+            }
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(
+                "Still uses Screen Time only to shield the apps and websites you choose during focus. Nothing is sent to us. Turn access back on so blocking and schedules keep working."
+            )
+        }
         .onChange(of: showStillModePicker) { showing in
             if !showing { stillMode.saveSelection(stillModeSelection) }
         }
@@ -137,7 +169,10 @@ struct FocusHomeView: View {
             reloadGroups()
             reloadScheduledBlocks()
             stillModeSelection = stillMode.loadSelection()
-            screenTimeStatus = FocusAuthorization.authorizationStatus()
+            evaluateScreenTimeRevocation()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            evaluateScreenTimeRevocation()
         }
         .onChange(of: session.isCheatActive) { isActive in
             guard isActive else { return }
@@ -234,43 +269,17 @@ struct FocusHomeView: View {
         .alert("How streaks work", isPresented: $showStreakInfo) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("A day counts toward your streak only after 30+ minutes of total focus time that day.")
+            Text("A day counts if you either reach 2+ hours total focus, or reach 30+ minutes with no manual session breaks. Cheats do not break your streak.")
         }
     }
 
     private var achievementSection: some View {
-        CalmCard {
-            AchievementShelfView(isPro: store.isProUnlocked)
-        }
+        AchievementShelfView(isPro: store.isProUnlocked, matchHeight: statsRowHeight > 0 ? statsRowHeight : nil)
     }
 
-    // ────────────────────────────────────────────
-    // MARK: - Screen Time re-request
-    // ────────────────────────────────────────────
-
-    private var screenTimeCard: some View {
-        CalmCard {
-            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
-                Label("Screen Time access needed", systemImage: "exclamationmark.triangle.fill")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.orange)
-                Text("Still needs Screen Time access to block apps during focus. If another app reset your settings, re-allow it here.")
-                    .font(.caption)
-                    .foregroundStyle(Tokens.ColorName.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                PrimaryButton(title: "Allow Screen Time") {
-                    Task {
-                        do {
-                            try await FocusAuthorization.requestAuthorization()
-                            StillHaptics.selectionChanged()
-                        } catch {
-                            StillHaptics.warning()
-                        }
-                        screenTimeStatus = FocusAuthorization.authorizationStatus()
-                    }
-                }
-            }
+    private func evaluateScreenTimeRevocation() {
+        if PermissionRevocationTracker.refreshScreenTimeRevocation() {
+            showScreenTimeRevokedAlert = true
         }
     }
 
@@ -283,12 +292,17 @@ struct FocusHomeView: View {
             sectionHeader(title: "Focus Session", icon: "moon.fill")
 
             VStack(alignment: .leading, spacing: Tokens.Spacing.lg) {
-                if session.isCheatActive && session.cheatSourceMode == "focus" {
+                if session.isCheatActive && session.cheatSourceMode == "focus" && !session.isScheduledSession {
                     cheatCountdownContent(reengageTitle: "Restore focus session")
                 } else {
-                    if session.isSessionActive {
+                    if session.isSessionActive && session.isScheduledSession {
+                        Text("A scheduled focus session is running. Use the Scheduled Blocks section for the timer, or end the session there.")
+                            .font(.footnote)
+                            .foregroundStyle(Tokens.ColorName.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    } else if session.isSessionActive && !session.isScheduledSession {
                         focusTimerCard
-                    } else {
+                    } else if !session.isSessionActive {
                         DurationBar(
                             preset: $durationPreset,
                             otherHours: $otherHours,
@@ -351,8 +365,12 @@ struct FocusHomeView: View {
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Tokens.ColorName.textSecondary)
 
-            if session.isSessionActive {
+            if session.isSessionActive && !session.isScheduledSession {
                 Text("End this session to edit groups.")
+                    .font(.footnote)
+                    .foregroundStyle(Tokens.ColorName.textTertiary)
+            } else if session.isSessionActive && session.isScheduledSession {
+                Text("End your scheduled focus session to edit groups.")
                     .font(.footnote)
                     .foregroundStyle(Tokens.ColorName.textTertiary)
             } else if groups.isEmpty {
@@ -413,6 +431,25 @@ struct FocusHomeView: View {
                         .font(.footnote)
                         .foregroundStyle(Tokens.ColorName.textTertiary)
                         .frame(maxWidth: .infinity, alignment: .leading)
+
+                    if session.isSessionActive && session.isScheduledSession {
+                        VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                            HStack(spacing: Tokens.Spacing.sm) {
+                                Image(systemName: "calendar.badge.clock")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(Tokens.ColorName.accent)
+                                Text(activeScheduledBlockTitle)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(Tokens.ColorName.textPrimary)
+                            }
+                            if session.isCheatActive && session.cheatSourceMode == "focus" {
+                                cheatCountdownContent(reengageTitle: "Restore scheduled focus")
+                            } else {
+                                scheduledFocusTimerCard
+                            }
+                        }
+                        .padding(.bottom, Tokens.Spacing.sm)
+                    }
 
                     if !scheduledBlocks.isEmpty {
                         VStack(spacing: 0) {
@@ -539,6 +576,19 @@ struct FocusHomeView: View {
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
+                    .disabled(session.isSessionActive)
+                    .opacity(session.isSessionActive ? 0.45 : 1)
+
+                    if session.isSessionActive {
+                        Text(
+                            session.isScheduledSession
+                                ? "End your scheduled focus session before using Still Mode."
+                                : "End your focus session before using Still Mode."
+                        )
+                        .font(.footnote)
+                        .foregroundStyle(Tokens.ColorName.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    }
 
                     Label("Print your QR from Settings, then scan it with your camera to activate.", systemImage: "info.circle")
                         .font(.footnote)
@@ -560,7 +610,7 @@ struct FocusHomeView: View {
                 .font(.title2)
                 .foregroundStyle(.orange)
             VStack(alignment: .leading, spacing: 2) {
-                Text(session.cheatSourceMode == "still" ? "Still Mode cheat" : "Focus cheat")
+                Text("\(session.cheatSourceDisplayName) cheat")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(Tokens.ColorName.textSecondary)
                 Text(formattedCountdown(session.cheatRemainingSeconds))
@@ -723,6 +773,50 @@ struct FocusHomeView: View {
         }
     }
 
+    private var activeScheduledBlockTitle: String {
+        guard let idStr = session.scheduledBlockId,
+              let uuid = UUID(uuidString: idStr),
+              let block = scheduledBlocks.first(where: { $0.id == uuid })
+        else { return "Scheduled focus" }
+        return block.name
+    }
+
+    private var scheduledFocusTimerCard: some View {
+        VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+            HStack(spacing: Tokens.Spacing.xl) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("In scheduled focus")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(Tokens.ColorName.textTertiary)
+                    Text(focusElapsedText)
+                        .font(.title2.weight(.semibold))
+                        .monospacedDigit()
+                        .foregroundStyle(Tokens.ColorName.textPrimary)
+                        .contentTransition(.numericText())
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Remaining")
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(Tokens.ColorName.textTertiary)
+                    Text(focusRemainingText)
+                        .font(.title2.weight(.semibold))
+                        .monospacedDigit()
+                        .foregroundStyle(Tokens.ColorName.textSecondary)
+                        .contentTransition(.numericText())
+                }
+            }
+
+            if let end = session.sessionEndsAt {
+                ProgressView(value: focusProgress(endDate: end))
+                    .tint(Tokens.ColorName.textPrimary)
+            }
+
+            SecondaryButton(title: "Break scheduled focus…") {
+                showBreakFlow = true
+            }
+        }
+    }
+
     private var focusElapsedText: String {
         guard let start = AppGroupStore.shared.sessionStart else { return "0m" }
         return formattedDuration(max(0, now.timeIntervalSince(start)))
@@ -839,6 +933,11 @@ struct FocusHomeView: View {
 
     private func startSession() {
         startError = nil
+        guard !session.isScheduledSession else {
+            startError = "End your scheduled focus session before starting a manual one."
+            StillHaptics.warning()
+            return
+        }
         guard !stillMode.isActive else {
             startError = "Exit Still Mode before starting a focus session."
             StillHaptics.warning()
@@ -855,9 +954,22 @@ struct FocusHomeView: View {
             }
             try session.startFocus(durationMinutes: durationMinutes, selection: merged)
             StillHaptics.success()
+        } catch FocusSessionStartError.sessionAlreadyActive {
+            startError = "End your current focus session before starting a new one."
+            StillHaptics.warning()
         } catch {
             startError = "Could not start focus. Try again."
             StillHaptics.warning()
         }
+    }
+}
+
+// MARK: - Collectibles row height (match stats cards)
+
+private struct StatsRowHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        let next = nextValue()
+        if next > 0 { value = next }
     }
 }

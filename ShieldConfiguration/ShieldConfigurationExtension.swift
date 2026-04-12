@@ -127,9 +127,16 @@ final class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     // MARK: - Helpers (read from shared UserDefaults without Core dependency)
 
     private static func readStreak(defaults: UserDefaults?) -> Int {
-        guard let data = defaults?.data(forKey: "stillDailyFocusLog"),
-              let dict = try? JSONDecoder().decode([String: Double].self, from: data)
+        guard let focusData = defaults?.data(forKey: "stillDailyFocusLog"),
+              let focusByDay = try? JSONDecoder().decode([String: Double].self, from: focusData)
         else { return 0 }
+        let manualBreaksByDay: [String: Int]
+        if let breakData = defaults?.data(forKey: "stillManualBreaksByDay"),
+           let decoded = try? JSONDecoder().decode([String: Int].self, from: breakData) {
+            manualBreaksByDay = decoded
+        } else {
+            manualBreaksByDay = [:]
+        }
 
         let cal = Calendar.current
         let fmt = DateFormatter()
@@ -138,15 +145,20 @@ final class ShieldConfigurationExtension: ShieldConfigurationDataSource {
 
         let today = cal.startOfDay(for: Date())
         let todayKey = fmt.string(from: today)
-        let todayHas = (dict[todayKey] ?? 0) >= 1800
-        guard todayHas else { return 0 }
+        guard dayCounts(
+            focusedSeconds: focusByDay[todayKey] ?? 0,
+            manualBreaks: manualBreaksByDay[todayKey] ?? 0
+        ) else { return 0 }
 
         var check = today
         var streak = 0
 
         while true {
             let k = fmt.string(from: check)
-            if (dict[k] ?? 0) >= 1800 {
+            if dayCounts(
+                focusedSeconds: focusByDay[k] ?? 0,
+                manualBreaks: manualBreaksByDay[k] ?? 0
+            ) {
                 streak += 1
                 check = cal.date(byAdding: .day, value: -1, to: check)!
             } else {
@@ -154,6 +166,11 @@ final class ShieldConfigurationExtension: ShieldConfigurationDataSource {
             }
         }
         return streak
+    }
+
+    private static func dayCounts(focusedSeconds: Double, manualBreaks: Int) -> Bool {
+        if focusedSeconds >= 7200 { return true }
+        return focusedSeconds >= 1800 && manualBreaks == 0
     }
 
     /// Mirrors app `CheatBudgetTracker.remainingSeconds()` (includes elapsed time during an active cheat).

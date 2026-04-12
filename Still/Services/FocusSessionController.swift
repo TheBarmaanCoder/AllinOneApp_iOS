@@ -4,9 +4,23 @@ import FamilyControls
 import Foundation
 import ManagedSettings
 
+enum FocusSessionStartError: LocalizedError {
+    case sessionAlreadyActive
+
+    var errorDescription: String? {
+        switch self {
+        case .sessionAlreadyActive:
+            return "A focus session is already in progress."
+        }
+    }
+}
+
 @MainActor
 final class FocusSessionController: ObservableObject {
     @Published private(set) var isSessionActive = false
+    /// True when the active session was started by a scheduled block (no focus Live Activity; cheat Live Activity still allowed).
+    @Published private(set) var isScheduledSession = false
+    @Published private(set) var scheduledBlockId: String?
     @Published private(set) var sessionEndsAt: Date?
     @Published private(set) var plannedDuration: TimeInterval = 0
     @Published private(set) var isCheatActive = false
@@ -24,10 +38,16 @@ final class FocusSessionController: ObservableObject {
 
     func syncFromStore() {
         groupStore.synchronizeForCrossProcessRead()
+        completeNaturallyIfNeeded()
+        groupStore.synchronizeForCrossProcessRead()
         isSessionActive = groupStore.sessionActive
+        isScheduledSession = groupStore.sessionIsScheduled
+        scheduledBlockId = groupStore.scheduledBlockSessionId
         sessionEndsAt = groupStore.sessionEnd
         if let start = groupStore.sessionStart, let end = groupStore.sessionEnd {
             plannedDuration = end.timeIntervalSince(start)
+        } else {
+            plannedDuration = 0
         }
         syncCheatState()
         // Keep lock screen / Dynamic Island aligned whenever we’re not in a cheat (cheat path updates LA inside syncCheatState).
@@ -137,6 +157,9 @@ final class FocusSessionController: ObservableObject {
     /// Starts focus for the merged selection. Persists selection for the monitor extension.
     func startFocus(durationMinutes: Int, selection: FamilyActivitySelection) throws {
         guard durationMinutes > 0 else { return }
+        guard !groupStore.sessionActive else {
+            throw FocusSessionStartError.sessionAlreadyActive
+        }
 
         let data = try SelectionCodec.encode(selection)
         groupStore.persistSessionSelection(data)
@@ -146,9 +169,13 @@ final class FocusSessionController: ObservableObject {
         groupStore.sessionStart = now
         groupStore.sessionEnd = end
         groupStore.sessionActive = true
+        groupStore.sessionIsScheduled = false
+        groupStore.scheduledBlockSessionId = nil
 
         plannedDuration = end.timeIntervalSince(now)
         isSessionActive = true
+        isScheduledSession = false
+        scheduledBlockId = nil
         sessionEndsAt = end
 
         center.stopMonitoring([activityName])
@@ -163,7 +190,12 @@ final class FocusSessionController: ObservableObject {
 
     /// Ends focus early: stops monitoring and clears shields. Counts elapsed time only (not the full plan).
     func breakFocusEarly() {
-        center.stopMonitoring([activityName])
+        let scheduledBlockIdToDisable = groupStore.sessionIsScheduled ? groupStore.scheduledBlockSessionId : nil
+
+        StreakTracker.markManualBreak()
+        if !groupStore.sessionIsScheduled {
+            center.stopMonitoring([activityName])
+        }
         ShieldApplicator.clearShields()
         if let start = groupStore.sessionStart {
             let elapsed = Date().timeIntervalSince(start)
@@ -172,8 +204,11 @@ final class FocusSessionController: ObservableObject {
                 DailyFocusLog.logSession(start: start, end: Date())
             }
         }
+        disableScheduledBlockForEarlyBreak(blockIdString: scheduledBlockIdToDisable)
         groupStore.clearSessionMetadata()
         isSessionActive = false
+        isScheduledSession = false
+        scheduledBlockId = nil
         sessionEndsAt = nil
         plannedDuration = 0
         restartLiveActivityForCurrentMode()
@@ -184,7 +219,13 @@ final class FocusSessionController: ObservableObject {
     /// Backup when the monitor extension has not run yet (e.g. Simulator): same accounting as `intervalDidEnd`.
     func completeNaturallyIfNeeded() {
         guard groupStore.sessionActive, let end = groupStore.sessionEnd, Date() >= end else { return }
-        center.stopMonitoring([activityName])
+        if groupStore.sessionIsScheduled {
+            CheatBudgetTracker.endScheduledFocusCheatIfNeeded(sessionEnd: end)
+            stopAllCheatExpirySchedules()
+        }
+        if !groupStore.sessionIsScheduled {
+            center.stopMonitoring([activityName])
+        }
         if let start = groupStore.sessionStart {
             groupStore.totalFocusSeconds += end.timeIntervalSince(start)
             groupStore.completedSessions += 1
@@ -193,8 +234,11 @@ final class FocusSessionController: ObservableObject {
         ShieldApplicator.clearShields()
         groupStore.clearSessionMetadata()
         isSessionActive = false
+        isScheduledSession = false
+        scheduledBlockId = nil
         sessionEndsAt = nil
         plannedDuration = 0
+        syncCheatState()
         restartLiveActivityForCurrentMode()
         AchievementTracker.evaluateAndUnlock()
         CloudPreferencesSync.schedulePushDebounced()
@@ -210,12 +254,26 @@ final class FocusSessionController: ObservableObject {
         LiveActivityManager.syncToAppState(
             stillModeActive: groupStore.stillModeActive,
             isSessionActive: isSessionActive,
-            sessionEndsAt: sessionEndsAt
+            sessionEndsAt: sessionEndsAt,
+            suppressFocusLiveActivity: groupStore.sessionIsScheduled
         )
     }
 
     var cheatSourceDisplayName: String {
-        cheatSourceMode == "still" ? "Still Mode" : "Focus Session"
+        if cheatSourceMode == "still" { return "Still Mode" }
+        if isScheduledSession { return "Scheduled focus" }
+        return "Focus Session"
+    }
+
+    /// Turning off the schedule toggle in the block editor — used when the user breaks out of a scheduled session early.
+    private func disableScheduledBlockForEarlyBreak(blockIdString: String?) {
+        guard let blockIdString, let uuid = UUID(uuidString: blockIdString) else { return }
+        var blocks = ScheduledBlockStore.load()
+        guard let idx = blocks.firstIndex(where: { $0.id == uuid }) else { return }
+        blocks[idx].enabled = false
+        ScheduledBlockStore.save(blocks)
+        ScheduledBlockScheduler.rescheduleAll()
+        CloudPreferencesSync.schedulePushDebounced()
     }
 
     private static func schedule(from start: Date, to end: Date) -> DeviceActivitySchedule {

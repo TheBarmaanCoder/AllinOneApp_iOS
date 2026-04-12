@@ -10,7 +10,7 @@ final class DeviceActivityMonitorExtension: DeviceActivityMonitor {
 
     override func intervalDidStart(for activity: DeviceActivityName) {
         if activity.rawValue.hasPrefix(scheduledPrefix) {
-            handleScheduledBlockStart(activity)
+            ScheduledSessionStarter.startIfPossible(activityRawValue: activity.rawValue, scheduledPrefix: scheduledPrefix)
             return
         }
         if activity.rawValue.hasPrefix(cheatPrefix) {
@@ -44,7 +44,7 @@ final class DeviceActivityMonitorExtension: DeviceActivityMonitor {
         g.clearSessionMetadata()
     }
 
-    /// Fires shortly before a short (<15 min) cheat interval ends — real cheat expiry for sub‑15‑minute budgets.
+    /// Fires shortly before a short (<15 min) cheat interval ends — real cheat expiry for sub‑minute budgets.
     override func intervalWillEndWarning(for activity: DeviceActivityName) {
         guard activity.rawValue.hasPrefix(cheatPrefix) else { return }
         CheatBudgetTracker.endCheat()
@@ -79,26 +79,12 @@ final class DeviceActivityMonitorExtension: DeviceActivityMonitor {
 
     // MARK: - Scheduled blocks
 
-    private func handleScheduledBlockStart(_ activity: DeviceActivityName) {
-        let raw = activity.rawValue
-        let parts = raw.replacingOccurrences(of: scheduledPrefix, with: "").components(separatedBy: "_")
-        guard parts.count >= 5,
-              let blockIDStr = parts.dropLast().joined(separator: "_").components(separatedBy: "_").first(where: { _ in true }),
-              let _ = UUID(uuidString: String(raw.dropFirst(scheduledPrefix.count).prefix(36)))
-        else { return }
-
-        let idStr = String(raw.dropFirst(scheduledPrefix.count).prefix(36))
-        guard let blockID = UUID(uuidString: idStr) else { return }
-
-        let key = "scheduledBlockSelection_\(blockID.uuidString)"
-        guard let data = UserDefaults(suiteName: AppConstants.appGroupId)?.data(forKey: key),
-              let selection = try? SelectionCodec.decode(data)
-        else { return }
-        ShieldApplicator.applyShields(for: selection)
-    }
-
     private func handleScheduledBlockEnd() {
         let g = AppGroupStore.shared
+        if g.sessionActive && g.sessionIsScheduled {
+            ScheduledSessionStarter.endScheduledSessionIfNeeded()
+            return
+        }
         guard !g.sessionActive && !g.stillModeActive else { return }
         ShieldApplicator.clearShields()
     }

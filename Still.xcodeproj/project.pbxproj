@@ -28,6 +28,7 @@
 		2D56782CF556E2675BF68197 /* AlarmTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FB4EB389F6B68BCD1A9DF8 /* AlarmTabView.swift */; };
 		329E9A05E1455153736C71DE /* StreakTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E40B364F11D7791A657AA7 /* StreakTracker.swift */; };
 		37A48DC11CCCD9F4F252EE4C /* AchievementShelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8562C867122050B3C6A2344E /* AchievementShelfView.swift */; };
+		C9B8A7D6E5F4039281716051 /* CollectibleOrbVisual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B8A7D6E5F4039281716050 /* CollectibleOrbVisual.swift */; };
 		3850C280A2431076E8567E23 /* StillLiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1D1991B371BC5C2945F1F /* StillLiveActivityBundle.swift */; };
 		3CD4A7C29B6D56C13CBAE5BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5B2539898EB583763A28A42 /* Assets.xcassets */; };
 		41CD5C404C204E944143F9F5 /* AlarmSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40CDD61B798C6BC5024365 /* AlarmSoundPlayer.swift */; };
@@ -65,6 +66,7 @@
 		92A5E42F2A31B0C5B606F672 /* StatBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4E77A236C7B170E3A6F44C /* StatBlock.swift */; };
 		95090932768F46DA01FD101D /* StillTimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */; };
 		976B9C206EA5C84519B9CED2 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */; };
+		E81234AB56CD78EF9012345AB /* ScheduledSessionStarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81234AB56CD78EF9012345AA /* ScheduledSessionStarter.swift */; };
 		9D34D0BDA04A88154A551EE4 /* still_ping.caf in Resources */ = {isa = PBXBuildFile; fileRef = 224D3CE7101EC9EED2BC0093 /* still_ping.caf */; };
 		A0C6BEBAB33A8838E21E1D2B /* StillTimerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */; };
 		A53A60BC21723061D05B3ADA /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */; };
@@ -94,6 +96,7 @@
 		E79417AB09A569A29A4FAEF2 /* CheatBudgetTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF34BF7CBE5FDC1E32116DD /* CheatBudgetTracker.swift */; };
 		E8BC5EE422B4B37B2C5D3AF1 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB251AD9C28AB68D6D416A /* MainTabView.swift */; };
 		EA50619FCF443ED810530DE8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76775C0345634029781ED9 /* AppConstants.swift */; };
+		D1D2E3F405162738495A6B7D /* PermissionRevocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D2E3F405162738495A6B7C /* PermissionRevocationTracker.swift */; };
 		EC9DA4968A6309E77D310DFB /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */; };
 		F0E37C68A6EC8D97ED6A58B9 /* StillHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F415B9A4D4368D6233C506 /* StillHaptics.swift */; };
 		F4293B40F6FBC4D2E13D2132 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B6DACD684D8698EBBA07C3 /* ActivityShareSheet.swift */; };
@@ -157,6 +160,7 @@
 		087E384F22E7C2EEFB9BE1D7 /* AlarmRingingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRingingCoordinator.swift; sourceTree = "<group>"; };
 		0977B244FF0011CC6D2506C8 /* StillTimerWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StillTimerWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
+		E81234AB56CD78EF9012345AA /* ScheduledSessionStarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledSessionStarter.swift; sourceTree = "<group>"; };
 		0E883AA014F89547770325A6 /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmScheduler.swift; sourceTree = "<group>"; };
 		15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillTimerAttributes.swift; sourceTree = "<group>"; };
 		1718F1E77823DF4707D57128 /* QRCodeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeImageView.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 		6FE483101A3FEFB1E63B191E /* StillModeExitFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillModeExitFlow.swift; sourceTree = "<group>"; };
 		75B51ADB08EDF74609504079 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		775C28E2A3DDB1619A481A78 /* CloudPreferencesSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPreferencesSync.swift; sourceTree = "<group>"; };
+		C9B8A7D6E5F4039281716050 /* CollectibleOrbVisual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectibleOrbVisual.swift; sourceTree = "<group>"; };
 		77F1D1991B371BC5C2945F1F /* StillLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillLiveActivityBundle.swift; sourceTree = "<group>"; };
 		7BFBB4EB37CB829A01BE4A8B /* ProPaywallSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProPaywallSheet.swift; sourceTree = "<group>"; };
 		7DBAED7AB8AF9AFF2260404C /* StillAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillAppDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +231,7 @@
 		B8FED92DE8DE37927EACC621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B9FB4EB389F6B68BCD1A9DF8 /* AlarmTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTabView.swift; sourceTree = "<group>"; };
 		BF76775C0345634029781ED9 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		C1D2E3F405162738495A6B7C /* PermissionRevocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRevocationTracker.swift; sourceTree = "<group>"; };
 		C0CD34D498076A9DA4B856A4 /* AuthorizationCenter+Still.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthorizationCenter+Still.swift"; sourceTree = "<group>"; };
 		C944B7F7A298A8F6C86D8C73 /* ScheduledBlockScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledBlockScheduler.swift; sourceTree = "<group>"; };
 		D5B2539898EB583763A28A42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -331,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				8562C867122050B3C6A2344E /* AchievementShelfView.swift */,
+				C9B8A7D6E5F4039281716050 /* CollectibleOrbVisual.swift */,
 				213192B956B35C653EAEE0A3 /* CalmCard.swift */,
 				2F5229B631BB752283F1A6FC /* DurationPicker.swift */,
 				81D7670EFBBC45339515C578 /* EmptyState.swift */,
@@ -396,6 +403,7 @@
 			children = (
 				4F999EF7254FD4F5B21E1755 /* AchievementTracker.swift */,
 				BF76775C0345634029781ED9 /* AppConstants.swift */,
+				C1D2E3F405162738495A6B7C /* PermissionRevocationTracker.swift */,
 				49DC56BA35E1EDAA56FBAC28 /* AppGroupStore.swift */,
 				5FF34BF7CBE5FDC1E32116DD /* CheatBudgetTracker.swift */,
 				3A8ECBE13AF87356878A4C29 /* DailyFocusLog.swift */,
@@ -431,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				0C68E3CA54AACD94625DBEEA /* DeviceActivityMonitorExtension.swift */,
+				E81234AB56CD78EF9012345AA /* ScheduledSessionStarter.swift */,
 				75B51ADB08EDF74609504079 /* Info.plist */,
 				9157B439397BBB9E7056783B /* StillMonitor.entitlements */,
 			);
@@ -600,12 +609,14 @@
 				2D56782CF556E2675BF68197 /* AlarmTabView.swift in Sources */,
 				117EE9C0649D61F58FC5025D /* AlarmWalkDismissContent.swift in Sources */,
 				EA50619FCF443ED810530DE8 /* AppConstants.swift in Sources */,
+				D1D2E3F405162738495A6B7D /* PermissionRevocationTracker.swift in Sources */,
 				A53A60BC21723061D05B3ADA /* AppGroupStore.swift in Sources */,
 				6E06F4E489E331B15A9245FF /* AuthorizationCenter+Still.swift in Sources */,
 				AC1BC0C4E83723D7FEE77062 /* BreakFocusFlowView.swift in Sources */,
 				D7725F91C3103E95CF5D14D2 /* CalmCard.swift in Sources */,
 				E79417AB09A569A29A4FAEF2 /* CheatBudgetTracker.swift in Sources */,
 				50EF6E1B407651F6664FEE48 /* CloudPreferencesSync.swift in Sources */,
+				C9B8A7D6E5F4039281716051 /* CollectibleOrbVisual.swift in Sources */,
 				8FC8DEAC17923858A16B0642 /* DailyFocusLog.swift in Sources */,
 				123C2D4FD639A9D9F8ECE556 /* DurationPicker.swift in Sources */,
 				820B451E2DB6DA2373347006 /* EmptyState.swift in Sources */,
@@ -672,6 +683,7 @@
 				CD529762E94AAE2AB82AC829 /* CheatBudgetTracker.swift in Sources */,
 				FB2828438187CC22D10F5D1F /* DailyFocusLog.swift in Sources */,
 				976B9C206EA5C84519B9CED2 /* DeviceActivityMonitorExtension.swift in Sources */,
+				E81234AB56CD78EF9012345AB /* ScheduledSessionStarter.swift in Sources */,
 				ACCF8AC4714A2DA723FCA815 /* ScheduledBlock.swift in Sources */,
 				761342F53F7B90FF685A3614 /* SelectionCodec.swift in Sources */,
 				FDCA70DC58D43F75A7354C0C /* SelectionMerge.swift in Sources */,

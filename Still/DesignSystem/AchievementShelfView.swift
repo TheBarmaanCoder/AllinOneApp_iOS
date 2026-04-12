@@ -1,137 +1,169 @@
 import SwiftUI
 
 /// Horizontal scrollable shelf of moon-themed achievement collectibles.
+///
+/// This view builds its own card background rather than using `CalmCard`,
+/// because the scroll strip must span the full card width while the header
+/// text stays inset. Using CalmCard and then fighting its padding with
+/// negative insets caused the clipping bugs.
 struct AchievementShelfView: View {
     let isPro: Bool
+    /// External height to match (e.g. the stats row). Orb size adapts.
+    var matchHeight: CGFloat?
+
     @State private var unlockedIDs: Set<String> = AchievementTracker.unlockedIDs()
-    @State private var selectedAchievement: StillAchievement?
+    @State private var detailAchievement: StillAchievement?
+
+    // MARK: - Derived layout constants
+
+    /// Orb diameter — fills available vertical space minus header + breathing room.
+    private var orbSize: CGFloat {
+        guard let h = matchHeight, h > 60 else { return 44 }
+        let headerBlock: CGFloat = 20
+        let verticalPad = cardPadTop + cardPadBottom
+        let available = h - headerBlock - verticalPad
+        return max(28, min(52, available))
+    }
+
+    private let cardPadH: CGFloat = Tokens.Spacing.xl        // 24 – matches CalmCard
+    private let cardPadTop: CGFloat = Tokens.Spacing.lg       // 20
+    private let cardPadBottom: CGFloat = Tokens.Spacing.lg    // 20
+
+    /// Wide spacing — roughly 3 orbs visible at a time on a standard-width phone.
+    private let orbSpacing: CGFloat = 28
+
+    // MARK: - Data
 
     private var achievements: [StillAchievement] {
-        AchievementCatalog.all.sorted { a, b in
-            let aUnlocked = unlockedIDs.contains(a.id)
-            let bUnlocked = unlockedIDs.contains(b.id)
-            if aUnlocked != bUnlocked { return aUnlocked }
+        let sorted = AchievementCatalog.all.sorted { a, b in
+            let aU = unlockedIDs.contains(a.id)
+            let bU = unlockedIDs.contains(b.id)
+            if aU != bU { return aU }
             return false
         }
+        return sorted + [AchievementCatalog.unknownMystery]
     }
+
+    // MARK: - Body
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
-            HStack {
+        VStack(alignment: .leading, spacing: 6) {
+            // Header — inset to match other CalmCards
+            HStack(alignment: .firstTextBaseline) {
                 Text("Collectibles")
-                    .font(.subheadline.weight(.semibold))
+                    .font(.caption.weight(.semibold))
                     .foregroundStyle(Tokens.ColorName.textSecondary)
                 Spacer()
-                Text("\(unlockedIDs.count)/\(achievements.count)")
-                    .font(.caption.weight(.medium))
+                Text("\(unlockedIDs.count)/\(AchievementCatalog.all.count)")
+                    .font(.caption2.weight(.medium))
                     .foregroundStyle(Tokens.ColorName.textTertiary)
             }
+            .padding(.horizontal, cardPadH)
 
+            // Scroll strip — full card width; orbs are inset via content padding
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
+                HStack(spacing: orbSpacing) {
                     ForEach(achievements) { achievement in
-                        collectibleCell(achievement)
+                        cellButton(achievement)
                     }
                 }
-                .padding(.vertical, 4)
-            }
-
-            if let selected = selectedAchievement {
-                achievementDetail(selected)
+                .padding(.horizontal, cardPadH)
             }
         }
+        .padding(.top, cardPadTop)
+        .padding(.bottom, cardPadBottom)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        // Card background (same look as CalmCard) — no clipShape so orb shadows aren't cut off
+        .background(
+            RoundedRectangle(cornerRadius: Tokens.Radius.large, style: .continuous)
+                .fill(Tokens.ColorName.backgroundSecondary)
+                .shadow(
+                    color: StillTheme.current == .dark
+                        ? Color.white.opacity(0.04)
+                        : Color.black.opacity(0.06),
+                    radius: 10, x: 0, y: 3
+                )
+        )
         .onAppear { unlockedIDs = AchievementTracker.unlockedIDs() }
+        .sheet(item: $detailAchievement) { achievement in
+            CollectibleDetailSheet(
+                achievement: achievement,
+                unlocked: isAchievementUnlocked(achievement)
+            )
+        }
     }
 
-    // MARK: - Cell
+    // MARK: - Helpers
 
-    private func collectibleCell(_ a: StillAchievement) -> some View {
-        let unlocked = unlockedIDs.contains(a.id)
-        let isSelected = selectedAchievement?.id == a.id
-
+    private func cellButton(_ a: StillAchievement) -> some View {
+        let unlocked = isAchievementUnlocked(a)
         return Button {
-            withAnimation(.easeOut(duration: 0.15)) {
-                selectedAchievement = selectedAchievement?.id == a.id ? nil : a
-            }
+            detailAchievement = a
             StillHaptics.selectionChanged()
         } label: {
-            ZStack {
-                if unlocked {
-                    Circle()
-                        .fill(accentGradient)
-                        .frame(width: 52, height: 52)
-                        .shadow(color: shadowColor.opacity(0.3), radius: 6, x: 0, y: 3)
-                } else {
-                    Circle()
-                        .fill(lockedFill)
-                        .frame(width: 52, height: 52)
-                }
-
-                Image(systemName: unlocked ? a.unlockedIcon : a.lockedIcon)
-                    .font(.system(size: 22, weight: .medium))
-                    .foregroundStyle(unlocked ? iconColor : Tokens.ColorName.textTertiary.opacity(0.4))
-                    .symbolRenderingMode(.hierarchical)
-            }
-            .overlay(
-                Circle()
-                    .stroke(isSelected ? Tokens.ColorName.accent : .clear, lineWidth: 2)
-            )
-            .scaleEffect(isSelected ? 1.1 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
+            CollectibleOrbCluster(achievement: a, unlocked: unlocked, size: orbSize)
         }
         .buttonStyle(.plain)
     }
 
-    private func achievementDetail(_ a: StillAchievement) -> some View {
-        let unlocked = unlockedIDs.contains(a.id)
-        return HStack(spacing: Tokens.Spacing.md) {
-            Image(systemName: unlocked ? a.unlockedIcon : a.lockedIcon)
-                .font(.title3)
-                .foregroundStyle(unlocked ? Tokens.ColorName.accent : Tokens.ColorName.textTertiary)
-                .symbolRenderingMode(.hierarchical)
-                .frame(width: 28)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(a.title)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Tokens.ColorName.textPrimary)
-                Text(unlocked ? "Unlocked" : a.detail)
-                    .font(.caption)
-                    .foregroundStyle(unlocked ? .green : Tokens.ColorName.textSecondary)
+    private func isAchievementUnlocked(_ a: StillAchievement) -> Bool {
+        if a.id == AchievementCatalog.unknownMystery.id { return false }
+        return unlockedIDs.contains(a.id)
+    }
+}
+
+// MARK: - Detail sheet (unchanged)
+
+private struct CollectibleDetailSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let achievement: StillAchievement
+    let unlocked: Bool
+
+    private let heroOrbSize: CGFloat = 140
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 28) {
+                CollectibleOrbCluster(achievement: achievement, unlocked: unlocked, size: heroOrbSize)
+                    .padding(.top, 12)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(statusHeadline)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(statusColor)
+
+                    Text(achievement.collectibleExplanation(isUnlocked: unlocked))
+                        .font(.body)
+                        .foregroundStyle(Tokens.ColorName.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.horizontal, 4)
+
+                Spacer(minLength: 0)
             }
-            Spacer()
+            .padding(.horizontal, 20)
+            .navigationTitle(achievement.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                }
+            }
         }
-        .padding(.top, 4)
-        .transition(.opacity)
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
     }
 
-    // MARK: - Style helpers
+    private var statusHeadline: String {
+        if achievement.id == AchievementCatalog.unknownMystery.id { return "Legend" }
+        return unlocked ? "Unlocked" : "Locked"
+    }
 
-    private var accentGradient: LinearGradient {
-        let theme = StillTheme.current
-        if theme == .dark {
-            return LinearGradient(
-                colors: [Color(white: 0.22), Color(white: 0.14)],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        } else {
-            return LinearGradient(
-                colors: [Color(white: 0.92), Color(white: 0.84)],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+    private var statusColor: Color {
+        if achievement.id == AchievementCatalog.unknownMystery.id {
+            return Tokens.ColorName.textTertiary
         }
-    }
-
-    private var lockedFill: Color {
-        Tokens.ColorName.surfaceMuted.opacity(0.6)
-    }
-
-    private var iconColor: Color {
-        StillTheme.current == .dark ? .white : .black
-    }
-
-    private var shadowColor: Color {
-        StillTheme.current == .dark ? .white : .black
+        return unlocked ? .green : Tokens.ColorName.textTertiary
     }
 }
