@@ -213,6 +213,7 @@
 		775C28E2A3DDB1619A481A78 /* CloudPreferencesSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPreferencesSync.swift; sourceTree = "<group>"; };
 		C9B8A7D6E5F4039281716050 /* CollectibleOrbVisual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectibleOrbVisual.swift; sourceTree = "<group>"; };
 		77F1D1991B371BC5C2945F1F /* StillLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillLiveActivityBundle.swift; sourceTree = "<group>"; };
+		7E4C9A1F2B8D305647586970 /* StillTimerWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StillTimerWidget.entitlements; sourceTree = "<group>"; };
 		7BFBB4EB37CB829A01BE4A8B /* ProPaywallSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProPaywallSheet.swift; sourceTree = "<group>"; };
 		7DBAED7AB8AF9AFF2260404C /* StillAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StillAppDelegate.swift; sourceTree = "<group>"; };
 		81D7670EFBBC45339515C578 /* EmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyState.swift; sourceTree = "<group>"; };
@@ -379,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				25F629E33F451FF37637F32B /* Info.plist */,
+				7E4C9A1F2B8D305647586970 /* StillTimerWidget.entitlements */,
 				77F1D1991B371BC5C2945F1F /* StillLiveActivityBundle.swift */,
 				15CC0DBA560E45902BDB72AB /* StillTimerAttributes.swift */,
 				25159A9F53F970BC8D532644 /* StillTimerLiveActivity.swift */,
@@ -760,6 +762,7 @@
 		29A1C55EE90CC6B92AE0A80E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = StillLiveActivity/StillTimerWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
@@ -893,6 +896,7 @@
 		9D32E04EF047606E4E314255 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = StillLiveActivity/StillTimerWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WYCSFCBC9V;
