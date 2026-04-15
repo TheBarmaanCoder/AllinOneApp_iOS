@@ -1,9 +1,11 @@
+import Combine
 import SwiftUI
 
 /// GitHub-style monthly contribution grid showing daily focus intensity.
 struct FocusHeatmapView: View {
     @State private var monthOffset = 0
-    @State private var selectedDay: (day: Int, seconds: TimeInterval)?
+    @State private var selectedDay: Int?
+    @State private var now = Date()
 
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 3), count: 7)
     private let weekdayLabels = ["M", "T", "W", "T", "F", "S", "S"]
@@ -36,13 +38,9 @@ struct FocusHeatmapView: View {
         return (weekday + 5) % 7
     }
 
-    private var monthData: [Int: TimeInterval] {
-        DailyFocusLog.monthData(year: year, month: month)
-    }
-
-    /// Max seconds in any day this month (for color intensity scaling).
-    private var maxSeconds: TimeInterval {
-        max(1, monthData.values.max() ?? 1)
+    /// Logged focus plus any active session / Still Mode time not yet persisted.
+    private var displayMonthData: [Int: TimeInterval] {
+        DailyFocusLog.monthDataIncludingInProgressSession(year: year, month: month, now: now)
     }
 
     var body: some View {
@@ -57,24 +55,27 @@ struct FocusHeatmapView: View {
                         Color.clear.frame(height: 28)
                     } else {
                         let day = index - firstWeekdayOffset + 1
-                        let secs = monthData[day] ?? 0
+                        let secs = displayMonthData[day] ?? 0
                         dayCell(day: day, seconds: secs)
                     }
                 }
             }
 
-            if let selected = selectedDay {
+            if let day = selectedDay {
                 HStack(spacing: Tokens.Spacing.xs) {
-                    Text("\(monthTitle.prefix(3)) \(selected.day)")
+                    Text("\(monthTitle.prefix(3)) \(day)")
                         .font(.caption.weight(.medium))
                         .foregroundStyle(Tokens.ColorName.textSecondary)
                     Spacer()
-                    Text(formattedDuration(selected.seconds))
+                    Text(formattedDuration(displayMonthData[day] ?? 0))
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(Tokens.ColorName.textPrimary)
                 }
                 .padding(.top, 4)
             }
+        }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { tick in
+            now = tick
         }
     }
 
@@ -123,14 +124,14 @@ struct FocusHeatmapView: View {
 
     private func dayCell(day: Int, seconds: TimeInterval) -> some View {
         let intensity = intensityForDay(seconds)
-        let isSelected = selectedDay?.day == day
+        let isSelected = selectedDay == day
 
         return Button {
             withAnimation(.easeOut(duration: 0.15)) {
-                if selectedDay?.day == day {
+                if selectedDay == day {
                     selectedDay = nil
                 } else {
-                    selectedDay = (day, seconds)
+                    selectedDay = day
                 }
             }
             StillHaptics.selectionChanged()

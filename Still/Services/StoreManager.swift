@@ -5,6 +5,12 @@ import SwiftUI
 final class StoreManager: ObservableObject {
     static let proProductID = "com.allinoneapp.still.pro"
 
+    /// Beta / internal unlock codes (Settings → Redeem code). Trimmed, case-sensitive.
+    private static let betaRedeemCodes: Set<String> = [
+        "Still2026",
+        "Soleil2016",
+    ]
+
     @Published private(set) var isProUnlocked = false
     @Published private(set) var proProduct: Product?
     @Published private(set) var purchaseInProgress = false
@@ -65,6 +71,14 @@ final class StoreManager: ObservableObject {
         UserDefaults.standard.set(true, forKey: "stillProUnlocked")
         StillHaptics.success()
         CloudPreferencesSync.schedulePushDebounced()
+    }
+
+    /// Returns `true` if `raw` matched a beta redeem code and Pro was unlocked.
+    func redeemBetaCodeIfValid(_ raw: String) -> Bool {
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard Self.betaRedeemCodes.contains(trimmed) else { return false }
+        redeemProAccess()
+        return true
     }
 
     func restorePurchases() async {

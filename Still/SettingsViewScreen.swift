@@ -78,8 +78,7 @@ struct SettingsViewScreen: View {
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
             Button("Redeem") {
-                if redeemCode == "Soleil2016" {
-                    store.redeemProAccess()
+                if store.redeemBetaCodeIfValid(redeemCode) {
                     redeemCode = ""
                 } else {
                     redeemError = true

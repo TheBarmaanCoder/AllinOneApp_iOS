@@ -50,6 +50,43 @@ enum DailyFocusLog {
         return result
     }
 
+    /// Like `monthData`, plus any **in-progress** focus (manual/scheduled session or Still Mode) not yet written to the log.
+    /// Splits elapsed time across calendar days the same way `logSession` will when the session ends.
+    static func monthDataIncludingInProgressSession(year: Int, month: Int, now: Date = Date()) -> [Int: TimeInterval] {
+        var result = monthData(year: year, month: month)
+        let g = AppGroupStore.shared
+        g.synchronizeForCrossProcessRead()
+
+        let intervalStart: Date?
+        if g.sessionActive, let s = g.sessionStart {
+            intervalStart = s
+        } else if g.stillModeActive, let s = g.stillModeStart {
+            intervalStart = s
+        } else {
+            return result
+        }
+
+        guard let start = intervalStart, start < now else { return result }
+
+        let cal = Calendar.current
+        var cursor = start
+        while cursor < now {
+            let endOfDay = cal.startOfDay(for: cursor).addingTimeInterval(86400)
+            let segmentEnd = min(now, endOfDay)
+            let secs = segmentEnd.timeIntervalSince(cursor)
+            if secs > 0 {
+                let y = cal.component(.year, from: cursor)
+                let m = cal.component(.month, from: cursor)
+                let day = cal.component(.day, from: cursor)
+                if y == year && m == month {
+                    result[day, default: 0] += secs
+                }
+            }
+            cursor = segmentEnd
+        }
+        return result
+    }
+
     // MARK: - Write
 
     static func addSeconds(_ seconds: TimeInterval, on date: Date) {
@@ -58,6 +95,27 @@ enum DailyFocusLog {
         let k = key(for: date)
         dict[k, default: 0] += seconds
         persist(dict)
+    }
+
+    /// Seconds in `[intervalStart, intervalEnd)` that belong to the same calendar day as `reference`
+    /// (matches how `logSession` splits across midnight).
+    static func secondsInInterval(onSameCalendarDayAs reference: Date, intervalStart: Date, intervalEnd: Date) -> TimeInterval {
+        let targetKey = key(for: reference)
+        let cal = Calendar.current
+        var cursor = intervalStart
+        var total: TimeInterval = 0
+        while cursor < intervalEnd {
+            let segmentKey = key(for: cursor)
+            let dayStart = cal.startOfDay(for: cursor)
+            guard let nextDayStart = cal.date(byAdding: .day, value: 1, to: dayStart) else { break }
+            let segmentEnd = min(intervalEnd, nextDayStart)
+            let secs = segmentEnd.timeIntervalSince(cursor)
+            if secs > 0, segmentKey == targetKey {
+                total += secs
+            }
+            cursor = segmentEnd
+        }
+        return total
     }
 
     /// Log focus time for a session that ran from `start` to `end`.

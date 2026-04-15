@@ -28,7 +28,9 @@ enum ScheduledSessionStarter {
         guard let data = try? SelectionCodec.encode(selection) else { return }
 
         g.persistSessionSelection(data)
-        g.sessionStart = interval.start
+        // Count only from when this session actually begins (now), not the calendar window start —
+        // otherwise joining late credits hours before the user was in a block.
+        g.sessionStart = now
         g.sessionEnd = interval.end
         g.sessionActive = true
         g.sessionIsScheduled = true

@@ -70,7 +70,7 @@ struct ProPaywallSheet: View {
                 .font(.largeTitle.weight(.bold))
                 .foregroundStyle(Tokens.ColorName.textPrimary)
 
-            Text("Unlock the full power of your QR code")
+            Text("Scheduled focus, deep stats, and your QR code — beyond manual sessions.")
                 .font(.subheadline)
                 .foregroundStyle(Tokens.ColorName.textSecondary)
                 .multilineTextAlignment(.center)
@@ -82,8 +82,20 @@ struct ProPaywallSheet: View {
     private var featuresList: some View {
         VStack(spacing: 0) {
             featureRow(
+                icon: "calendar.badge.clock",
+                title: "Scheduled blocks",
+                detail: "Auto-block apps on a weekly schedule — set it once, Still handles the rest."
+            )
+            Divider().background(Tokens.ColorName.separator).padding(.leading, 48)
+            featureRow(
+                icon: "square.grid.3x3.fill",
+                title: "Focus heatmap",
+                detail: "See when you focus most each month — unlock patterns in your habits."
+            )
+            Divider().background(Tokens.ColorName.separator).padding(.leading, 48)
+            featureRow(
                 icon: "qrcode.viewfinder",
-                title: "QR Alarm Dismiss",
+                title: "QR alarm dismiss",
                 detail: "Force yourself out of bed — scan your printed QR code to stop the alarm."
             )
             Divider().background(Tokens.ColorName.separator).padding(.leading, 48)
@@ -94,8 +106,8 @@ struct ProPaywallSheet: View {
             )
             Divider().background(Tokens.ColorName.separator).padding(.leading, 48)
             featureRow(
-                icon: "printer",
-                title: "Print & Share QR",
+                icon: "printer.fill",
+                title: "Print & share QR",
                 detail: "Generate, print, or AirDrop your personal QR code from Settings."
             )
         }

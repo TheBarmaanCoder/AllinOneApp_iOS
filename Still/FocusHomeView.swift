@@ -274,7 +274,7 @@ struct FocusHomeView: View {
     }
 
     private var achievementSection: some View {
-        AchievementShelfView(isPro: store.isProUnlocked, matchHeight: statsRowHeight > 0 ? statsRowHeight : nil)
+        AchievementShelfView(matchHeight: statsRowHeight > 0 ? statsRowHeight : nil)
     }
 
     private func evaluateScreenTimeRevocation() {
@@ -911,9 +911,40 @@ struct FocusHomeView: View {
     private func reloadScheduledBlocks() { scheduledBlocks = ScheduledBlockStore.load() }
 
     private func refreshTally() {
-        totalSeconds = AppGroupStore.shared.totalFocusSeconds
-        completedSessions = AppGroupStore.shared.completedSessions
-        todaySeconds = DailyFocusLog.todaySeconds()
+        let g = AppGroupStore.shared
+        g.synchronizeForCrossProcessRead()
+
+        let baseTotal = g.totalFocusSeconds
+        let baseToday = DailyFocusLog.todaySeconds()
+
+        var pendingTotal: TimeInterval = 0
+        var pendingToday: TimeInterval = 0
+
+        if g.sessionActive, let start = g.sessionStart {
+            let end = now
+            if end > start {
+                pendingTotal += end.timeIntervalSince(start)
+                pendingToday += DailyFocusLog.secondsInInterval(
+                    onSameCalendarDayAs: end,
+                    intervalStart: start,
+                    intervalEnd: end
+                )
+            }
+        } else if g.stillModeActive, let start = g.stillModeStart {
+            let end = now
+            if end > start {
+                pendingTotal += end.timeIntervalSince(start)
+                pendingToday += DailyFocusLog.secondsInInterval(
+                    onSameCalendarDayAs: end,
+                    intervalStart: start,
+                    intervalEnd: end
+                )
+            }
+        }
+
+        totalSeconds = baseTotal + pendingTotal
+        todaySeconds = baseToday + pendingToday
+        completedSessions = g.completedSessions
         currentStreak = StreakTracker.currentStreak()
     }
 

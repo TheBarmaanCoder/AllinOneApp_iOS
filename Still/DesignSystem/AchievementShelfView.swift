@@ -7,7 +7,6 @@ import SwiftUI
 /// text stays inset. Using CalmCard and then fighting its padding with
 /// negative insets caused the clipping bugs.
 struct AchievementShelfView: View {
-    let isPro: Bool
     /// External height to match (e.g. the stats row). Orb size adapts.
     var matchHeight: CGFloat?
 
